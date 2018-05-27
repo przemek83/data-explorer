@@ -10,10 +10,10 @@ data-explorer sample.txt
 ## Usage:  
 \<operation\> \<aggregation\> \<grouping\>  
 
-## Usage Example:  
+Usage Example:  
 avg score movie_name
 
-## Example output:  
+Example output:  
 avg score GROUPED BY movie_name  
 ender's_game 8  
 pulp_fiction 6  
@@ -32,21 +32,22 @@ Operation.[h|cpp] - Stores enum OperationType. Also "math" is done here using so
 Query.h - Trivial structure for storing which query user requested.  
 UserInterface.[h|cpp] - Functionalities related to interaction with user.  
 
-## As speed is most important expectations from task there was some optimization performed. Ones with biggest impact:  
+## Additional info
+As speed is most important expectations from task there was some optimization performed. Ones with biggest impact:  
 1) Used std::unordered_map instead of std::map.  
 2) Used std::vectors to store data and passed by const reference.  
 3) Storing strings as mapped values (std::string <-> unsigned int) and usage of indexes for operations (performance and significant memory optimisation).  
 4) Minimized copying.
 
-##Potential further optimizations:  
+Potential further optimizations:  
 1) Usage of dynamic C-style arrays for storage. To introduce those input file need to be passed 2 times (first to check number of rows).  
 2) Usage of C-style array + index instead of maps (if applicable and worth doing).  
 
-## Potential options for scalability:  
+Potential options for scalability:  
 1) Usage for multithreading by introducing threads.  
 2) Usage of MPI (make sense with more sophisticated calculations).  
 3) GPU calculations (in case of more complex calculations).
 
-## I'm not fully happy about:  
+I'm not fully happy about:  
 1) Template usage.  
 2) Allowing accessing private field data of Column subclasses from outside (performance reasons).
