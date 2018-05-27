@@ -1,52 +1,52 @@
-Building:
-g++ -Wall -std=c++11 -c -O3 *.cpp
-g++ -Wall -std=c++11 -o -O3 data-explorer *.o
-OR
-use Qt data-explorer.pro file (from QtCreator IDE or cmd).
+Building:  
+g++ -Wall -std=c++11 -c -O3 *.cpp  
+g++ -Wall -std=c++11 -o -O3 data-explorer *.o  
+OR  
+use Qt data-explorer.pro file (from QtCreator IDE or cmd).  
 
-Execution:
+Execution:  
 data-explorer sample.txt
 
-Usage:
-<operation> <aggregation> <grouping>
+Usage:  
+\<operation\> \<aggregation\> \<grouping\>  
 
-Usage Example:
+Usage Example:  
 avg score movie_name
 
-Example output:
-avg score GROUPED BY movie_name
-ender's_game 8
-pulp_fiction 6
-inception 8
-Operation time = 0.000009s
+Example output:  
+avg score GROUPED BY movie_name  
+ender's_game 8  
+pulp_fiction 6  
+inception 8  
+Operation time = 0.000009s  
 
-Files:
-main.cpp - main file :)
-Column.[h|cpp] - Abstract and base class for column inheritance hierarchy.
-IntegerColumn.[h|cpp] - Class for storing data and performing operations on integer type columns. 
-StringColumn.[h|cpp] - Class for storing data and performing operations on string type columns. 
-DataLoader.h - Abstract and base class for data loaders.
-FileDataLoader.[h|cpp] - File data loader. Loads from file headers, types and finally data.
-Dataset.[h|cpp] - Representation of data. Contains info about headers, column types and stores Column class objects.
-Operation.[h|cpp] - Stores enum OperationType. Also "math" is done here using some templates.
-Query.h - Trivial structure for storing which query user requested.
-UserInterface.[h|cpp] - Functionalities related to interaction with user.
+Files:  
+main.cpp - main file :)  
+Column.[h|cpp] - Abstract and base class for column inheritance hierarchy.  
+IntegerColumn.[h|cpp] - Class for storing data and performing operations on integer type columns.   
+StringColumn.[h|cpp] - Class for storing data and performing operations on string type columns.   
+DataLoader.h - Abstract and base class for data loaders.  
+FileDataLoader.[h|cpp] - File data loader. Loads from file headers, types and finally data.  
+Dataset.[h|cpp] - Representation of data. Contains info about headers, column types and stores Column class objects.  
+Operation.[h|cpp] - Stores enum OperationType. Also "math" is done here using some templates.  
+Query.h - Trivial structure for storing which query user requested.  
+UserInterface.[h|cpp] - Functionalities related to interaction with user.  
 
-As speed is most important expectations from task there was some optimization performed. Ones with biggest impact:
-1) Used std::unordered_map instead of std::map.
-2) Used std::vectors to store data and passed by const reference.
-3) Storing strings as mapped values (std::string <-> unsigned int) and usage of indexes for operations (performance and significant memory optimisation).
+As speed is most important expectations from task there was some optimization performed. Ones with biggest impact:  
+1) Used std::unordered_map instead of std::map.  
+2) Used std::vectors to store data and passed by const reference.  
+3) Storing strings as mapped values (std::string <-> unsigned int) and usage of indexes for operations (performance and significant memory optimisation).  
 4) Minimized copying.
 
-Potential further optimizations:
-1) Usage of dynamic C-style arrays for storage. To introduce those input file need to be passed 2 times (first to check number of rows).
-2) Usage of C-style array + index instead of maps (if applicable and worth doing).
+Potential further optimizations:  
+1) Usage of dynamic C-style arrays for storage. To introduce those input file need to be passed 2 times (first to check number of rows).  
+2) Usage of C-style array + index instead of maps (if applicable and worth doing).  
 
-Potential options for scalability:
-1) Usage for multithreading by introducing threads.
-2) Usage of MPI (make sense with more sophisticated calculations).
-3) GPU calculations (in case of more complex calculations).  
+Potential options for scalability:  
+1) Usage for multithreading by introducing threads.  
+2) Usage of MPI (make sense with more sophisticated calculations).  
+3) GPU calculations (in case of more complex calculations).
 
-I'm not fully happy about:
-1) Template usage.
+I'm not fully happy about:  
+1) Template usage.  
 2) Allowing accessing private field data of Column subclasses from outside (performance reasons).
