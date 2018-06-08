@@ -36,7 +36,7 @@ private:
 
     static const std::string delimiter_;
 
-    std::string filePath_;
+    const std::string filePath_;
 };
 
 #endif // FILEDATALOADER_H

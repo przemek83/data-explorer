@@ -33,6 +33,11 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset, Quer
         return true;
     }
 
+    if (query.operation == Operation::OperationType::TEST)
+    {
+        return true;
+    }
+
     if (!areColumnsValid(aggregateColumnInputString_, groupingColumnInputString_, dataset))
     {
         return false;

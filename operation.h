@@ -17,6 +17,7 @@ public:
         MIN,
         MAX,
         QUIT,
+        TEST,
         UNKNOWN
     };
 
