@@ -1,7 +1,8 @@
+#include "UserInterface.h"
+
 #include <sstream>
 #include <algorithm>
 
-#include "UserInterface.h"
 #include "Dataset.h"
 #include "Operation.h"
 

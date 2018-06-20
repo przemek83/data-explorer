@@ -1,7 +1,7 @@
+#include "Dataset.h"
+
 #include <iostream>
 #include <algorithm>
-
-#include "Dataset.h"
 
 Dataset::Dataset(std::unique_ptr<DataLoader> dataLoader) : dataLoader_(std::move(dataLoader))
 {

@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "StringColumn.h"
+
+#include <iostream>
 
 StringColumn::StringColumn() :
     data_(std::vector<unsigned int>()), stringToIdMapping_(std::unordered_map<std::string, unsigned int>())

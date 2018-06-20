@@ -1,9 +1,10 @@
+#include "FileDataLoader.h"
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <memory>
 
-#include "FileDataLoader.h"
 #include "IntegerColumn.h"
 #include "StringColumn.h"
 #include "Column.h"
