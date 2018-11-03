@@ -11,7 +11,7 @@
 #include "UserInterface.h"
 #include "Query.h"
 
-void exitWithHelp()
+[[ noreturn ]] void exitWithHelp()
 {
     std::cerr << "Usage: <binary> file" << std::endl << " file - name of data file." << std::endl;
     exit(EXIT_FAILURE);
@@ -29,7 +29,7 @@ std::string parseArgs(int argc, char* argv[])
     return filePath;
 }
 
-static void testResults(const auto& current, const auto& expected)
+static void testResults(const std::unordered_map<std::string, int>& current, const std::unordered_map<std::string, int>& expected)
 {
     if (current != expected)
     {
@@ -125,6 +125,11 @@ int main(int argc, char* argv[])
 
         std::cout << "Operation time = " << std::fixed <<
             std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()/1000000.0 << "s" << std::endl;
+    }
+
+    if (bool test = false; test)
+    {
+        std::cout << "Bla" << std::endl;
     }
 
     return 0;
