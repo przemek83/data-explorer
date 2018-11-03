@@ -5,6 +5,8 @@
 #include <chrono>
 #include <cassert>
 #include <iomanip>
+#include <unordered_map>
+#include <string>
 
 #include "FileDataLoader.h"
 #include "Dataset.h"
@@ -125,11 +127,6 @@ int main(int argc, char* argv[])
 
         std::cout << "Operation time = " << std::fixed <<
             std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()/1000000.0 << "s" << std::endl;
-    }
-
-    if (bool test = false; test)
-    {
-        std::cout << "Bla" << std::endl;
     }
 
     return 0;

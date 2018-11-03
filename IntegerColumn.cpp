@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-IntegerColumn::IntegerColumn(std::vector<int> data) : data_(data)
+IntegerColumn::IntegerColumn(std::vector<int> data) : data_(std::move(data))
 {
 
 }

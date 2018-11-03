@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "Column.h"
 
@@ -24,7 +25,7 @@ public:
 
     virtual bool loadData(std::vector<std::string>& headers,
                           std::vector<Column::ColumnType>& columnTypes,
-                          std::vector<Column*>& dataColumns) const = 0;
+                          std::vector<std::unique_ptr<Column>>& dataColumns) const = 0;
 };
 
 #endif // DATALOADER_H

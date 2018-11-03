@@ -14,7 +14,7 @@ class Dataset
 public:
     explicit Dataset(std::unique_ptr<DataLoader> dataLoader);
 
-    virtual ~Dataset();
+    virtual ~Dataset() = default;
 
     Dataset& operator=(const Dataset& other) = delete;
     Dataset(const Dataset& other) = delete;
@@ -30,7 +30,7 @@ public:
 
     bool isColumnNameCanBeUsedForAggregation(const std::string& columnName) const;
 
-    std::unordered_map<std::string, int> executeQuery(const Query& query) const;
+    std::unordered_map<std::string, int> executeQuery(const Query query) const;
 
 private:
     std::unique_ptr<DataLoader> dataLoader_;
@@ -39,7 +39,7 @@ private:
 
     std::vector<Column::ColumnType> columnTypes_;
 
-    std::vector<Column*> columns_;
+    std::vector<std::unique_ptr<Column>> columns_;
 };
 
 #endif // DATASET_H

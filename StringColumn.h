@@ -9,7 +9,9 @@
 class StringColumn : public Column
 {
 public:
-    StringColumn();
+    StringColumn() = default;
+
+    ~StringColumn() override = default;
 
     ColumnType getColumnType() const override;
 
@@ -33,9 +35,9 @@ public:
         performOperation(Operation::OperationType operationType, const std::vector<int>& data) override;
 
 private:
-    std::vector<unsigned int> data_;
+    std::vector<unsigned int> data_{};
 
-    std::unordered_map<std::string, unsigned int> stringToIdMapping_;
+    std::unordered_map<std::string, unsigned int> stringToIdMapping_{};
 
     unsigned int currentIndex_ {0};
 };

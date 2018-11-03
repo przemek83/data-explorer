@@ -2,12 +2,6 @@
 
 #include <iostream>
 
-StringColumn::StringColumn() :
-    data_(std::vector<unsigned int>()), stringToIdMapping_(std::unordered_map<std::string, unsigned int>())
-{
-
-}
-
 Column::ColumnType StringColumn::getColumnType() const
 {
     return Column::ColumnType::STRING;

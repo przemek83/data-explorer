@@ -11,9 +11,9 @@ class StringColumn;
 class FileDataLoader : public DataLoader
 {
 public:
-    explicit FileDataLoader(const std::string& filePath);
+    explicit FileDataLoader(std::string filePath);
 
-    ~FileDataLoader() override;
+    ~FileDataLoader() override = default;
 
     FileDataLoader& operator=(const FileDataLoader& other) = delete;
     FileDataLoader(const FileDataLoader& other) = delete;
@@ -23,16 +23,16 @@ public:
 
     bool loadData(std::vector<std::string>& headers,
                   std::vector<Column::ColumnType>& columnTypes,
-                  std::vector<Column*>& dataColumns) const override;
+                  std::vector<std::unique_ptr<Column>>& dataColumns) const override;
 
 private:
     std::vector<std::string> getHeaders(std::string& inputLine) const;
 
     std::vector<Column::ColumnType> getColumnTypes(std::string& inputLine) const;
 
-    bool initColumns(std::vector<Column::ColumnType>& columnTypes, std::vector<Column*>& dataColumns) const;
+    bool initColumns(std::vector<Column::ColumnType>& columnTypes, std::vector<std::unique_ptr<Column>>& dataColumns) const;
 
-    bool loadData(std::vector<Column*>& dataColumns, std::ifstream& infile) const;
+    bool loadData(std::vector<std::unique_ptr<Column>>& dataColumns, std::ifstream& infile) const;
 
     static const std::string delimiter_;
 

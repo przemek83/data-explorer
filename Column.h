@@ -28,7 +28,7 @@ public:
 
     static std::string getColumnNameForType(Column::ColumnType columnType);
 
-    static ColumnType getColumnTypeForName(std::string columnName);
+    static ColumnType getColumnTypeForName(const std::string& columnName);
 
     virtual ColumnType getColumnType() const = 0;
 

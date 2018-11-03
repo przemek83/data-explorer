@@ -9,21 +9,16 @@
 #include "StringColumn.h"
 #include "Column.h"
 
-const std::string FileDataLoader::delimiter_ {" "};
+const std::string FileDataLoader::delimiter_{" "};
 
-FileDataLoader::FileDataLoader(const std::string& filePath) : filePath_(filePath)
-{
-
-}
-
-FileDataLoader::~FileDataLoader()
+FileDataLoader::FileDataLoader(std::string filePath) : filePath_(std::move(filePath))
 {
 
 }
 
 bool FileDataLoader::loadData(std::vector<std::string>& headers,
                               std::vector<Column::ColumnType>& columnTypes,
-                              std::vector<Column*>& dataColumns) const
+                              std::vector<std::unique_ptr<Column>>& dataColumns) const
 {
     std::ifstream infile(filePath_);
     if (!infile.good())
@@ -52,11 +47,11 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
     return true;
 }
 
-bool FileDataLoader::loadData(std::vector<Column*>& dataColumns, std::ifstream& infile) const
+bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns, std::ifstream& infile) const
 {
     int lineIndex = 0;
     std::string inputLine;
-    unsigned int columnsCount = dataColumns.size();
+    size_t columnsCount = dataColumns.size();
     while (std::getline(infile, inputLine))
     {
         size_t currentPosition = 0;
@@ -118,7 +113,7 @@ std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(std::string& inpu
     return columnTypes;
 }
 
-bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes, std::vector<Column*>& dataColumns) const
+bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes, std::vector<std::unique_ptr<Column>>& dataColumns) const
 {
     for (Column::ColumnType columnType : columnTypes)
     {
@@ -126,13 +121,13 @@ bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes, s
         {
             case Column::ColumnType::INTEGER:
             {
-                dataColumns.push_back(new IntegerColumn(std::vector<int>()));
+                dataColumns.emplace_back(std::make_unique<IntegerColumn>(std::vector<int>()));
                 break;
             }
 
             case Column::ColumnType::STRING:
             {
-                dataColumns.push_back(new StringColumn());
+                dataColumns.emplace_back(std::make_unique<StringColumn>());
                 break;
             }
 
@@ -140,7 +135,6 @@ bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes, s
             {
                 std::cout << "Unknown column type " << static_cast<int>(columnType) << std::endl;
                 return false;
-                break;
             }
         }
     }

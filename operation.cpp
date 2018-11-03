@@ -1,6 +1,6 @@
 #include "Operation.h"
 
-const std::map<std::string, Operation::OperationType> Operation::stringToOperationTypeMapping_ =
+const std::map<std::string, Operation::OperationType> Operation::stringToOperationTypeMapping_
     {{"avg", Operation::OperationType::AVG},
     {"min", Operation::OperationType::MIN},
     {"max", Operation::OperationType::MAX},

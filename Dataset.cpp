@@ -8,14 +8,6 @@ Dataset::Dataset(std::unique_ptr<DataLoader> dataLoader) : dataLoader_(std::move
 
 }
 
-Dataset::~Dataset()
-{
-    for (Column* column : columns_)
-    {
-        delete column;
-    }
-}
-
 bool Dataset::init()
 {
     return dataLoader_->loadData(headers_, columnTypes_, columns_);
@@ -23,7 +15,8 @@ bool Dataset::init()
 
 unsigned int Dataset::getColumnIdForName(const std::string& columnName) const
 {
-    return std::distance(headers_.begin(), std::find(headers_.begin(), headers_.end(), columnName));
+    const auto position = std::find(headers_.begin(), headers_.end(), columnName);
+    return std::abs(std::distance(headers_.begin(), position));
 }
 
 bool Dataset::isColumnNameValid(const std::string& columnName) const
@@ -37,9 +30,9 @@ bool Dataset::isColumnNameCanBeUsedForAggregation(const std::string& columnName)
     return columnTypes_[getColumnIdForName(columnName)] == Column::ColumnType::INTEGER;
 }
 
-std::unordered_map<std::string, int> Dataset::executeQuery(const Query& query) const
+std::unordered_map<std::string, int> Dataset::executeQuery(const Query query) const
 {
     const std::vector<int>& aggregateData =
-        static_cast<IntegerColumn*>(columns_[query.aggregateColumnId])->getData();
+        dynamic_cast<IntegerColumn*>(columns_[query.aggregateColumnId].get())->getData();
     return columns_[query.groupingColumnId]->performOperation(query.operation, aggregateData);
 }

@@ -4,7 +4,6 @@
 #include <algorithm>
 
 #include "Dataset.h"
-#include "Operation.h"
 
 UserInterface::UserInterface()
 {
@@ -88,7 +87,7 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
 
 void UserInterface::printCommandHelp()
 {
-    std::stringstream stringStream;
+    std::stringstream stringStream(std::ios_base::out);
     stringStream << "Usage:" << std::endl;
     stringStream << "<operation> <aggregation> <grouping>" << std::endl;
     stringStream << " operation = {" + Operation::getAvailableOperationsAsString("|") + "}" << std::endl;
