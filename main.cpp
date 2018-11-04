@@ -31,6 +31,15 @@ std::string parseArgs(int argc, char* argv[])
     return filePath;
 }
 
+std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin, std::chrono::steady_clock::time_point end)
+{
+    constexpr unsigned int MICROSECONDS_IN_SECOND = 1000000;
+    auto diff = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+    std::string timeDiffAsString = std::to_string(diff * 1.0 / MICROSECONDS_IN_SECOND);
+    timeDiffAsString += "s";
+    return timeDiffAsString;
+}
+
 int main(int argc, char* argv[])
 {
     std::string fileName = parseArgs(argc, argv);
@@ -54,8 +63,7 @@ int main(int argc, char* argv[])
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    std::cout << "Data loaded in " << std::fixed <<
-        std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()/1000000.0 << "s" << std::endl;
+    std::cout << "Data loaded in " << std::fixed << getTimeDiffAsString(begin, end) << std::endl;
 
     UserInterface::printCommandHelp();
 
@@ -77,13 +85,12 @@ int main(int argc, char* argv[])
         std::unordered_map<std::string, int> results = dataset.executeQuery(userQuery);
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-        for (auto& pair : results)
+        for (const auto& [key, value] : results)
         {
-            std:: cout << pair.first << " " << pair.second << std::endl;
+            std:: cout << key << " " << value << std::endl;
         }
 
-        std::cout << "Operation time = " << std::fixed <<
-            std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()/1000000.0 << "s" << std::endl;
+        std::cout << "Operation time = " << std::fixed << getTimeDiffAsString(begin, end) << std::endl;
     }
 
     return 0;
