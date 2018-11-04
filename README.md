@@ -1,8 +1,8 @@
 ## Building:  
-g++ -Wall -std=c++11 -c -O3 *.cpp  
-g++ -Wall -std=c++11 -o -O3 data-explorer *.o  
+g++ -Wall -std=c++17 -O3 -c *.cpp  
+g++ -Wall -std=c++17 -O3 -o data-explorer *.o  
 OR  
-use Qt data-explorer.pro file (from QtCreator IDE or cmd).  
+use CMake + GCC/Clang to compile project and tests (from some IDE or cmd).  
 
 ## Execution:  
 data-explorer sample.txt
