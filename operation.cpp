@@ -4,7 +4,6 @@ const std::map<std::string, Operation::OperationType> Operation::stringToOperati
     {{"avg", Operation::OperationType::AVG},
     {"min", Operation::OperationType::MIN},
     {"max", Operation::OperationType::MAX},
-    {"test", Operation::OperationType::TEST},
     {"quit", Operation::OperationType::QUIT}};
 
 Operation::OperationType Operation::getOperationTypeForString(const std::string& operationTypeString)

@@ -9,29 +9,23 @@
 #include "StringColumn.h"
 #include "Column.h"
 
-const std::string FileDataLoader::delimiter_{" "};
-
-FileDataLoader::FileDataLoader(std::string filePath) : filePath_(std::move(filePath))
+FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream) : stream_(std::move(stream))
 {
 
 }
 
 bool FileDataLoader::loadData(std::vector<std::string>& headers,
                               std::vector<Column::ColumnType>& columnTypes,
-                              std::vector<std::unique_ptr<Column>>& dataColumns) const
+                              std::vector<std::unique_ptr<Column>>& dataColumns)
 {
-    std::ifstream infile(filePath_);
-    if (!infile.good())
-    {
-        return false;
-    }
+    std::unique_ptr<std::istream> stream(std::move(stream_));
 
     std::string line;
 
-    std::getline(infile, line);
+    std::getline(*stream, line);
     headers = getHeaders(line);
 
-    std::getline(infile, line);
+    std::getline(*stream, line);
     columnTypes = getColumnTypes(line);
 
     if (!initColumns(columnTypes, dataColumns))
@@ -39,7 +33,7 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
         return false;
     }
 
-    if (!loadData(dataColumns, infile))
+    if (!loadData(dataColumns, *stream))
     {
         return false;
     }
@@ -47,7 +41,7 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
     return true;
 }
 
-bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns, std::ifstream& infile) const
+bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns, std::istream& infile) const
 {
     int lineIndex = 0;
     std::string inputLine;
@@ -57,7 +51,7 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
         size_t currentPosition = 0;
         unsigned int index = 0;
         std::string token;
-        while ((currentPosition = inputLine.find(delimiter_)) != std::string::npos)
+        while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
         {
             token = inputLine.substr(0, currentPosition);
             if (index >= columnsCount)
@@ -67,7 +61,7 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
                 return false;
             }
             dataColumns[index]->addDataItem(token);
-            inputLine.erase(0, currentPosition + delimiter_.length());
+            inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
             index++;
         }
         if (index >= columnsCount)
@@ -88,10 +82,10 @@ std::vector<std::string> FileDataLoader::getHeaders(std::string& inputLine) cons
     std::vector<std::string> headers;
 
     size_t currentPosition = 0;
-    while ((currentPosition = inputLine.find(delimiter_)) != std::string::npos)
+    while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
     {
         headers.emplace_back(inputLine.substr(0, currentPosition));
-        inputLine.erase(0, currentPosition + delimiter_.length());
+        inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
     }
     headers.emplace_back(inputLine);
 
@@ -103,10 +97,10 @@ std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(std::string& inpu
     std::vector<Column::ColumnType> columnTypes;
 
     size_t currentPosition = 0;
-    while ((currentPosition = inputLine.find(delimiter_)) != std::string::npos)
+    while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
     {
         columnTypes.emplace_back(Column::getColumnTypeForName(inputLine.substr(0, currentPosition)));
-        inputLine.erase(0, currentPosition + delimiter_.length());
+        inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
     }
     columnTypes.emplace_back(Column::getColumnTypeForName(inputLine));
 

@@ -1,5 +1,5 @@
 #include <sstream>
-#include <iostream>
+#include <fstream>
 #include <string>
 #include <memory>
 #include <chrono>
@@ -31,57 +31,20 @@ std::string parseArgs(int argc, char* argv[])
     return filePath;
 }
 
-static void testResults(const std::unordered_map<std::string, int>& current, const std::unordered_map<std::string, int>& expected)
-{
-    if (current != expected)
-    {
-        std::cout << "test failed, expected: ";
-        for (auto& pair : expected)
-        {
-            std:: cout << "(" + pair.first << "," << pair.second << ") ";
-        }
-
-        std::cout << ", current: ";
-
-        for (auto& pair : current)
-        {
-            std:: cout << "(" + pair.first << "," << pair.second << ") ";
-        }
-
-        std::cout << std::endl;
-    }
-}
-
-static void test()
-{
-    std::unique_ptr<FileDataLoader> loader(new FileDataLoader("sample.txt"));
-    Dataset dataset(std::move(loader));
-
-    if (!dataset.init())
-    {
-        std::cerr << "Cannot load data, exiting." << std::endl;
-        return;
-    }
-
-    Query query {Operation::OperationType::MIN, 1, 0};
-    std::unordered_map<std::string, int> expected {{"tim", 26}, {"tamas", 44}, {"dave", 0}};
-    testResults(dataset.executeQuery(query), expected);
-
-    query = {Operation::OperationType::MAX, 3, 2};
-    expected = {{"inception", 8}, {"pulp_fiction", 8}, {"ender's_game", 8}};
-    testResults(dataset.executeQuery({Operation::OperationType::MAX, 3, 2}), expected);
-
-    query = {Operation::OperationType::AVG, 3, 0};
-    expected = std::unordered_map<std::string, int> {{"tim", 8}, {"tamas", 6}, {"dave", 8}};
-    testResults(dataset.executeQuery(query), expected);
-}
-
 int main(int argc, char* argv[])
 {
     std::string fileName = parseArgs(argc, argv);
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    std::unique_ptr<FileDataLoader> loader(new FileDataLoader(fileName));
+
+    std::unique_ptr<std::istream> inFile = std::make_unique<std::ifstream>(fileName);
+    if (!inFile->good())
+    {
+        std::cerr << "Cannot open " << fileName << " file, exiting." << std::endl;
+        return -1;
+    }
+
+    std::unique_ptr<FileDataLoader> loader(new FileDataLoader(std::move(inFile)));
     Dataset dataset(std::move(loader));
 
     if (!dataset.init())
@@ -108,12 +71,6 @@ int main(int argc, char* argv[])
         if (userQuery.operation == Operation::OperationType::QUIT)
         {
             break;
-        }
-
-        if (userQuery.operation == Operation::OperationType::TEST)
-        {
-            test();
-            continue;
         }
 
         auto begin = std::chrono::steady_clock::now();
