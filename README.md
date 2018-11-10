@@ -1,5 +1,5 @@
 ## Building:  
-g++ -Wall -std=c++17 -O3 -c *.cpp  
+g++ -Wall -std=c++17 -Isrc -O3 -c *.cpp src/*.cpp
 g++ -Wall -std=c++17 -O3 -o data-explorer *.o  
 OR  
 use CMake + GCC/Clang to compile project and tests (from some IDE or cmd).  
