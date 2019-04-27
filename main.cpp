@@ -13,25 +13,23 @@
 #include "UserInterface.h"
 #include "Query.h"
 
-[[ noreturn ]] void exitWithHelp()
+[[ noreturn ]] static void exitWithHelp()
 {
     std::cerr << "Usage: <binary> file" << std::endl << " file - name of data file." << std::endl;
     exit(EXIT_FAILURE);
 }
 
-std::string parseArgs(int argc, char* argv[])
+static std::string parseArgs(int argc, char* argv[])
 {
     if (argc != 2)
     {
         exitWithHelp();
     }
 
-    std::string filePath = argv[1];
-
-    return filePath;
+    return argv[1];
 }
 
-std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin, std::chrono::steady_clock::time_point end)
+static std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin, std::chrono::steady_clock::time_point end)
 {
     constexpr unsigned int MICROSECONDS_IN_SECOND = 1000000;
     auto diff = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
@@ -81,9 +79,9 @@ int main(int argc, char* argv[])
             break;
         }
 
-        auto begin = std::chrono::steady_clock::now();
+        begin = std::chrono::steady_clock::now();
         std::unordered_map<std::string, int> results = dataset.executeQuery(userQuery);
-        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        end = std::chrono::steady_clock::now();
 
         for (const auto& [key, value] : results)
         {
