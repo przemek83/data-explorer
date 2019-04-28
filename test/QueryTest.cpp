@@ -6,7 +6,7 @@
 #include <FileDataLoader.h>
 
 static const std::string sampleData =
-R"(first_name;age;movie_name;score
+    R"(first_name;age;movie_name;score
 string;integer;string;integer
 tim;26;inception;8
 tim;26;pulp_fiction;8

@@ -9,12 +9,12 @@
 #include "Operation.h"
 #include "Query.h"
 
-class Dataset
+class Dataset final
 {
 public:
     explicit Dataset(std::unique_ptr<DataLoader> dataLoader);
 
-    virtual ~Dataset() = default;
+    ~Dataset() = default;
 
     Dataset& operator=(const Dataset& other) = delete;
     Dataset(const Dataset& other) = delete;

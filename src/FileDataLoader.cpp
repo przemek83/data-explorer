@@ -9,7 +9,8 @@
 #include "StringColumn.h"
 #include "Column.h"
 
-FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream) : stream_(std::move(stream))
+FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream) :
+    stream_(std::move(stream))
 {
 
 }
@@ -18,14 +19,12 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
                               std::vector<Column::ColumnType>& columnTypes,
                               std::vector<std::unique_ptr<Column>>& dataColumns)
 {
-    std::unique_ptr<std::istream> stream(std::move(stream_));
-
     std::string line;
 
-    std::getline(*stream, line);
+    std::getline(*stream_, line);
     headers = getHeaders(line);
 
-    std::getline(*stream, line);
+    std::getline(*stream_, line);
     columnTypes = getColumnTypes(line);
 
     if (!initColumns(columnTypes, dataColumns))
@@ -33,7 +32,7 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
         return false;
     }
 
-    if (!loadData(dataColumns, *stream))
+    if (!loadData(dataColumns, *stream_))
     {
         return false;
     }
@@ -41,7 +40,8 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
     return true;
 }
 
-bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns, std::istream& infile) const
+bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
+                              std::istream& infile) const
 {
     int lineIndex = 0;
     std::string inputLine;
@@ -57,7 +57,7 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
             if (index >= columnsCount)
             {
                 std::cerr << "Data corrupted, line " << lineIndex << ", column " <<
-                    index << ", value " << token << std::endl;
+                          index << ", value " << token << std::endl;
                 return false;
             }
             dataColumns[index]->addDataItem(token);
@@ -67,7 +67,7 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
         if (index >= columnsCount)
         {
             std::cerr << "Data corrupted, line " << lineIndex << ", column " <<
-                index << ", value " << token << std::endl;
+                      index << ", value " << token << std::endl;
             return false;
         }
         dataColumns[index]->addDataItem(inputLine);
@@ -92,7 +92,8 @@ std::vector<std::string> FileDataLoader::getHeaders(std::string& inputLine) cons
     return headers;
 }
 
-std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(std::string& inputLine) const
+std::vector<Column::ColumnType>
+FileDataLoader::getColumnTypes(std::string& inputLine) const
 {
     std::vector<Column::ColumnType> columnTypes;
 
@@ -107,7 +108,8 @@ std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(std::string& inpu
     return columnTypes;
 }
 
-bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes, std::vector<std::unique_ptr<Column>>& dataColumns) const
+bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes,
+                                 std::vector<std::unique_ptr<Column>>& dataColumns) const
 {
     for (Column::ColumnType columnType : columnTypes)
     {
@@ -123,12 +125,6 @@ bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes, s
             {
                 dataColumns.emplace_back(std::make_unique<StringColumn>());
                 break;
-            }
-
-            default:
-            {
-                std::cout << "Unknown column type " << static_cast<int>(columnType) << std::endl;
-                return false;
             }
         }
     }

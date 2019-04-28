@@ -30,9 +30,11 @@ private:
 
     std::vector<Column::ColumnType> getColumnTypes(std::string& inputLine) const;
 
-    bool initColumns(std::vector<Column::ColumnType>& columnTypes, std::vector<std::unique_ptr<Column>>& dataColumns) const;
+    bool initColumns(std::vector<Column::ColumnType>& columnTypes,
+                     std::vector<std::unique_ptr<Column>>& dataColumns) const;
 
-    bool loadData(std::vector<std::unique_ptr<Column>>& dataColumns, std::istream &infile) const;
+    bool loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
+                  std::istream& infile) const;
 
     static constexpr char DELIMITER{';'};
 
