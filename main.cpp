@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     if (!inFile->good())
     {
         std::cerr << "Cannot open " << fileName << " file, exiting." << std::endl;
-        return -1;
+        return EXIT_FAILURE;
     }
 
     std::unique_ptr<FileDataLoader> loader(new FileDataLoader(std::move(inFile)));
@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     if (!dataset.init())
     {
         std::cerr << "Cannot load data, exiting." << std::endl;
-        return -1;
+        return EXIT_FAILURE;
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -91,5 +91,5 @@ int main(int argc, char* argv[])
         std::cout << "Operation time = " << std::fixed << getTimeDiffAsString(begin, end) << std::endl;
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
