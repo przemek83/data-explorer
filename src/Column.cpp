@@ -1,8 +1,8 @@
 #include "Column.h"
 
-std::map<Column::ColumnType, std::string> Column::columnTypeMapping_
-    {{Column::ColumnType::INTEGER, "integer"},
-     {Column::ColumnType::STRING, "string"}};
+std::map<Column::ColumnType, std::string> Column::columnTypeMapping_{
+    {Column::ColumnType::INTEGER, "integer"},
+    {Column::ColumnType::STRING, "string"}};
 
 std::string Column::getColumnNameForType(Column::ColumnType columnType)
 {

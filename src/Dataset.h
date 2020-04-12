@@ -5,9 +5,9 @@
 
 #include "DataLoader.h"
 #include "IntegerColumn.h"
-#include "StringColumn.h"
 #include "Operation.h"
 #include "Query.h"
+#include "StringColumn.h"
 
 class Dataset final
 {
@@ -28,7 +28,8 @@ public:
 
     bool isColumnNameValid(const std::string& columnName) const;
 
-    bool isColumnNameCanBeUsedForAggregation(const std::string& columnName) const;
+    bool isColumnNameCanBeUsedForAggregation(
+        const std::string& columnName) const;
 
     std::unordered_map<std::string, int> executeQuery(const Query query) const;
 
@@ -42,4 +43,4 @@ private:
     std::vector<std::unique_ptr<Column>> columns_;
 };
 
-#endif // DATASET_H
+#endif  // DATASET_H

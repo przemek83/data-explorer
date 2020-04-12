@@ -19,7 +19,8 @@ public:
     UserInterface& operator=(UserInterface&& other) = default;
     UserInterface(UserInterface&& other) = default;
 
-    bool getValidatedUserQueryForDataset(const Dataset& dataset, Query& query) const;
+    bool getValidatedUserQueryForDataset(const Dataset& dataset,
+                                         Query& query) const;
 
     static void printCommandHelp();
 
@@ -28,9 +29,9 @@ private:
                          const std::string& groupingColumn,
                          const Dataset& dataset) const;
 
-    std::string operationInputString_ {};
-    std::string aggregateColumnInputString_ {};
-    std::string groupingColumnInputString_ {};
+    std::string operationInputString_{};
+    std::string aggregateColumnInputString_{};
+    std::string groupingColumnInputString_{};
 };
 
-#endif // USERINTERFACE_H
+#endif  // USERINTERFACE_H

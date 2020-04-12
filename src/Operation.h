@@ -1,12 +1,12 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-#include <string>
+#include <math.h>
+#include <functional>
 #include <map>
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include <functional>
-#include <math.h>
 
 class Operation
 {
@@ -23,14 +23,16 @@ public:
     Operation() = delete;
     ~Operation() = delete;
 
-    static OperationType getOperationTypeForString(const std::string& operationTypeString);
+    static OperationType getOperationTypeForString(
+        const std::string& operationTypeString);
 
-    static std::string getAvailableOperationsAsString(const std::string& delimiter);
+    static std::string getAvailableOperationsAsString(
+        const std::string& delimiter);
 
-    template<class T>
-    static std::unordered_map<T, int> executeOperation(OperationType operationType,
-                                                       const std::vector<T>& groupingData,
-                                                       const std::vector<int>& aggregateData)
+    template <class T>
+    static std::unordered_map<T, int> executeOperation(
+        OperationType operationType, const std::vector<T>& groupingData,
+        const std::vector<int>& aggregateData)
     {
         std::unordered_map<T, int> results;
 
@@ -44,30 +46,36 @@ public:
 
             case OperationType::MIN:
             {
-                results = computeExtremum<T>(groupingData, aggregateData, [](int a, int b) { return a > b; });
+                results =
+                    computeExtremum<T>(groupingData, aggregateData,
+                                       [](int a, int b) { return a > b; });
                 break;
             }
 
             case OperationType::MAX:
             {
-                results = computeExtremum<T>(groupingData, aggregateData, [](int a, int b) { return a <= b; });
+                results =
+                    computeExtremum<T>(groupingData, aggregateData,
+                                       [](int a, int b) { return a <= b; });
                 break;
             }
 
             case OperationType::UNKNOWN:
             default:
             {
-                throw std::logic_error("Unknown Operation Type " + static_cast<int>(operationType));
+                throw std::logic_error("Unknown Operation Type " +
+                                       static_cast<int>(operationType));
             }
         }
         return results;
     }
 
 private:
-    template<class T>
-    static std::unordered_map<T, int> computeExtremum(const std::vector<T>& groupingData,
-                                                      const std::vector<int>& aggregateData,
-                                                      std::function<bool(int, int)> func)
+    template <class T>
+    static std::unordered_map<T, int> computeExtremum(
+        const std::vector<T>& groupingData,
+        const std::vector<int>& aggregateData,
+        std::function<bool(int, int)> func)
     {
         std::unordered_map<T, int> results;
         for (unsigned int i = 0; i < groupingData.size(); ++i)
@@ -86,11 +94,13 @@ private:
             }
         }
 
-       return results;
+        return results;
     }
 
-    template<class T>
-    static std::unordered_map<T, int> computeAverage(const std::vector<T>& groupingData, const std::vector<int>& aggregateData)
+    template <class T>
+    static std::unordered_map<T, int> computeAverage(
+        const std::vector<T>& groupingData,
+        const std::vector<int>& aggregateData)
     {
         std::unordered_map<T, std::pair<long long int, int>> indirectResults;
         unsigned int groupingDataSize = groupingData.size();
@@ -104,13 +114,15 @@ private:
         std::unordered_map<T, int> results;
         for (const auto& item : indirectResults)
         {
-            results[item.first] = round(static_cast<float>(item.second.first) / item.second.second);
+            results[item.first] = round(static_cast<float>(item.second.first) /
+                                        item.second.second);
         }
 
-       return results;
+        return results;
     }
 
-    const static std::map<std::string, OperationType> stringToOperationTypeMapping_;
+    const static std::map<std::string, OperationType>
+        stringToOperationTypeMapping_;
 };
 
-#endif // OPERATION_H
+#endif  // OPERATION_H

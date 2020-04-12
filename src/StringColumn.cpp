@@ -7,13 +7,10 @@ Column::ColumnType StringColumn::getColumnType() const
     return Column::ColumnType::STRING;
 }
 
-const std::vector<unsigned int>& StringColumn::getData()
-{
-    return data_;
-}
+const std::vector<unsigned int>& StringColumn::getData() { return data_; }
 
-std::unordered_map<std::string, int>
-    StringColumn::performOperation(Operation::OperationType operationType, const std::vector<int>& data)
+std::unordered_map<std::string, int> StringColumn::performOperation(
+    Operation::OperationType operationType, const std::vector<int>& data)
 {
     std::unordered_map<unsigned int, int> indirectResults =
         Operation::executeOperation<unsigned int>(operationType, data_, data);

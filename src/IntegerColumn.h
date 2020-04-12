@@ -40,8 +40,9 @@ public:
         data_.push_back(value);
     }
 
-    std::unordered_map<std::string, int>
-        performOperation(Operation::OperationType operationType, const std::vector<int>& data) override;
+    std::unordered_map<std::string, int> performOperation(
+        Operation::OperationType operationType,
+        const std::vector<int>& data) override;
 
     const std::vector<int>& getData();
 
@@ -49,4 +50,4 @@ private:
     std::vector<int> data_;
 };
 
-#endif // INTEGERCOLUMN_H
+#endif  // INTEGERCOLUMN_H

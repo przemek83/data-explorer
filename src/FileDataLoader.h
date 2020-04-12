@@ -28,7 +28,8 @@ public:
 private:
     std::vector<std::string> getHeaders(std::string& inputLine) const;
 
-    std::vector<Column::ColumnType> getColumnTypes(std::string& inputLine) const;
+    std::vector<Column::ColumnType> getColumnTypes(
+        std::string& inputLine) const;
 
     bool initColumns(std::vector<Column::ColumnType>& columnTypes,
                      std::vector<std::unique_ptr<Column>>& dataColumns) const;
@@ -38,9 +39,9 @@ private:
 
     static constexpr char DELIMITER{';'};
 
-    static constexpr unsigned int DELIMITER_LENGTH {1};
+    static constexpr unsigned int DELIMITER_LENGTH{1};
 
     std::unique_ptr<std::istream> stream_;
 };
 
-#endif // FILEDATALOADER_H
+#endif  // FILEDATALOADER_H

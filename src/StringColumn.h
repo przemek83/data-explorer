@@ -31,15 +31,16 @@ public:
 
     const std::vector<unsigned int>& getData();
 
-    std::unordered_map<std::string, int>
-        performOperation(Operation::OperationType operationType, const std::vector<int>& data) override;
+    std::unordered_map<std::string, int> performOperation(
+        Operation::OperationType operationType,
+        const std::vector<int>& data) override;
 
 private:
     std::vector<unsigned int> data_{};
 
     std::unordered_map<std::string, unsigned int> stringToIdMapping_{};
 
-    unsigned int currentIndex_ {0};
+    unsigned int currentIndex_{0};
 };
 
-#endif // STRINGCOLUMN_H
+#endif  // STRINGCOLUMN_H

@@ -1,7 +1,7 @@
 #include "UserInterface.h"
 
-#include <sstream>
 #include <algorithm>
+#include <sstream>
 
 #include "Dataset.h"
 
@@ -12,19 +12,21 @@ UserInterface::UserInterface()
 
     std::istringstream iss(inputLine);
 
-    iss >> operationInputString_ >> aggregateColumnInputString_ >> groupingColumnInputString_;
-    std::transform(operationInputString_.begin(),
-                   operationInputString_.end(),
-                   operationInputString_.begin(),
-                   ::tolower);
+    iss >> operationInputString_ >> aggregateColumnInputString_ >>
+        groupingColumnInputString_;
+    std::transform(operationInputString_.begin(), operationInputString_.end(),
+                   operationInputString_.begin(), ::tolower);
 }
 
-bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset, Query& query) const
+bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
+                                                    Query& query) const
 {
-    query.operation = Operation::getOperationTypeForString(operationInputString_);
+    query.operation =
+        Operation::getOperationTypeForString(operationInputString_);
     if (query.operation == Operation::OperationType::UNKNOWN)
     {
-        std::cerr << "Operation " << operationInputString_ << " is unknown." << std::endl;
+        std::cerr << "Operation " << operationInputString_ << " is unknown."
+                  << std::endl;
         return false;
     }
 
@@ -33,16 +35,20 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset, Quer
         return true;
     }
 
-    if (!areColumnsValid(aggregateColumnInputString_, groupingColumnInputString_, dataset))
+    if (!areColumnsValid(aggregateColumnInputString_,
+                         groupingColumnInputString_, dataset))
     {
         return false;
     }
 
-    query.aggregateColumnId = dataset.getColumnIdForName(aggregateColumnInputString_);
-    query.groupingColumnId = dataset.getColumnIdForName(groupingColumnInputString_);
+    query.aggregateColumnId =
+        dataset.getColumnIdForName(aggregateColumnInputString_);
+    query.groupingColumnId =
+        dataset.getColumnIdForName(groupingColumnInputString_);
 
-    std:: cout << "Execute: " << operationInputString_ << " " << aggregateColumnInputString_ <<
-        " GROUPED BY " << groupingColumnInputString_ << std::endl;
+    std::cout << "Execute: " << operationInputString_ << " "
+              << aggregateColumnInputString_ << " GROUPED BY "
+              << groupingColumnInputString_ << std::endl;
 
     return true;
 }
@@ -55,7 +61,8 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
 
     if (aggregateColumn == groupingColumn)
     {
-        std::cerr << "Cannot use same column for aggregation and grouping." << std::endl;
+        std::cerr << "Cannot use same column for aggregation and grouping."
+                  << std::endl;
         columnsValid = false;
     }
 
@@ -71,9 +78,11 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
         columnsValid = false;
     }
 
-    if (columnsValid && !dataset.isColumnNameCanBeUsedForAggregation(aggregateColumn))
+    if (columnsValid &&
+        !dataset.isColumnNameCanBeUsedForAggregation(aggregateColumn))
     {
-        std::cerr << "Cannot aggregate using column " << aggregateColumn << std::endl;
+        std::cerr << "Cannot aggregate using column " << aggregateColumn
+                  << std::endl;
         columnsValid = false;
     }
 
@@ -85,9 +94,13 @@ void UserInterface::printCommandHelp()
     std::stringstream stringStream(std::ios_base::out);
     stringStream << "Usage:" << std::endl;
     stringStream << "<operation> <aggregation> <grouping>" << std::endl;
-    stringStream << " operation = {" + Operation::getAvailableOperationsAsString("|") + "}" << std::endl;
-    stringStream << " aggregation = column which will be used for aggreagation (numerical only)" << std::endl;
-    stringStream << " grouping = column which will be used for grouping" << std::endl;
+    stringStream << " operation = {" +
+                        Operation::getAvailableOperationsAsString("|") + "}"
+                 << std::endl;
+    stringStream << " aggregation = column which will be used for aggreagation "
+                    "(numerical only)"
+                 << std::endl;
+    stringStream << " grouping = column which will be used for grouping"
+                 << std::endl;
     std::cout << stringStream.str() << std::endl;
 }
-

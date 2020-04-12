@@ -17,19 +17,26 @@ dave;0;ender's_game;8)";
 
 TEST(DataExplorer, executeQuery)
 {
-    std::unique_ptr<std::istringstream> stream = std::make_unique<std::istringstream>(sampleData);
+    std::unique_ptr<std::istringstream> stream =
+        std::make_unique<std::istringstream>(sampleData);
 
-    std::unique_ptr<FileDataLoader> loader(new FileDataLoader(std::move(stream)));
+    std::unique_ptr<FileDataLoader> loader(
+        new FileDataLoader(std::move(stream)));
     Dataset dataset(std::move(loader));
 
     ASSERT_TRUE(dataset.init());
 
-    std::unordered_map<std::string, int> expected {{"tim", 26}, {"tamas", 44}, {"dave", 0}};
-    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::MIN, 1, 0}), expected);
+    std::unordered_map<std::string, int> expected{
+        {"tim", 26}, {"tamas", 44}, {"dave", 0}};
+    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::MIN, 1, 0}),
+              expected);
 
     expected = {{"inception", 8}, {"pulp_fiction", 8}, {"ender's_game", 8}};
-    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::MAX, 3, 2}), expected);
+    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::MAX, 3, 2}),
+              expected);
 
-    expected = std::unordered_map<std::string, int> {{"tim", 8}, {"tamas", 6}, {"dave", 8}};
-    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::AVG, 3, 0}), expected);
+    expected = std::unordered_map<std::string, int>{
+        {"tim", 8}, {"tamas", 6}, {"dave", 8}};
+    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::AVG, 3, 0}),
+              expected);
 }

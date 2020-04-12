@@ -1,18 +1,17 @@
 #include "FileDataLoader.h"
 
-#include <iostream>
-#include <sstream>
 #include <fstream>
+#include <iostream>
 #include <memory>
+#include <sstream>
 
+#include "Column.h"
 #include "IntegerColumn.h"
 #include "StringColumn.h"
-#include "Column.h"
 
-FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream) :
-    stream_(std::move(stream))
+FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream)
+    : stream_(std::move(stream))
 {
-
 }
 
 bool FileDataLoader::loadData(std::vector<std::string>& headers,
@@ -51,13 +50,14 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
         size_t currentPosition = 0;
         unsigned int index = 0;
         std::string token;
-        while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
+        while ((currentPosition = inputLine.find(DELIMITER)) !=
+               std::string::npos)
         {
             token = inputLine.substr(0, currentPosition);
             if (index >= columnsCount)
             {
-                std::cerr << "Data corrupted, line " << lineIndex << ", column " <<
-                          index << ", value " << token << std::endl;
+                std::cerr << "Data corrupted, line " << lineIndex << ", column "
+                          << index << ", value " << token << std::endl;
                 return false;
             }
             dataColumns[index]->addDataItem(token);
@@ -66,8 +66,8 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
         }
         if (index >= columnsCount)
         {
-            std::cerr << "Data corrupted, line " << lineIndex << ", column " <<
-                      index << ", value " << token << std::endl;
+            std::cerr << "Data corrupted, line " << lineIndex << ", column "
+                      << index << ", value " << token << std::endl;
             return false;
         }
         dataColumns[index]->addDataItem(inputLine);
@@ -77,7 +77,8 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
     return true;
 }
 
-std::vector<std::string> FileDataLoader::getHeaders(std::string& inputLine) const
+std::vector<std::string> FileDataLoader::getHeaders(
+    std::string& inputLine) const
 {
     std::vector<std::string> headers;
 
@@ -92,15 +93,16 @@ std::vector<std::string> FileDataLoader::getHeaders(std::string& inputLine) cons
     return headers;
 }
 
-std::vector<Column::ColumnType>
-FileDataLoader::getColumnTypes(std::string& inputLine) const
+std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(
+    std::string& inputLine) const
 {
     std::vector<Column::ColumnType> columnTypes;
 
     size_t currentPosition = 0;
     while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
     {
-        columnTypes.emplace_back(Column::getColumnTypeForName(inputLine.substr(0, currentPosition)));
+        columnTypes.emplace_back(
+            Column::getColumnTypeForName(inputLine.substr(0, currentPosition)));
         inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
     }
     columnTypes.emplace_back(Column::getColumnTypeForName(inputLine));
@@ -108,8 +110,9 @@ FileDataLoader::getColumnTypes(std::string& inputLine) const
     return columnTypes;
 }
 
-bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes,
-                                 std::vector<std::unique_ptr<Column>>& dataColumns) const
+bool FileDataLoader::initColumns(
+    std::vector<Column::ColumnType>& columnTypes,
+    std::vector<std::unique_ptr<Column>>& dataColumns) const
 {
     for (Column::ColumnType columnType : columnTypes)
     {
@@ -117,7 +120,8 @@ bool FileDataLoader::initColumns(std::vector<Column::ColumnType>& columnTypes,
         {
             case Column::ColumnType::INTEGER:
             {
-                dataColumns.emplace_back(std::make_unique<IntegerColumn>(std::vector<int>()));
+                dataColumns.emplace_back(
+                    std::make_unique<IntegerColumn>(std::vector<int>()));
                 break;
             }
 

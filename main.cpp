@@ -1,21 +1,21 @@
-#include <sstream>
-#include <fstream>
-#include <string>
-#include <memory>
-#include <chrono>
 #include <cassert>
+#include <chrono>
+#include <fstream>
 #include <iomanip>
-#include <unordered_map>
+#include <memory>
+#include <sstream>
 #include <string>
+#include <unordered_map>
 
-#include "FileDataLoader.h"
 #include "Dataset.h"
-#include "UserInterface.h"
+#include "FileDataLoader.h"
 #include "Query.h"
+#include "UserInterface.h"
 
-[[ noreturn ]] static void exitWithHelp()
+[[noreturn]] static void exitWithHelp()
 {
-    std::cerr << "Usage: <binary> file" << std::endl << " file - name of data file." << std::endl;
+    std::cerr << "Usage: <binary> file" << std::endl
+              << " file - name of data file." << std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -29,11 +29,16 @@ static std::string parseArgs(int argc, char* argv[])
     return argv[1];
 }
 
-static std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin, std::chrono::steady_clock::time_point end)
+static std::string getTimeDiffAsString(
+    std::chrono::steady_clock::time_point begin,
+    std::chrono::steady_clock::time_point end)
 {
     constexpr unsigned int MICROSECONDS_IN_SECOND = 1000000;
-    auto diff = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
-    std::string timeDiffAsString = std::to_string(diff * 1.0 / MICROSECONDS_IN_SECOND);
+    auto diff =
+        std::chrono::duration_cast<std::chrono::microseconds>(end - begin)
+            .count();
+    std::string timeDiffAsString =
+        std::to_string(diff * 1.0 / MICROSECONDS_IN_SECOND);
     timeDiffAsString += "s";
     return timeDiffAsString;
 }
@@ -42,16 +47,20 @@ int main(int argc, char* argv[])
 {
     std::string fileName = parseArgs(argc, argv);
 
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point begin =
+        std::chrono::steady_clock::now();
 
-    std::unique_ptr<std::istream> inFile = std::make_unique<std::ifstream>(fileName);
+    std::unique_ptr<std::istream> inFile =
+        std::make_unique<std::ifstream>(fileName);
     if (!inFile->good())
     {
-        std::cerr << "Cannot open " << fileName << " file, exiting." << std::endl;
+        std::cerr << "Cannot open " << fileName << " file, exiting."
+                  << std::endl;
         return EXIT_FAILURE;
     }
 
-    std::unique_ptr<FileDataLoader> loader(new FileDataLoader(std::move(inFile)));
+    std::unique_ptr<FileDataLoader> loader(
+        new FileDataLoader(std::move(inFile)));
     Dataset dataset(std::move(loader));
 
     if (!dataset.init())
@@ -60,8 +69,10 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     }
 
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    std::cout << "Data loaded in " << std::fixed << getTimeDiffAsString(begin, end) << std::endl;
+    std::chrono::steady_clock::time_point end =
+        std::chrono::steady_clock::now();
+    std::cout << "Data loaded in " << std::fixed
+              << getTimeDiffAsString(begin, end) << std::endl;
 
     UserInterface::printCommandHelp();
 
@@ -80,15 +91,17 @@ int main(int argc, char* argv[])
         }
 
         begin = std::chrono::steady_clock::now();
-        std::unordered_map<std::string, int> results = dataset.executeQuery(userQuery);
+        std::unordered_map<std::string, int> results =
+            dataset.executeQuery(userQuery);
         end = std::chrono::steady_clock::now();
 
         for (const auto& [key, value] : results)
         {
-            std:: cout << key << " " << value << std::endl;
+            std::cout << key << " " << value << std::endl;
         }
 
-        std::cout << "Operation time = " << std::fixed << getTimeDiffAsString(begin, end) << std::endl;
+        std::cout << "Operation time = " << std::fixed
+                  << getTimeDiffAsString(begin, end) << std::endl;
     }
 
     return EXIT_SUCCESS;

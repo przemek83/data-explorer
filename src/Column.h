@@ -34,11 +34,12 @@ public:
 
     virtual void addDataItem(const std::string& dataItem) = 0;
 
-    virtual std::unordered_map<std::string, int>
-        performOperation(Operation::OperationType operationType, const std::vector<int>& data) = 0;
+    virtual std::unordered_map<std::string, int> performOperation(
+        Operation::OperationType operationType,
+        const std::vector<int>& data) = 0;
 
 private:
     static std::map<ColumnType, std::string> columnTypeMapping_;
 };
 
-#endif // COLUMNTYPES_H
+#endif  // COLUMNTYPES_H
