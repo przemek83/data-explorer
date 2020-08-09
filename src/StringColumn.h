@@ -1,5 +1,4 @@
-#ifndef STRINGCOLUMN_H
-#define STRINGCOLUMN_H
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -42,5 +41,3 @@ private:
 
     unsigned int currentIndex_{0};
 };
-
-#endif  // STRINGCOLUMN_H

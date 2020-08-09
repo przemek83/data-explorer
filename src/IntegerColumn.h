@@ -1,5 +1,4 @@
-#ifndef INTEGERCOLUMN_H
-#define INTEGERCOLUMN_H
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -49,5 +48,3 @@ public:
 private:
     std::vector<int> data_;
 };
-
-#endif  // INTEGERCOLUMN_H

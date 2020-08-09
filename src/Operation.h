@@ -1,5 +1,4 @@
-#ifndef OPERATION_H
-#define OPERATION_H
+#pragma once
 
 #include <math.h>
 #include <functional>
@@ -124,5 +123,3 @@ private:
     const static std::map<std::string, OperationType>
         stringToOperationTypeMapping_;
 };
-
-#endif  // OPERATION_H

@@ -1,5 +1,4 @@
-#ifndef FILEDATALOADER_H
-#define FILEDATALOADER_H
+#pragma once
 
 #include <vector>
 
@@ -43,5 +42,3 @@ private:
 
     std::unique_ptr<std::istream> stream_;
 };
-
-#endif  // FILEDATALOADER_H

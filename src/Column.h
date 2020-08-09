@@ -1,5 +1,4 @@
-#ifndef COLUMNTYPES_H
-#define COLUMNTYPES_H
+#pragma once
 
 #include <map>
 #include <string>
@@ -41,5 +40,3 @@ public:
 private:
     static std::map<ColumnType, std::string> columnTypeMapping_;
 };
-
-#endif  // COLUMNTYPES_H
