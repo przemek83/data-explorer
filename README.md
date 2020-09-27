@@ -1,24 +1,33 @@
 ## Building:  
-g++ -Wall -std=c++17 -Isrc -O3 -c *.cpp src/*.cpp  
-g++ -Wall -std=c++17 -O3 -o data-explorer *.o  
+Use compiler directly:
+```shell
+$ g++ -Wall -std=c++17 -Isrc -O3 -c *.cpp src/*.cpp  
+$ g++ -Wall -std=c++17 -O3 -o data-explorer *.o  
+```
 OR  
 use CMake + GCC/Clang to compile project and tests (from some IDE or cmd).  
 
 ## Execution:  
-data-explorer sample.txt
+```shell
+$ data-explorer sample.txt
+```
 
 ## Usage:  
 \<operation\> \<aggregation\> \<grouping\>  
 
 Usage Example:  
-avg score movie_name
+```shell
+$ avg score movie_name
+```
 
 Example output:  
+```shell
 avg score GROUPED BY movie_name  
 ender's_game 8  
 pulp_fiction 6  
 inception 8  
 Operation time = 0.000009s  
+```
 
 ## Files:  
 main.cpp - main file :)  
