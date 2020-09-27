@@ -1,5 +1,4 @@
-#ifndef DATASET_H
-#define DATASET_H
+#pragma once
 
 #include <memory>
 
@@ -42,5 +41,3 @@ private:
 
     std::vector<std::unique_ptr<Column>> columns_;
 };
-
-#endif  // DATASET_H

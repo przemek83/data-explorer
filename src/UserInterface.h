@@ -1,5 +1,4 @@
-#ifndef USERINTERFACE_H
-#define USERINTERFACE_H
+#pragma once
 
 #include <string>
 
@@ -33,5 +32,3 @@ private:
     std::string aggregateColumnInputString_{};
     std::string groupingColumnInputString_{};
 };
-
-#endif  // USERINTERFACE_H

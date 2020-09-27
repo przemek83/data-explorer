@@ -1,5 +1,4 @@
-#ifndef QUERY_H
-#define QUERY_H
+#pragma once
 
 #include "Operation.h"
 
@@ -10,5 +9,3 @@ public:
     unsigned int aggregateColumnId{0};
     unsigned int groupingColumnId{0};
 };
-
-#endif  // QUERY_H

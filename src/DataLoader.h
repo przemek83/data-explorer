@@ -1,5 +1,4 @@
-#ifndef DATALOADER_H
-#define DATALOADER_H
+#pragma once
 
 #include <memory>
 #include <string>
@@ -28,5 +27,3 @@ public:
         std::vector<Column::ColumnType>& columnTypes,
         std::vector<std::unique_ptr<Column>>& dataColumns) = 0;
 };
-
-#endif  // DATALOADER_H
