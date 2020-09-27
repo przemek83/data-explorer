@@ -21,7 +21,7 @@ $ avg score movie_name
 ```
 
 Example output:  
-```shell
+```
 avg score GROUPED BY movie_name  
 ender's_game 8  
 pulp_fiction 6  
