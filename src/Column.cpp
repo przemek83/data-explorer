@@ -1,5 +1,7 @@
 #include "Column.h"
 
+#include <stdexcept>
+
 std::map<Column::ColumnType, std::string> Column::columnTypeMapping_{
     {Column::ColumnType::INTEGER, "integer"},
     {Column::ColumnType::STRING, "string"}};
