@@ -31,5 +31,7 @@
 *.out
 *.app
 
-# Qt
-*.user*
+# Other
+/.vscode
+/build
+/.cache
