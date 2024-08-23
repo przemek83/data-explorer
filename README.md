@@ -1,3 +1,5 @@
+[![Build & test](https://github.com/przemek83/data-explorer/actions/workflows/buld-and-test.yml/badge.svg)](https://github.com/przemek83/data-explorer/actions/workflows/buld-and-test.yml)
+
 ## Building:  
 Use compiler directly:
 ```shell
