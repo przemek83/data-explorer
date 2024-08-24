@@ -8,11 +8,11 @@ on:
 
 jobs:
   linux:
-    uses: przemek83/workflows/.github/workflows/build-and-test-cpp.yml@main
+    uses: przemek83/common/.github/workflows/build-and-test-cpp.yml@main
     with:
       platform: ubuntu-latest
 
   windows:
-    uses: przemek83/workflows/.github/workflows/build-and-test-cpp.yml@main
+    uses: przemek83/common/.github/workflows/build-and-test-cpp.yml@main
     with:
       platform: windows-latest
