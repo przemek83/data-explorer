@@ -2,8 +2,8 @@
 
 #include "gtest/gtest.h"
 
-#include <Dataset.h>
-#include <FileDataLoader.h>
+#include <src/Dataset.h>
+#include <src/FileDataLoader.h>
 
 static const std::string sampleData =
     R"(first_name;age;movie_name;score
