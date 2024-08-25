@@ -1,5 +1,6 @@
 [![Build & test](https://github.com/przemek83/data-explorer/actions/workflows/buld-and-test.yml/badge.svg)](https://github.com/przemek83/data-explorer/actions/workflows/buld-and-test.yml)
 [![CodeQL](https://github.com/przemek83/data-explorer/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/przemek83/data-explorer/actions/workflows/github-code-scanning/codeql)
+[![codecov](https://codecov.io/gh/przemek83/data-explorer/graph/badge.svg?token=SJF84CBY8Y)](https://codecov.io/gh/przemek83/data-explorer)
 
 ## Building:  
 Use compiler directly:
