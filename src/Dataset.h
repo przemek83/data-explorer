@@ -3,10 +3,7 @@
 #include <memory>
 
 #include "DataLoader.h"
-#include "IntegerColumn.h"
-#include "Operation.h"
 #include "Query.h"
-#include "StringColumn.h"
 
 class Dataset final
 {
