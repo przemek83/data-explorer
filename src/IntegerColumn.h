@@ -10,7 +10,7 @@ class IntegerColumn : public Column
 public:
     explicit IntegerColumn(std::vector<int> data);
 
-    virtual ~IntegerColumn() = default;
+    ~IntegerColumn() override = default;
 
     IntegerColumn& operator=(const IntegerColumn& other) = delete;
     IntegerColumn(const IntegerColumn& other) = delete;
@@ -20,7 +20,7 @@ public:
 
     ColumnType getColumnType() const override;
 
-    inline void addDataItem(const std::string& dataItem) override final
+    inline void addDataItem(const std::string& dataItem) override
     {
         int value = 0;
         try
