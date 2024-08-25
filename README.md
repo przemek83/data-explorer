@@ -2,6 +2,12 @@
 [![CodeQL](https://github.com/przemek83/data-explorer/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/przemek83/data-explorer/actions/workflows/github-code-scanning/codeql)
 [![codecov](https://codecov.io/gh/przemek83/data-explorer/graph/badge.svg?token=SJF84CBY8Y)](https://codecov.io/gh/przemek83/data-explorer)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=przemek83_data-explorer&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=przemek83_data-explorer)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=przemek83_data-explorer&metric=bugs)](https://sonarcloud.io/summary/new_code?id=przemek83_data-explorer)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=przemek83_data-explorer&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=przemek83_data-explorer)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=przemek83_data-explorer&metric=coverage)](https://sonarcloud.io/summary/new_code?id=przemek83_data-explorer)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=przemek83_data-explorer&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=przemek83_data-explorer)
+
 ## Building:  
 Use compiler directly:
 ```shell
