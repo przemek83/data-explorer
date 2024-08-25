@@ -1,6 +1,7 @@
+#include <memory>
 #include <sstream>
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #include <src/Dataset.h>
 #include <src/FileDataLoader.h>
@@ -17,11 +18,10 @@ dave;0;ender's_game;8)";
 
 TEST(DataExplorer, executeQuery)
 {
-    std::unique_ptr<std::istringstream> stream =
-        std::make_unique<std::istringstream>(sampleData);
+    auto stream{
+        std::make_unique<std::istringstream>(sampleData)};
 
-    std::unique_ptr<FileDataLoader> loader(
-        new FileDataLoader(std::move(stream)));
+    auto loader{std::make_unique<FileDataLoader>(std::move(stream))};
     Dataset dataset(std::move(loader));
 
     ASSERT_TRUE(dataset.init());
