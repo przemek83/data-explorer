@@ -28,7 +28,7 @@ public:
         }
     }
 
-    const std::vector<unsigned int>& getData();
+    const std::vector<unsigned int>& getData() const;
 
     std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
