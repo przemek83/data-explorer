@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "IntegerColumn.h"
+
 Dataset::Dataset(std::unique_ptr<DataLoader> dataLoader)
     : dataLoader_(std::move(dataLoader))
 {
