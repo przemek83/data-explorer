@@ -7,7 +7,8 @@ set(${PROJECT_TEST}_SOURCES
 )
 
 add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})
-target_link_libraries(${PROJECT_TEST} PRIVATE gtest gtest_main ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_TEST} PRIVATE GTest::gtest_main ${PROJECT_NAME}-lib)
 
 include(CTest)
-add_test(NAME ${PROJECT_TEST} COMMAND ${PROJECT_TEST})
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_TEST})
