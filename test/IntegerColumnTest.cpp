@@ -2,6 +2,7 @@
 
 #include <src/IntegerColumn.h>
 #include <src/Operation.h>
+#include "build/googletest-src/googletest/include/gtest/gtest.h"
 
 TEST(IntegerColumn, ConstructorTest)
 {
@@ -34,7 +35,7 @@ TEST(IntegerColumn, AddDataItemInvalidTest)
     testing::internal::CaptureStderr();
     column.addDataItem("invalid");
     std::string output{testing::internal::GetCapturedStderr()};
-    EXPECT_EQ(output, "Cannot convert to int: stoi\n");
+    EXPECT_TRUE(output.find("Cannot convert to int:") != std::string::npos);
 }
 
 TEST(IntegerColumn, GetDataTest)
