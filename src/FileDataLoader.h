@@ -12,14 +12,6 @@ class FileDataLoader : public DataLoader
 public:
     explicit FileDataLoader(std::unique_ptr<std::istream> stream);
 
-    ~FileDataLoader() override = default;
-
-    FileDataLoader& operator=(const FileDataLoader& other) = delete;
-    FileDataLoader(const FileDataLoader& other) = delete;
-
-    FileDataLoader& operator=(FileDataLoader&& other) = default;
-    FileDataLoader(FileDataLoader&& other) = default;
-
     bool loadData(std::vector<std::string>& headers,
                   std::vector<Column::ColumnType>& columnTypes,
                   std::vector<std::unique_ptr<Column>>& dataColumns) override;

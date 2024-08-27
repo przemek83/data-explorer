@@ -16,8 +16,8 @@ public:
 
     virtual ~DataLoader() = default;
 
-    DataLoader& operator=(const DataLoader& other) = delete;
-    DataLoader(const DataLoader& other) = delete;
+    DataLoader& operator=(const DataLoader& other) = default;
+    DataLoader(const DataLoader& other) = default;
 
     DataLoader& operator=(DataLoader&& other) = default;
     DataLoader(DataLoader&& other) = default;
