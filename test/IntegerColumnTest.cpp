@@ -1,3 +1,6 @@
+#include <limits>
+#include <string>
+
 #include <gtest/gtest.h>
 
 #include <src/IntegerColumn.h>
@@ -35,6 +38,17 @@ TEST(IntegerColumn, AddDataItemInvalidTest)
     column.addDataItem("invalid");
     std::string output{testing::internal::GetCapturedStderr()};
     EXPECT_TRUE(output.find("Cannot convert to int:") != std::string::npos);
+}
+
+TEST(IntegerColumn, AddDataItemOutOfRangeTest)
+{
+    std::vector<int> data{{1, 2, 3}};
+    IntegerColumn column(data);
+    column.addDataItem("4");
+    testing::internal::CaptureStderr();
+    column.addDataItem(std::to_string(std::numeric_limits<int>::max()) + "1");
+    std::string output{testing::internal::GetCapturedStderr()};
+    EXPECT_TRUE(output.find("Value out of range:") != std::string::npos);
 }
 
 TEST(IntegerColumn, GetDataTest)

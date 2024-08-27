@@ -22,10 +22,12 @@ public:
         catch (std::invalid_argument& e)
         {
             std::cerr << "Cannot convert to int: " << e.what() << std::endl;
+            return;
         }
         catch (std::out_of_range& e)
         {
             std::cerr << "Value out of range: " << e.what() << std::endl;
+            return;
         }
 
         data_.push_back(value);
