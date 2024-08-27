@@ -10,7 +10,7 @@ Column::ColumnType IntegerColumn::getColumnType() const
 const std::vector<int>& IntegerColumn::getData() { return data_; }
 
 std::unordered_map<std::string, int> IntegerColumn::performOperation(
-    Operation::OperationType operationType, const std::vector<int>& data)
+    Operation::OperationType operationType, const std::vector<int>& data) const
 {
     const std::unordered_map<int, int> results =
         Operation::executeOperation<int>(operationType, data_, data);

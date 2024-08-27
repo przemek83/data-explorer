@@ -8,10 +8,6 @@
 class StringColumn : public Column
 {
 public:
-    StringColumn() = default;
-
-    ~StringColumn() override = default;
-
     ColumnType getColumnType() const override;
 
     inline void addDataItem(const std::string& dataItem) override final
@@ -32,7 +28,7 @@ public:
 
     std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
-        const std::vector<int>& data) override;
+        const std::vector<int>& data) const override;
 
 private:
     std::vector<unsigned int> data_{};

@@ -10,14 +10,6 @@ class IntegerColumn : public Column
 public:
     explicit IntegerColumn(std::vector<int> data);
 
-    ~IntegerColumn() override = default;
-
-    IntegerColumn& operator=(const IntegerColumn& other) = delete;
-    IntegerColumn(const IntegerColumn& other) = delete;
-
-    IntegerColumn& operator=(IntegerColumn&& other) = default;
-    IntegerColumn(IntegerColumn&& other) = default;
-
     ColumnType getColumnType() const override;
 
     inline void addDataItem(const std::string& dataItem) override
@@ -41,7 +33,7 @@ public:
 
     std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
-        const std::vector<int>& data) override;
+        const std::vector<int>& data) const override;
 
     const std::vector<int>& getData();
 

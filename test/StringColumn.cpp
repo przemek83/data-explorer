@@ -35,20 +35,52 @@ TEST(StringColumn, GetData)
     EXPECT_EQ(data[1], 2);
 }
 
-TEST(StringColumn, PerformOperation)
+namespace
+{
+StringColumn getStringColumn()
 {
     StringColumn stringColumn;
     stringColumn.addDataItem("apple");
     stringColumn.addDataItem("banana");
     stringColumn.addDataItem("apple");
     stringColumn.addDataItem("banana");
+    return stringColumn;
+}
+const std::vector<int> inputData = {3, 4, 6, 2};
+}  // namespace
 
-    std::vector<int> inputData = {3, 4, 6, 2};
+TEST(StringColumn, PerformOperationMax)
+{
+    StringColumn stringColumn{getStringColumn()};
     const auto results{stringColumn.performOperation(
         Operation::OperationType::MAX, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"apple", 6}, {"banana", 4}}};
+
+    EXPECT_EQ(results, expectedResults);
+}
+
+TEST(StringColumn, PerformOperationMin)
+{
+    StringColumn stringColumn{getStringColumn()};
+    const auto results{stringColumn.performOperation(
+        Operation::OperationType::MIN, inputData)};
+
+    std::unordered_map<std::string, int> expectedResults{
+        {{"apple", 3}, {"banana", 2}}};
+
+    EXPECT_EQ(results, expectedResults);
+}
+
+TEST(StringColumn, PerformOperationAvg)
+{
+    StringColumn stringColumn{getStringColumn()};
+    const auto results{stringColumn.performOperation(
+        Operation::OperationType::AVG, inputData)};
+
+    std::unordered_map<std::string, int> expectedResults{
+        {{"apple", 5}, {"banana", 3}}};
 
     EXPECT_EQ(results, expectedResults);
 }

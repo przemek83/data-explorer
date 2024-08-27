@@ -8,7 +8,7 @@ Column::ColumnType StringColumn::getColumnType() const
 const std::vector<unsigned int>& StringColumn::getData() const { return data_; }
 
 std::unordered_map<std::string, int> StringColumn::performOperation(
-    Operation::OperationType operationType, const std::vector<int>& data)
+    Operation::OperationType operationType, const std::vector<int>& data) const
 {
     std::unordered_map<unsigned int, int> indirectResults =
         Operation::executeOperation<unsigned int>(operationType, data_, data);

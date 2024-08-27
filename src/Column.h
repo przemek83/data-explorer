@@ -19,8 +19,8 @@ public:
 
     virtual ~Column() = default;
 
-    Column& operator=(const Column& other) = delete;
-    Column(const Column& other) = delete;
+    Column& operator=(const Column& other) = default;
+    Column(const Column& other) = default;
 
     Column& operator=(Column&& other) = default;
     Column(Column&& other) = default;
@@ -35,7 +35,7 @@ public:
 
     virtual std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
-        const std::vector<int>& data) = 0;
+        const std::vector<int>& data) const = 0;
 
 private:
     static std::map<ColumnType, std::string> columnTypeMapping_;
