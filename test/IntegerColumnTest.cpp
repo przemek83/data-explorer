@@ -2,7 +2,6 @@
 
 #include <src/IntegerColumn.h>
 #include <src/Operation.h>
-#include "build/googletest-src/googletest/include/gtest/gtest.h"
 
 TEST(IntegerColumn, ConstructorTest)
 {
