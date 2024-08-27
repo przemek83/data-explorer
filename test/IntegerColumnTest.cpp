@@ -46,7 +46,7 @@ TEST(IntegerColumn, GetDataTest)
 
 namespace
 {
-const IntegerColumn column({{1, 1, 2, 2, 3, 3, 4, 4}});
+const IntegerColumn column{{1, 1, 2, 2, 3, 3, 4, 4}};
 const std::vector<int> inputData = {3, 4, 6, 2, 7, 1, 6, 8};
 }  // namespace
 
