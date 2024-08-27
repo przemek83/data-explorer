@@ -1,5 +1,6 @@
 #pragma once
 
+#include <charconv>
 #include <iostream>
 #include <vector>
 
@@ -12,25 +13,23 @@ public:
 
     ColumnType getColumnType() const override;
 
-    inline void addDataItem(const std::string& dataItem) override
+    inline bool addDataItem(const std::string& dataItem) override
     {
-        int value = 0;
-        try
+        int value{0};
+        const auto [_, errorCode] = std::from_chars(
+            dataItem.data(), dataItem.data() + dataItem.size(), value);
+        if (errorCode == std::errc())
         {
-            value = std::stoi(dataItem);
-        }
-        catch (std::invalid_argument& e)
-        {
-            std::cerr << "Cannot convert to int: " << e.what() << std::endl;
-            return;
-        }
-        catch (std::out_of_range& e)
-        {
-            std::cerr << "Value out of range: " << e.what() << std::endl;
-            return;
+            data_.push_back(value);
+            return true;
         }
 
-        data_.push_back(value);
+        if (errorCode == std::errc::invalid_argument)
+            std::cerr << "Cannot convert to int: " << dataItem << std::endl;
+        if (errorCode == std::errc::result_out_of_range)
+            std::cerr << "Value out of range: " << dataItem << std::endl;
+
+        return false;
     }
 
     std::unordered_map<std::string, int> performOperation(

@@ -31,7 +31,7 @@ public:
 
     virtual ColumnType getColumnType() const = 0;
 
-    virtual void addDataItem(const std::string& dataItem) = 0;
+    virtual bool addDataItem(const std::string& dataItem) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,

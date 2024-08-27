@@ -52,23 +52,24 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
                std::string::npos)
         {
             token = inputLine.substr(0, currentPosition);
-            if (index >= columnsCount)
+            if (index >= columnsCount ||
+                !dataColumns[index]->addDataItem(token))
             {
                 std::cerr << "Data corrupted, line " << lineIndex << ", column "
                           << index << ", value " << token << std::endl;
                 return false;
             }
-            dataColumns[index]->addDataItem(token);
+
             inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
             index++;
         }
-        if (index >= columnsCount)
+        if (index >= columnsCount ||
+            !dataColumns[index]->addDataItem(inputLine))
         {
             std::cerr << "Data corrupted, line " << lineIndex << ", column "
                       << index << ", value " << token << std::endl;
             return false;
         }
-        dataColumns[index]->addDataItem(inputLine);
         lineIndex++;
     }
 
