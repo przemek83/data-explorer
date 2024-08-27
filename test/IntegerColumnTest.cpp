@@ -43,3 +43,42 @@ TEST(IntegerColumn, GetDataTest)
     IntegerColumn column(data);
     EXPECT_EQ(column.getData(), data);
 }
+
+namespace
+{
+const IntegerColumn column({{1, 1, 2, 2, 3, 3, 4, 4}});
+const std::vector<int> inputData = {3, 4, 6, 2, 7, 1, 6, 8};
+}  // namespace
+
+TEST(IntegerColumn, PerformOperationMax)
+{
+    const std::unordered_map<std::string, int> results{
+        column.performOperation(Operation::OperationType::MAX, inputData)};
+
+    std::unordered_map<std::string, int> expectedResults{
+        {{"2", 6}, {"1", 4}, {"3", 7}, {"4", 8}}};
+
+    EXPECT_EQ(results, expectedResults);
+}
+
+TEST(IntegerColumn, PerformOperationMin)
+{
+    const std::unordered_map<std::string, int> results{
+        column.performOperation(Operation::OperationType::MIN, inputData)};
+
+    std::unordered_map<std::string, int> expectedResults{
+        {{"2", 2}, {"1", 3}, {"3", 1}, {"4", 6}}};
+
+    EXPECT_EQ(results, expectedResults);
+}
+
+TEST(IntegerColumn, PerformOperationAvg)
+{
+    const std::unordered_map<std::string, int> results{
+        column.performOperation(Operation::OperationType::AVG, inputData)};
+
+    std::unordered_map<std::string, int> expectedResults{
+        {{"4", 7}, {"2", 4}, {"3", 4}, {"1", 4}}};
+
+    EXPECT_EQ(results, expectedResults);
+}
