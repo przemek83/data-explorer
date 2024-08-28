@@ -1,4 +1,5 @@
 #include <memory>
+#include <stdexcept>
 #include "src/Column.h"
 #include "src/DataLoader.h"
 
@@ -133,4 +134,13 @@ TEST(DatasetTest, ExecuteQueryAvg)
 
     query = {Operation::OperationType::AVG, 1, 2};
     testResults(query, {9, 10, 11});
+}
+
+TEST(DatasetTest, ExecuteQueryUnknownOperation)
+{
+    Dataset dataset(std::make_unique<FakeLoader>());
+    dataset.init();
+
+    Query query{Operation::OperationType::UNKNOWN, 0, 2};
+    EXPECT_THROW(dataset.executeQuery(query), std::logic_error);
 }
