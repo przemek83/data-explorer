@@ -7,8 +7,8 @@ Column::ColumnType StringColumn::getColumnType() const
 
 bool StringColumn::addDataItem(const std::string& dataItem)
 {
-    auto element = stringToIdMapping_.find(dataItem);
-    if (element != stringToIdMapping_.end())
+    if (auto element{stringToIdMapping_.find(dataItem)};
+        element != stringToIdMapping_.end())
     {
         data_.push_back(element->second);
     }
