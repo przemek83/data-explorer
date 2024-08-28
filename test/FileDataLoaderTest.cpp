@@ -1,7 +1,8 @@
-#include <gtest/gtest.h>
 #include <memory>
 #include <sstream>
 #include <tuple>
+
+#include <gtest/gtest.h>
 
 #include <src/FileDataLoader.h>
 #include <src/IntegerColumn.h>

@@ -1,10 +1,10 @@
 #include <memory>
 #include <stdexcept>
-#include "src/Column.h"
-#include "src/DataLoader.h"
 
 #include <gtest/gtest.h>
 
+#include <src/Column.h>
+#include <src/DataLoader.h>
 #include <src/Dataset.h>
 #include <src/IntegerColumn.h>
 #include <src/StringColumn.h>
