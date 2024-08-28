@@ -102,8 +102,8 @@ private:
         const std::vector<int>& aggregateData)
     {
         std::unordered_map<T, std::pair<long long int, int>> indirectResults;
-        unsigned int groupingDataSize = groupingData.size();
-        for (unsigned int i = 0; i < groupingDataSize; ++i)
+        std::size_t groupingDataSize{groupingData.size()};
+        for (std::size_t i{0}; i < groupingDataSize; ++i)
         {
             auto& pair = indirectResults[groupingData[i]];
             pair.first += aggregateData[i];
@@ -113,8 +113,10 @@ private:
         std::unordered_map<T, int> results;
         for (const auto& item : indirectResults)
         {
-            results[item.first] = static_cast<int>(std::round(
-                static_cast<float>(item.second.first) / item.second.second));
+            const float avg{static_cast<float>(item.second.first) /
+                            static_cast<float>(item.second.second)};
+
+            results[item.first] = static_cast<int>(std::round(avg));
         }
 
         return results;
