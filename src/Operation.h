@@ -71,11 +71,10 @@ public:
     }
 
 private:
-    template <class T>
+    template <class T, class Func>
     static std::unordered_map<T, int> computeExtremum(
         const std::vector<T>& groupingData,
-        const std::vector<int>& aggregateData,
-        std::function<bool(int, int)> func)
+        const std::vector<int>& aggregateData, Func func)
     {
         std::unordered_map<T, int> results;
         for (unsigned int i = 0; i < groupingData.size(); ++i)
