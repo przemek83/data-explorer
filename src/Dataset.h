@@ -5,18 +5,10 @@
 #include "DataLoader.h"
 #include "Query.h"
 
-class Dataset final
+class Dataset
 {
 public:
     explicit Dataset(std::unique_ptr<DataLoader> dataLoader);
-
-    ~Dataset() = default;
-
-    Dataset& operator=(const Dataset& other) = delete;
-    Dataset(const Dataset& other) = delete;
-
-    Dataset& operator=(Dataset&& other) = default;
-    Dataset(Dataset&& other) = default;
 
     bool init();
 
