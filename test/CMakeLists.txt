@@ -9,6 +9,7 @@ set(${PROJECT_TEST}_SOURCES
     ColumnTest.cpp
     FileDataLoaderTest.cpp
     DatasetTest.cpp
+    OperationTest.cpp
 )
 
 add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})
