@@ -58,8 +58,7 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     }
 
-    std::unique_ptr<FileDataLoader> loader(
-        new FileDataLoader(std::move(inFile)));
+    auto loader{std::make_unique<FileDataLoader>(std::move(inFile))};
     Dataset dataset(std::move(loader));
 
     if (!dataset.init())
