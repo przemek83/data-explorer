@@ -16,9 +16,9 @@ bool Dataset::init()
 
 unsigned int Dataset::getColumnIdForName(const std::string& columnName) const
 {
-    const auto position =
-        std::find(headers_.begin(), headers_.end(), columnName);
-    return std::abs(std::distance(headers_.begin(), position));
+    const auto position{
+        std::find(headers_.begin(), headers_.end(), columnName)};
+    return static_cast<unsigned int>(std::distance(headers_.begin(), position));
 }
 
 bool Dataset::isColumnNameValid(const std::string& columnName) const
