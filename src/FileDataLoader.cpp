@@ -110,7 +110,7 @@ std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(
 }
 
 bool FileDataLoader::initColumns(
-    std::vector<Column::ColumnType>& columnTypes,
+    const std::vector<Column::ColumnType>& columnTypes,
     std::vector<std::unique_ptr<Column>>& dataColumns) const
 {
     for (Column::ColumnType columnType : columnTypes)
