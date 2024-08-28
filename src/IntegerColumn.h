@@ -36,7 +36,7 @@ public:
         Operation::OperationType operationType,
         const std::vector<int>& data) const override;
 
-    const std::vector<int>& getData();
+    const std::vector<int>& getData() const;
 
 private:
     std::vector<int> data_;
