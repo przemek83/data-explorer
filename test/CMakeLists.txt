@@ -8,6 +8,7 @@ set(${PROJECT_TEST}_SOURCES
     StringColumnTest.cpp
     ColumnTest.cpp
     FileDataLoaderTest.cpp
+    DatasetTest.cpp
 )
 
 add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})
