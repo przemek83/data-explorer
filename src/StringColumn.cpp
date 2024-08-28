@@ -1,5 +1,7 @@
 #include "StringColumn.h"
 
+#include <algorithm>
+
 Column::ColumnType StringColumn::getColumnType() const
 {
     return Column::ColumnType::STRING;

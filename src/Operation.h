@@ -2,7 +2,6 @@
 
 #include <math.h>
 #include <cstdint>
-#include <functional>
 #include <map>
 #include <stdexcept>
 #include <string>
@@ -113,8 +112,8 @@ private:
         std::unordered_map<T, int> results;
         for (const auto& item : indirectResults)
         {
-            results[item.first] = round(static_cast<float>(item.second.first) /
-                                        item.second.second);
+            results[item.first] = static_cast<int>(std::round(
+                static_cast<float>(item.second.first) / item.second.second));
         }
 
         return results;
