@@ -14,16 +14,18 @@ std::unordered_map<std::string, int> StringColumn::performOperation(
         Operation::executeOperation<unsigned int>(operationType, data_, data);
 
     std::unordered_map<std::string, int> resultsToReturn;
-    for (const auto& item : indirectResults)
-    {
-        for (const auto& stringMappingItem : stringToIdMapping_)
-        {
-            if (stringMappingItem.second == item.first)
-            {
-                resultsToReturn[stringMappingItem.first] = item.second;
-            }
-        }
-    }
+    for (const auto& [columnId, value] : indirectResults)
+        resultsToReturn[getColumnNameUsingId(columnId)] = value;
 
     return resultsToReturn;
+}
+
+std::string StringColumn::getColumnNameUsingId(int columnId) const
+{
+    const auto condition{[&id = columnId](const auto& pair)
+                         { return pair.second == id; }};
+    const auto result{std::find_if(stringToIdMapping_.cbegin(),
+                                   stringToIdMapping_.cend(), condition)};
+
+    return result->first;
 }

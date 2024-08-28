@@ -32,6 +32,8 @@ public:
         const std::vector<int>& data) const override;
 
 private:
+    std::string getColumnNameUsingId(int id) const;
+
     std::vector<unsigned int> data_{};
 
     std::unordered_map<std::string, unsigned int> stringToIdMapping_{};

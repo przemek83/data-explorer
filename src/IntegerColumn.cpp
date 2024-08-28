@@ -16,10 +16,8 @@ std::unordered_map<std::string, int> IntegerColumn::performOperation(
         Operation::executeOperation<int>(operationType, data_, data);
 
     std::unordered_map<std::string, int> resultsWithStrings;
-    for (const auto& pair : results)
-    {
-        resultsWithStrings[std::to_string(pair.first)] = pair.second;
-    }
+    for (const auto& [columnId, value] : results)
+        resultsWithStrings[std::to_string(columnId)] = value;
 
     return resultsWithStrings;
 }
