@@ -4,10 +4,10 @@
 #include <cstdint>
 #include <functional>
 #include <map>
+#include <stdexcept>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <stdexcept>
 
 class Operation
 {
@@ -61,7 +61,6 @@ public:
                 break;
             }
 
-            case OperationType::UNKNOWN:
             default:
             {
                 throw std::logic_error("Unknown Operation Type " +
