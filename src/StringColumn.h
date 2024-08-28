@@ -10,20 +10,7 @@ class StringColumn : public Column
 public:
     ColumnType getColumnType() const override;
 
-    inline bool addDataItem(const std::string& dataItem) override final
-    {
-        auto element = stringToIdMapping_.find(dataItem);
-        if (element != stringToIdMapping_.end())
-        {
-            data_.push_back(element->second);
-        }
-        else
-        {
-            stringToIdMapping_[dataItem] = ++currentIndex_;
-            data_.push_back(currentIndex_);
-        }
-        return true;
-    }
+    bool addDataItem(const std::string& dataItem) override;
 
     const std::vector<unsigned int>& getData() const;
 

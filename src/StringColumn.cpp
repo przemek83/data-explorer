@@ -5,6 +5,21 @@ Column::ColumnType StringColumn::getColumnType() const
     return Column::ColumnType::STRING;
 }
 
+bool StringColumn::addDataItem(const std::string& dataItem)
+{
+    auto element = stringToIdMapping_.find(dataItem);
+    if (element != stringToIdMapping_.end())
+    {
+        data_.push_back(element->second);
+    }
+    else
+    {
+        stringToIdMapping_[dataItem] = ++currentIndex_;
+        data_.push_back(currentIndex_);
+    }
+    return true;
+}
+
 const std::vector<unsigned int>& StringColumn::getData() const { return data_; }
 
 std::unordered_map<std::string, int> StringColumn::performOperation(
