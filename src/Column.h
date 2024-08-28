@@ -38,5 +38,5 @@ public:
         const std::vector<int>& data) const = 0;
 
 private:
-    static std::map<ColumnType, std::string> columnTypeMapping_;
+    static std::map<ColumnType, std::string> columnTypes_;
 };
