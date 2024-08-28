@@ -21,9 +21,9 @@ std::string Operation::getAvailableOperationsAsString(
     const std::string& delimiter)
 {
     std::string resultString;
-    for (const auto& item : stringToOperationTypeMapping_)
+    for (const auto& [stringPart, _] : stringToOperationTypeMapping_)
     {
-        resultString += item.first;
+        resultString += stringPart;
         resultString += delimiter;
     }
     resultString.pop_back();
