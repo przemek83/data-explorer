@@ -62,8 +62,9 @@ public:
 
             default:
             {
-                throw std::logic_error("Unknown Operation Type " +
-                                       static_cast<int>(operationType));
+                throw std::logic_error(
+                    "Unknown Operation Type " +
+                    std::to_string(static_cast<int>(operationType)));
             }
         }
         return results;
