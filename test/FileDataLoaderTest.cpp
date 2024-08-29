@@ -48,9 +48,23 @@ TEST(FileDataLoader, LoadDataSuccess)
     EXPECT_TRUE(result);
 }
 
-TEST(FileDataLoader, LoadDataCorrupted)
+TEST(FileDataLoader, LoadDataCorruptedTooMuchEntries)
 {
     std::string data{"header1;header2\ninteger;string\n1;hello;f"};
+    FileDataLoader loader{std::make_unique<std::istringstream>(data)};
+
+    std::vector<std::string> headers;
+    std::vector<Column::ColumnType> columnTypes;
+    std::vector<std::unique_ptr<Column>> dataColumns;
+
+    bool result{loader.loadData(headers, columnTypes, dataColumns)};
+
+    EXPECT_FALSE(result);
+}
+
+TEST(FileDataLoader, LoadDataCorruptedTooLittleEntries)
+{
+    std::string data{"header1;header2\ninteger;string\n1"};
     FileDataLoader loader{std::make_unique<std::istringstream>(data)};
 
     std::vector<std::string> headers;

@@ -37,37 +37,13 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
 bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
                               std::istream& infile) const
 {
-    int lineIndex = 0;
-    std::string inputLine;
-    size_t columnsCount = dataColumns.size();
-    while (std::getline(infile, inputLine))
+    int index = 0;
+    std::string line;
+    while (std::getline(infile, line))
     {
-        size_t currentPosition = 0;
-        unsigned int index = 0;
-        std::string token;
-        while ((currentPosition = inputLine.find(DELIMITER)) !=
-               std::string::npos)
-        {
-            token = inputLine.substr(0, currentPosition);
-            if (index >= columnsCount ||
-                !dataColumns[index]->addDataItem(token))
-            {
-                std::cerr << "Data corrupted, line " << lineIndex << ", column "
-                          << index << ", value " << token << std::endl;
-                return false;
-            }
-
-            inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
-            index++;
-        }
-        if (index >= columnsCount ||
-            !dataColumns[index]->addDataItem(inputLine))
-        {
-            std::cerr << "Data corrupted, line " << lineIndex << ", column "
-                      << index << ", value " << token << std::endl;
+        ++index;
+        if (!processLine(dataColumns, line, index))
             return false;
-        }
-        lineIndex++;
     }
 
     return true;
@@ -123,6 +99,32 @@ bool FileDataLoader::initColumns(
                 break;
             }
         }
+    }
+
+    return true;
+}
+
+bool FileDataLoader::processLine(
+    std::vector<std::unique_ptr<Column>>& dataColumns, const std::string& line,
+    int index) const
+{
+    const size_t columnsCount{dataColumns.size()};
+    std::stringstream input(line);
+    for (int i{0}; i < columnsCount; ++i)
+    {
+        std::string entry;
+        std::getline(input, entry, DELIMITER);
+        if (input.fail() || !dataColumns[i]->addDataItem(entry))
+        {
+            std::cerr << "No data, line " << index << ", column " << i << "\n";
+            return false;
+        }
+    }
+
+    if (!input.eof())
+    {
+        std::cerr << "More data entries than expected, line " << index << "\n";
+        return false;
     }
 
     return true;

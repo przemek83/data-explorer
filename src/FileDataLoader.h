@@ -28,6 +28,9 @@ private:
     bool loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
                   std::istream& infile) const;
 
+    bool processLine(std::vector<std::unique_ptr<Column>>& dataColumns,
+                     const std::string& line, int index) const;
+
     static constexpr char DELIMITER{';'};
 
     static constexpr unsigned int DELIMITER_LENGTH{1};
