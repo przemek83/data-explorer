@@ -33,7 +33,7 @@ bool IntegerColumn::addItem(const std::string& item)
 std::unordered_map<std::string, int> IntegerColumn::performOperation(
     OperationType::Type operationType, const std::vector<int>& data) const
 {
-    const std::unordered_map<int, int> results{
+    const auto [success, results]{
         Operation<int>::executeOperation(operationType, getData(), data)};
 
     std::unordered_map<std::string, int> resultsWithStrings;

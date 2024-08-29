@@ -142,5 +142,5 @@ TEST(DatasetTest, ExecuteQueryUnknownOperation)
     dataset.init();
 
     Query query{OperationType::Type::UNKNOWN, 0, 2};
-    EXPECT_THROW(dataset.executeQuery(query), std::logic_error);
+    EXPECT_TRUE(dataset.executeQuery(query).empty());
 }

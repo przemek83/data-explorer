@@ -28,11 +28,12 @@ TEST(OperationTest, ExecuteOperationAverage)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 3, 5, 7}};
 
-    auto result{Operation<std::string>::executeOperation(
+    const auto [success, results]{Operation<std::string>::executeOperation(
         OperationType::Type::AVG, groupingData, aggregateData)};
 
-    EXPECT_EQ(result["group1"], 2);
-    EXPECT_EQ(result["group2"], 6);
+    EXPECT_TRUE(success);
+    EXPECT_EQ(results.at("group1"), 2);
+    EXPECT_EQ(results.at("group2"), 6);
 }
 
 TEST(OperationTest, ExecuteOperationMin)
@@ -41,11 +42,12 @@ TEST(OperationTest, ExecuteOperationMin)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
-    auto result{Operation<std::string>::executeOperation(
+    const auto [success, results]{Operation<std::string>::executeOperation(
         OperationType::Type::MIN, groupingData, aggregateData)};
 
-    EXPECT_EQ(result["group1"], 1);
-    EXPECT_EQ(result["group2"], 3);
+    EXPECT_TRUE(success);
+    EXPECT_EQ(results.at("group1"), 1);
+    EXPECT_EQ(results.at("group2"), 3);
 }
 
 TEST(OperationTest, ExecuteOperationMax)
@@ -54,11 +56,12 @@ TEST(OperationTest, ExecuteOperationMax)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
-    auto result{Operation<std::string>::executeOperation(
+    const auto [success, results]{Operation<std::string>::executeOperation(
         OperationType::Type::MAX, groupingData, aggregateData)};
 
-    EXPECT_EQ(result["group1"], 2);
-    EXPECT_EQ(result["group2"], 4);
+    EXPECT_TRUE(success);
+    EXPECT_EQ(results.at("group1"), 2);
+    EXPECT_EQ(results.at("group2"), 4);
 }
 
 TEST(OperationTest, ExecuteOperationUnknown)
@@ -67,7 +70,9 @@ TEST(OperationTest, ExecuteOperationUnknown)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
-    EXPECT_THROW(Operation<std::string>::executeOperation(
-                     OperationType::Type::UNKNOWN, groupingData, aggregateData),
-                 std::logic_error);
+    const auto [success, results]{Operation<std::string>::executeOperation(
+        OperationType::Type::UNKNOWN, groupingData, aggregateData)};
+
+    EXPECT_FALSE(success);
+    EXPECT_TRUE(results.empty());
 }

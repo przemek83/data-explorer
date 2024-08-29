@@ -1,9 +1,7 @@
 #pragma once
 
 #include <cmath>
-#include <map>
-#include <stdexcept>
-#include <string>
+#include <iostream>
 #include <unordered_map>
 #include <vector>
 
@@ -16,7 +14,7 @@ public:
     Operation() = delete;
     ~Operation() = delete;
 
-    static std::unordered_map<T, int> executeOperation(
+    static std::pair<bool, std::unordered_map<T, int>> executeOperation(
         OperationType::Type operationType, const std::vector<T>& groupingData,
         const std::vector<int>& aggregateData)
     {
@@ -46,12 +44,12 @@ public:
 
             default:
             {
-                throw std::logic_error(
-                    "Unknown Operation Type " +
-                    std::to_string(static_cast<int>(operationType)));
+                std::cerr << "Unknown Operation Type "
+                          << static_cast<int>(operationType) << "\n";
+                return {false, {}};
             }
         }
-        return results;
+        return {true, results};
     }
 
 private:

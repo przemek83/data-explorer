@@ -29,7 +29,7 @@ bool StringColumn::addItem(const std::string& item)
 std::unordered_map<std::string, int> StringColumn::performOperation(
     OperationType::Type operationType, const std::vector<int>& data) const
 {
-    std::unordered_map<int, int> indirectResults{
+    const auto [success, indirectResults]{
         Operation<int>::executeOperation(operationType, getData(), data)};
 
     std::unordered_map<std::string, int> resultsToReturn;
