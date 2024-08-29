@@ -6,11 +6,6 @@
 
 StringColumn::StringColumn() : Column({}) {}
 
-Column::ColumnType StringColumn::getType() const
-{
-    return Column::ColumnType::STRING;
-}
-
 bool StringColumn::addItem(const std::string& item)
 {
     if (auto element{stringToIdMapping_.find(item)};

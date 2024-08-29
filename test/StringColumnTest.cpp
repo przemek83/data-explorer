@@ -3,12 +3,6 @@
 #include <src/Operation.h>
 #include <src/StringColumn.h>
 
-TEST(StringColumnTest, GetColumnType)
-{
-    StringColumn stringColumn;
-    EXPECT_EQ(stringColumn.getType(), Column::ColumnType::STRING);
-}
-
 TEST(StringColumn, AddDataItem)
 {
     StringColumn stringColumn;

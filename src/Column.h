@@ -29,8 +29,6 @@ public:
     static std::pair<bool, Column::ColumnType> getColumnType(
         const std::string& name);
 
-    virtual ColumnType getType() const = 0;
-
     virtual bool addItem(const std::string& item) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(

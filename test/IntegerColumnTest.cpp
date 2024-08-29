@@ -13,13 +13,6 @@ TEST(IntegerColumn, ConstructorTest)
     EXPECT_EQ(column.getData(), data);
 }
 
-TEST(IntegerColumn, GetColumnTypeTest)
-{
-    std::vector<int> data{{1, 2, 3}};
-    IntegerColumn column(data);
-    EXPECT_EQ(column.getType(), Column::ColumnType::INTEGER);
-}
-
 TEST(IntegerColumn, AddDataItemTest)
 {
     std::vector<int> data{{1, 2, 3}};

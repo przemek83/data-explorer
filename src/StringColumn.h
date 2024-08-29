@@ -10,8 +10,6 @@ class StringColumn : public Column
 public:
     StringColumn();
 
-    ColumnType getType() const override;
-
     bool addItem(const std::string& item) override;
 
     std::unordered_map<std::string, int> performOperation(

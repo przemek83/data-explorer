@@ -6,11 +6,6 @@
 #include "Logger.h"
 #include "Operation.h"
 
-Column::ColumnType IntegerColumn::getType() const
-{
-    return Column::ColumnType::INTEGER;
-}
-
 bool IntegerColumn::addItem(const std::string& item)
 {
     int value{0};
