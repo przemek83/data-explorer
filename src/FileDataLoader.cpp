@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <memory>
+#include <sstream>
 
 #include "Column.h"
 #include "IntegerColumn.h"
@@ -89,24 +90,19 @@ std::vector<std::string> FileDataLoader::getHeaders(
 }
 
 std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(
-    std::string& inputLine) const
+    const std::string& inputLine) const
 {
-    std::vector<Column::ColumnType> columnTypes;
+    std::vector<Column::ColumnType> types;
 
-    size_t currentPosition = 0;
-    while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
+    std::stringstream input(inputLine);
+    std::string name;
+    while (std::getline(input, name, DELIMITER))
     {
-        const auto [success, type]{
-            Column::getColumnType(inputLine.substr(0, currentPosition))};
-        if (success)
-            columnTypes.push_back(type);
-        inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
+        if (const auto [success, type]{Column::getColumnType(name)}; success)
+            types.push_back(type);
     }
-    const auto [success, type]{Column::getColumnType(inputLine)};
-    if (success)
-        columnTypes.push_back(type);
 
-    return columnTypes;
+    return types;
 }
 
 bool FileDataLoader::initColumns(

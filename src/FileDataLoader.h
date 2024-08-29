@@ -20,7 +20,7 @@ private:
     std::vector<std::string> getHeaders(std::string& inputLine) const;
 
     std::vector<Column::ColumnType> getColumnTypes(
-        std::string& inputLine) const;
+        const std::string& inputLine) const;
 
     bool initColumns(const std::vector<Column::ColumnType>& columnTypes,
                      std::vector<std::unique_ptr<Column>>& dataColumns) const;
