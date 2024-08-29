@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <string>
 
-namespace OperationType
+namespace operationType
 {
 enum class Type : uint8_t
 {
@@ -14,8 +14,8 @@ enum class Type : uint8_t
     UNKNOWN
 };
 
-OperationType::Type getOperationTypeForString(
+operationType::Type getOperationTypeForString(
     const std::string& operationTypeString);
 
 std::string getAvailableOperationsAsString(const std::string& delimiter);
-};  // namespace OperationType
+};  // namespace operationType

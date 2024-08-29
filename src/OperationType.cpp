@@ -4,18 +4,18 @@
 
 namespace
 {
-std::map<std::string, OperationType::Type> getMapping()
+std::map<std::string, operationType::Type> getMapping()
 {
-    return {{"avg", OperationType::Type::AVG},
-            {"min", OperationType::Type::MIN},
-            {"max", OperationType::Type::MAX},
-            {"quit", OperationType::Type::QUIT}};
+    return {{"avg", operationType::Type::AVG},
+            {"min", operationType::Type::MIN},
+            {"max", operationType::Type::MAX},
+            {"quit", operationType::Type::QUIT}};
 }
 }  // namespace
 
-namespace OperationType
+namespace operationType
 {
-OperationType::Type getOperationTypeForString(
+operationType::Type getOperationTypeForString(
     const std::string& operationTypeString)
 {
     const auto mapping{getMapping()};
@@ -24,7 +24,7 @@ OperationType::Type getOperationTypeForString(
     if (findResult != mapping.end())
         return findResult->second;
     else
-        return OperationType::Type::UNKNOWN;
+        return operationType::Type::UNKNOWN;
 }
 
 std::string getAvailableOperationsAsString(const std::string& delimiter)
@@ -39,4 +39,4 @@ std::string getAvailableOperationsAsString(const std::string& delimiter)
 
     return resultString;
 }
-};  // namespace OperationType
+};  // namespace operationType

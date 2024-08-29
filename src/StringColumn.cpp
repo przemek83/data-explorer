@@ -22,10 +22,10 @@ bool StringColumn::addItem(const std::string& item)
 }
 
 std::unordered_map<std::string, int> StringColumn::performOperation(
-    OperationType::Type operationType, const std::vector<int>& data) const
+    operationType::Type type, const std::vector<int>& data) const
 {
     const auto [success, indirectResults]{
-        Operation<int>::executeOperation(operationType, getData(), data)};
+        Operation<int>::executeOperation(type, getData(), data)};
 
     std::unordered_map<std::string, int> resultsToReturn;
     for (const auto& [columnId, value] : indirectResults)
@@ -34,10 +34,10 @@ std::unordered_map<std::string, int> StringColumn::performOperation(
     return resultsToReturn;
 }
 
-std::string StringColumn::getColumnNameUsingId(int columnId) const
+std::string StringColumn::getColumnNameUsingId(int id) const
 {
-    const auto condition{[&id = columnId](const auto& pair)
-                         { return pair.second == id; }};
+    const auto condition{[&columnId = id](const auto& pair)
+                         { return pair.second == columnId; }};
     const auto result{std::find_if(stringToIdMapping_.cbegin(),
                                    stringToIdMapping_.cend(), condition)};
 

@@ -1,25 +1,26 @@
 #include <gtest/gtest.h>
 
 #include <src/Operation.h>
+#include <src/OperationType.h>
 
-TEST(OperationTest, GetOperationTypeForString)
+TEST(OperationTest, GetoperationTypeForString)
 {
-    EXPECT_EQ(OperationType::getOperationTypeForString("avg"),
-              OperationType::Type::AVG);
-    EXPECT_EQ(OperationType::getOperationTypeForString("min"),
-              OperationType::Type::MIN);
-    EXPECT_EQ(OperationType::getOperationTypeForString("max"),
-              OperationType::Type::MAX);
-    EXPECT_EQ(OperationType::getOperationTypeForString("quit"),
-              OperationType::Type::QUIT);
-    EXPECT_EQ(OperationType::getOperationTypeForString("unknown"),
-              OperationType::Type::UNKNOWN);
+    EXPECT_EQ(operationType::getOperationTypeForString("avg"),
+              operationType::Type::AVG);
+    EXPECT_EQ(operationType::getOperationTypeForString("min"),
+              operationType::Type::MIN);
+    EXPECT_EQ(operationType::getOperationTypeForString("max"),
+              operationType::Type::MAX);
+    EXPECT_EQ(operationType::getOperationTypeForString("quit"),
+              operationType::Type::QUIT);
+    EXPECT_EQ(operationType::getOperationTypeForString("unknown"),
+              operationType::Type::UNKNOWN);
 }
 
 TEST(OperationTest, GetAvailableOperationsAsString)
 {
     const std::string expected{"avg,max,min,quit"};
-    EXPECT_EQ(OperationType::getAvailableOperationsAsString(","), expected);
+    EXPECT_EQ(operationType::getAvailableOperationsAsString(","), expected);
 }
 
 TEST(OperationTest, ExecuteOperationAverage)
@@ -29,7 +30,7 @@ TEST(OperationTest, ExecuteOperationAverage)
     std::vector<int> aggregateData{{1, 3, 5, 7}};
 
     const auto [success, results]{Operation<std::string>::executeOperation(
-        OperationType::Type::AVG, groupingData, aggregateData)};
+        operationType::Type::AVG, groupingData, aggregateData)};
 
     EXPECT_TRUE(success);
     EXPECT_EQ(results.at("group1"), 2);
@@ -43,7 +44,7 @@ TEST(OperationTest, ExecuteOperationMin)
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
     const auto [success, results]{Operation<std::string>::executeOperation(
-        OperationType::Type::MIN, groupingData, aggregateData)};
+        operationType::Type::MIN, groupingData, aggregateData)};
 
     EXPECT_TRUE(success);
     EXPECT_EQ(results.at("group1"), 1);
@@ -57,7 +58,7 @@ TEST(OperationTest, ExecuteOperationMax)
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
     const auto [success, results]{Operation<std::string>::executeOperation(
-        OperationType::Type::MAX, groupingData, aggregateData)};
+        operationType::Type::MAX, groupingData, aggregateData)};
 
     EXPECT_TRUE(success);
     EXPECT_EQ(results.at("group1"), 2);
@@ -71,7 +72,7 @@ TEST(OperationTest, ExecuteOperationUnknown)
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
     const auto [success, results]{Operation<std::string>::executeOperation(
-        OperationType::Type::UNKNOWN, groupingData, aggregateData)};
+        operationType::Type::UNKNOWN, groupingData, aggregateData)};
 
     EXPECT_FALSE(success);
     EXPECT_TRUE(results.empty());

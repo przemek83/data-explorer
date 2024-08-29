@@ -104,35 +104,35 @@ TEST(DatasetTest, IsColumnNameCanBeUsedForAggregation)
     Dataset dataset(std::make_unique<FakeLoader>());
     dataset.init();
 
-    EXPECT_TRUE(dataset.isColumnNameCanBeUsedForAggregation("h1"));
-    EXPECT_TRUE(dataset.isColumnNameCanBeUsedForAggregation("h2"));
-    EXPECT_FALSE(dataset.isColumnNameCanBeUsedForAggregation("h3"));
+    EXPECT_TRUE(dataset.isColumnCanBeUsedForAggregation("h1"));
+    EXPECT_TRUE(dataset.isColumnCanBeUsedForAggregation("h2"));
+    EXPECT_FALSE(dataset.isColumnCanBeUsedForAggregation("h3"));
 }
 
 TEST(DatasetTest, ExecuteQueryMax)
 {
-    Query query{OperationType::Type::MAX, 0, 2};
+    Query query{operationType::Type::MAX, 0, 2};
     testResults(query, {11, 12, 13});
 
-    query = {OperationType::Type::MAX, 1, 2};
+    query = {operationType::Type::MAX, 1, 2};
     testResults(query, {14, 15, 16});
 }
 
 TEST(DatasetTest, ExecuteQueryMin)
 {
-    Query query{OperationType::Type::MIN, 0, 2};
+    Query query{operationType::Type::MIN, 0, 2};
     testResults(query, {1, 2, 3});
 
-    query = {OperationType::Type::MIN, 1, 2};
+    query = {operationType::Type::MIN, 1, 2};
     testResults(query, {4, 5, 6});
 }
 
 TEST(DatasetTest, ExecuteQueryAvg)
 {
-    Query query{OperationType::Type::AVG, 0, 2};
+    Query query{operationType::Type::AVG, 0, 2};
     testResults(query, {6, 7, 8});
 
-    query = {OperationType::Type::AVG, 1, 2};
+    query = {operationType::Type::AVG, 1, 2};
     testResults(query, {9, 10, 11});
 }
 
@@ -141,6 +141,6 @@ TEST(DatasetTest, ExecuteQueryUnknownOperation)
     Dataset dataset(std::make_unique<FakeLoader>());
     dataset.init();
 
-    Query query{OperationType::Type::UNKNOWN, 0, 2};
+    Query query{operationType::Type::UNKNOWN, 0, 2};
     EXPECT_TRUE(dataset.executeQuery(query).empty());
 }

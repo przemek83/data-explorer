@@ -27,12 +27,12 @@ TEST(DataExplorer, executeQuery)
 
     std::unordered_map<std::string, int> expected{
         {"tim", 26}, {"tamas", 44}, {"dave", 0}};
-    EXPECT_EQ(dataset.executeQuery({OperationType::Type::MIN, 1, 0}), expected);
+    EXPECT_EQ(dataset.executeQuery({operationType::Type::MIN, 1, 0}), expected);
 
     expected = {{"inception", 8}, {"pulp_fiction", 8}, {"ender's_game", 8}};
-    EXPECT_EQ(dataset.executeQuery({OperationType::Type::MAX, 3, 2}), expected);
+    EXPECT_EQ(dataset.executeQuery({operationType::Type::MAX, 3, 2}), expected);
 
     expected = std::unordered_map<std::string, int>{
         {"tim", 8}, {"tamas", 6}, {"dave", 8}};
-    EXPECT_EQ(dataset.executeQuery({OperationType::Type::AVG, 3, 0}), expected);
+    EXPECT_EQ(dataset.executeQuery({operationType::Type::AVG, 3, 0}), expected);
 }

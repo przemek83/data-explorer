@@ -60,7 +60,7 @@ const std::vector<int> inputData = {3, 4, 6, 2, 7, 1, 6, 8};
 TEST(IntegerColumn, PerformOperationMax)
 {
     const std::unordered_map<std::string, int> results{
-        column.performOperation(OperationType::Type::MAX, inputData)};
+        column.performOperation(operationType::Type::MAX, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"2", 6}, {"1", 4}, {"3", 7}, {"4", 8}}};
@@ -71,7 +71,7 @@ TEST(IntegerColumn, PerformOperationMax)
 TEST(IntegerColumn, PerformOperationMin)
 {
     const std::unordered_map<std::string, int> results{
-        column.performOperation(OperationType::Type::MIN, inputData)};
+        column.performOperation(operationType::Type::MIN, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"2", 2}, {"1", 3}, {"3", 1}, {"4", 6}}};
@@ -82,7 +82,7 @@ TEST(IntegerColumn, PerformOperationMin)
 TEST(IntegerColumn, PerformOperationAvg)
 {
     const std::unordered_map<std::string, int> results{
-        column.performOperation(OperationType::Type::AVG, inputData)};
+        column.performOperation(operationType::Type::AVG, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"4", 7}, {"2", 4}, {"3", 4}, {"1", 4}}};

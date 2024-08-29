@@ -32,8 +32,7 @@ public:
     virtual bool addItem(const std::string& item) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(
-        OperationType::Type operationType,
-        const std::vector<int>& data) const = 0;
+        operationType::Type type, const std::vector<int>& data) const = 0;
 
     const std::vector<int>& getData() const;
 

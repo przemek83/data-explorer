@@ -25,14 +25,14 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
                                                     Query& query) const
 {
     query.operation_ =
-        OperationType::getOperationTypeForString(operationInputString_);
-    if (query.operation_ == OperationType::Type::UNKNOWN)
+        operationType::getOperationTypeForString(operationInputString_);
+    if (query.operation_ == operationType::Type::UNKNOWN)
     {
         Logger().logErr("Operation " + operationInputString_ + " is unknown.");
         return false;
     }
 
-    if (query.operation_ == OperationType::Type::QUIT)
+    if (query.operation_ == operationType::Type::QUIT)
     {
         return true;
     }
@@ -78,7 +78,7 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
     }
 
     if (columnsValid &&
-        !dataset.isColumnNameCanBeUsedForAggregation(aggregateColumn))
+        !dataset.isColumnCanBeUsedForAggregation(aggregateColumn))
     {
         Logger().logErr("Cannot aggregate using column " + aggregateColumn);
         columnsValid = false;
@@ -93,7 +93,7 @@ void UserInterface::printCommandHelp()
     stringStream << "Usage:\n";
     stringStream << "<operation> <aggregation> <grouping>\n";
     stringStream << " operation = {" +
-                        OperationType::getAvailableOperationsAsString("|") +
+                        operationType::getAvailableOperationsAsString("|") +
                         "}\n";
     stringStream << " aggregation = column which will be used for aggreagation "
                     "(numerical only)\n";

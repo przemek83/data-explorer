@@ -19,16 +19,15 @@ std::size_t Dataset::getColumnId(const std::string& name) const
     return static_cast<std::size_t>(std::distance(headers_.cbegin(), pos));
 }
 
-bool Dataset::isColumnNameValid(const std::string& columnName) const
+bool Dataset::isColumnNameValid(const std::string& name) const
 {
-    const auto it{find(headers_.cbegin(), headers_.cend(), columnName)};
+    const auto it{find(headers_.cbegin(), headers_.cend(), name)};
     return it != headers_.end();
 }
 
-bool Dataset::isColumnNameCanBeUsedForAggregation(
-    const std::string& columnName) const
+bool Dataset::isColumnCanBeUsedForAggregation(const std::string& name) const
 {
-    const std::size_t id{getColumnId(columnName)};
+    const std::size_t id{getColumnId(name)};
     return columnTypes_[id] == Column::ColumnType::INTEGER;
 }
 

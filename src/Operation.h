@@ -16,27 +16,27 @@ public:
     ~Operation() = delete;
 
     static std::pair<bool, std::unordered_map<T, int>> executeOperation(
-        OperationType::Type type, const std::vector<T>& groupingData,
+        operationType::Type type, const std::vector<T>& groupingData,
         const std::vector<int>& aggregateData)
     {
         std::unordered_map<T, int> results;
 
         switch (type)
         {
-            case OperationType::Type::AVG:
+            case operationType::Type::AVG:
             {
                 results = computeAverage(groupingData, aggregateData);
                 break;
             }
 
-            case OperationType::Type::MIN:
+            case operationType::Type::MIN:
             {
                 results = computeExtremum(groupingData, aggregateData,
                                           [](int a, int b) { return a > b; });
                 break;
             }
 
-            case OperationType::Type::MAX:
+            case operationType::Type::MAX:
             {
                 results = computeExtremum(groupingData, aggregateData,
                                           [](int a, int b) { return a <= b; });
@@ -90,7 +90,7 @@ private:
         {
             auto& pair = indirectResults[groupingData[i]];
             pair.first += aggregateData[i];
-            pair.second++;
+            ++pair.second;
         }
 
         std::unordered_map<T, int> results;

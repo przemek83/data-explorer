@@ -12,12 +12,11 @@ public:
 
     bool init();
 
-    std::size_t getColumnId(const std::string& columnName) const;
+    std::size_t getColumnId(const std::string& name) const;
 
-    bool isColumnNameValid(const std::string& columnName) const;
+    bool isColumnNameValid(const std::string& name) const;
 
-    bool isColumnNameCanBeUsedForAggregation(
-        const std::string& columnName) const;
+    bool isColumnCanBeUsedForAggregation(const std::string& name) const;
 
     std::unordered_map<std::string, int> executeQuery(const Query query) const;
 
