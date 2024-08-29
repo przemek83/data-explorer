@@ -2,29 +2,35 @@
 
 #include <map>
 
+namespace
+{
+std::map<std::string, OperationType::Type> getMapping()
+{
+    return {{"avg", OperationType::Type::AVG},
+            {"min", OperationType::Type::MIN},
+            {"max", OperationType::Type::MAX},
+            {"quit", OperationType::Type::QUIT}};
+}
+}  // namespace
+
 namespace OperationType
 {
-
-const std::map<std::string, OperationType::Type> stringToOperationTypeMapping_{
-    {"avg", OperationType::Type::AVG},
-    {"min", OperationType::Type::MIN},
-    {"max", OperationType::Type::MAX},
-    {"quit", OperationType::Type::QUIT}};
-
 OperationType::Type getOperationTypeForString(
     const std::string& operationTypeString)
 {
-    const auto& findResult =
-        stringToOperationTypeMapping_.find(operationTypeString);
-    return (findResult != stringToOperationTypeMapping_.end()
-                ? findResult->second
-                : OperationType::Type::UNKNOWN);
+    const auto mapping{getMapping()};
+    const auto& findResult{mapping.find(operationTypeString)};
+
+    if (findResult != mapping.end())
+        return findResult->second;
+    else
+        return OperationType::Type::UNKNOWN;
 }
 
 std::string getAvailableOperationsAsString(const std::string& delimiter)
 {
     std::string resultString;
-    for (const auto& [stringPart, _] : stringToOperationTypeMapping_)
+    for (const auto& [stringPart, _] : getMapping())
     {
         resultString += stringPart;
         resultString += delimiter;
