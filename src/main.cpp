@@ -34,7 +34,7 @@ static std::string getTimeDiffAsString(
     std::chrono::steady_clock::time_point begin,
     std::chrono::steady_clock::time_point end)
 {
-    constexpr unsigned int MICROSECONDS_IN_SECOND = 1000000;
+    constexpr unsigned int MICROSECONDS_IN_SECOND = 1'000'000;
     auto diff =
         std::chrono::duration_cast<std::chrono::microseconds>(end - begin)
             .count();

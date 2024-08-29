@@ -60,7 +60,8 @@ private:
         const std::vector<int>& aggregateData, Func func)
     {
         std::unordered_map<T, int> results;
-        for (unsigned int i = 0; i < groupingData.size(); ++i)
+        const std::size_t dataSize{groupingData.size()};
+        for (unsigned int i = 0; i < dataSize; ++i)
         {
             const auto& element = results.find(groupingData[i]);
             if (element == results.end())

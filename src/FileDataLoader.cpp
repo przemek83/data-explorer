@@ -100,6 +100,9 @@ bool FileDataLoader::initColumns(
                 dataColumns.emplace_back(std::make_unique<StringColumn>());
                 break;
             }
+
+            default:
+                return false;
         }
     }
 
