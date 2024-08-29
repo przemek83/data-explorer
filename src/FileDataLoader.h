@@ -33,7 +33,5 @@ private:
 
     static constexpr char DELIMITER{';'};
 
-    static constexpr unsigned int DELIMITER_LENGTH{1};
-
     std::unique_ptr<std::istream> stream_;
 };
