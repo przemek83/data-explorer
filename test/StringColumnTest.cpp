@@ -6,7 +6,7 @@
 TEST(StringColumnTest, GetColumnType)
 {
     StringColumn stringColumn;
-    EXPECT_EQ(stringColumn.getColumnType(), Column::ColumnType::STRING);
+    EXPECT_EQ(stringColumn.getType(), Column::ColumnType::STRING);
 }
 
 TEST(StringColumn, AddDataItem)

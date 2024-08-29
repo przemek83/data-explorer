@@ -10,7 +10,7 @@ class StringColumn : public Column
 public:
     StringColumn();
 
-    ColumnType getColumnType() const override;
+    ColumnType getType() const override;
 
     bool addItem(const std::string& item) override;
 

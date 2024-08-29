@@ -26,12 +26,10 @@ public:
     Column& operator=(Column&& other) = default;
     Column(Column&& other) = default;
 
-    static std::string getColumnName(Column::ColumnType type);
-
     static std::pair<bool, Column::ColumnType> getColumnType(
         const std::string& name);
 
-    virtual ColumnType getColumnType() const = 0;
+    virtual ColumnType getType() const = 0;
 
     virtual bool addItem(const std::string& item) = 0;
 

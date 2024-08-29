@@ -10,11 +10,6 @@ std::map<Column::ColumnType, std::string> Column::types_{
 
 Column::Column(std::vector<int> data) : data_{std::move(data)} {}
 
-std::string Column::getColumnName(Column::ColumnType type)
-{
-    return types_[type];
-}
-
 std::pair<bool, Column::ColumnType> Column::getColumnType(
     const std::string& name)
 {

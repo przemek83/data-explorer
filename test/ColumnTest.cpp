@@ -2,13 +2,6 @@
 
 #include <src/Column.h>
 
-TEST(ColumnTest, GetColumnName)
-{
-    using ColumnType = Column::ColumnType;
-    EXPECT_EQ(Column::getColumnName(ColumnType::STRING), "string");
-    EXPECT_EQ(Column::getColumnName(ColumnType::INTEGER), "integer");
-}
-
 TEST(ColumnTest, GetColumnTypeForName)
 {
     using ColumnType = Column::ColumnType;

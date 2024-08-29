@@ -6,7 +6,7 @@
 #include "Logger.h"
 #include "Operation.h"
 
-Column::ColumnType IntegerColumn::getColumnType() const
+Column::ColumnType IntegerColumn::getType() const
 {
     return Column::ColumnType::INTEGER;
 }

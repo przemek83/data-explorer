@@ -17,7 +17,7 @@ TEST(IntegerColumn, GetColumnTypeTest)
 {
     std::vector<int> data{{1, 2, 3}};
     IntegerColumn column(data);
-    EXPECT_EQ(column.getColumnType(), Column::ColumnType::INTEGER);
+    EXPECT_EQ(column.getType(), Column::ColumnType::INTEGER);
 }
 
 TEST(IntegerColumn, AddDataItemTest)

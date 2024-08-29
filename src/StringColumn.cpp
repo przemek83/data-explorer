@@ -6,7 +6,7 @@
 
 StringColumn::StringColumn() : Column({}) {}
 
-Column::ColumnType StringColumn::getColumnType() const
+Column::ColumnType StringColumn::getType() const
 {
     return Column::ColumnType::STRING;
 }
