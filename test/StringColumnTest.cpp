@@ -53,7 +53,7 @@ TEST(StringColumn, PerformOperationMax)
 {
     StringColumn stringColumn{getStringColumn()};
     const auto results{
-        stringColumn.performOperation(OperationType::MAX, inputData)};
+        stringColumn.performOperation(OperationType::Type::MAX, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"apple", 6}, {"banana", 4}}};
@@ -65,7 +65,7 @@ TEST(StringColumn, PerformOperationMin)
 {
     StringColumn stringColumn{getStringColumn()};
     const auto results{
-        stringColumn.performOperation(OperationType::MIN, inputData)};
+        stringColumn.performOperation(OperationType::Type::MIN, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"apple", 3}, {"banana", 2}}};
@@ -77,7 +77,7 @@ TEST(StringColumn, PerformOperationAvg)
 {
     StringColumn stringColumn{getStringColumn()};
     const auto results{
-        stringColumn.performOperation(OperationType::AVG, inputData)};
+        stringColumn.performOperation(OperationType::Type::AVG, inputData)};
 
     std::unordered_map<std::string, int> expectedResults{
         {{"apple", 5}, {"banana", 3}}};

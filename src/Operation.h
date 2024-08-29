@@ -9,46 +9,38 @@
 
 #include "OperationType.h"
 
+template <typename T>
 class Operation
 {
 public:
     Operation() = delete;
     ~Operation() = delete;
 
-    static OperationType getOperationTypeForString(
-        const std::string& operationTypeString);
-
-    static std::string getAvailableOperationsAsString(
-        const std::string& delimiter);
-
-    template <class T>
     static std::unordered_map<T, int> executeOperation(
-        OperationType operationType, const std::vector<T>& groupingData,
+        OperationType::Type operationType, const std::vector<T>& groupingData,
         const std::vector<int>& aggregateData)
     {
         std::unordered_map<T, int> results;
 
         switch (operationType)
         {
-            case OperationType::AVG:
+            case OperationType::Type::AVG:
             {
-                results = computeAverage<T>(groupingData, aggregateData);
+                results = computeAverage(groupingData, aggregateData);
                 break;
             }
 
-            case OperationType::MIN:
+            case OperationType::Type::MIN:
             {
-                results =
-                    computeExtremum<T>(groupingData, aggregateData,
-                                       [](int a, int b) { return a > b; });
+                results = computeExtremum(groupingData, aggregateData,
+                                          [](int a, int b) { return a > b; });
                 break;
             }
 
-            case OperationType::MAX:
+            case OperationType::Type::MAX:
             {
-                results =
-                    computeExtremum<T>(groupingData, aggregateData,
-                                       [](int a, int b) { return a <= b; });
+                results = computeExtremum(groupingData, aggregateData,
+                                          [](int a, int b) { return a <= b; });
                 break;
             }
 
@@ -63,7 +55,7 @@ public:
     }
 
 private:
-    template <class T, class Func>
+    template <class Func>
     static std::unordered_map<T, int> computeExtremum(
         const std::vector<T>& groupingData,
         const std::vector<int>& aggregateData, Func func)
@@ -88,7 +80,6 @@ private:
         return results;
     }
 
-    template <class T>
     static std::unordered_map<T, int> computeAverage(
         const std::vector<T>& groupingData,
         const std::vector<int>& aggregateData)
@@ -114,6 +105,6 @@ private:
         return results;
     }
 
-    const static std::map<std::string, OperationType>
+    const static std::map<std::string, OperationType::Type>
         stringToOperationTypeMapping_;
 };

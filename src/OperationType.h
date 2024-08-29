@@ -1,8 +1,11 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
-enum class OperationType : uint8_t
+namespace OperationType
+{
+enum class Type : uint8_t
 {
     AVG = 0,
     MIN,
@@ -10,3 +13,9 @@ enum class OperationType : uint8_t
     QUIT,
     UNKNOWN
 };
+
+OperationType::Type getOperationTypeForString(
+    const std::string& operationTypeString);
+
+std::string getAvailableOperationsAsString(const std::string& delimiter);
+};  // namespace OperationType

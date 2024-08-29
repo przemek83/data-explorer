@@ -25,15 +25,15 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
                                                     Query& query) const
 {
     query.operation =
-        Operation::getOperationTypeForString(operationInputString_);
-    if (query.operation == OperationType::UNKNOWN)
+        OperationType::getOperationTypeForString(operationInputString_);
+    if (query.operation == OperationType::Type::UNKNOWN)
     {
         std::cerr << "Operation " << operationInputString_ << " is unknown."
                   << std::endl;
         return false;
     }
 
-    if (query.operation == OperationType::QUIT)
+    if (query.operation == OperationType::Type::QUIT)
     {
         return true;
     }
@@ -96,7 +96,7 @@ void UserInterface::printCommandHelp()
     stringStream << "Usage:" << std::endl;
     stringStream << "<operation> <aggregation> <grouping>" << std::endl;
     stringStream << " operation = {" +
-                        Operation::getAvailableOperationsAsString("|") + "}"
+                        OperationType::getAvailableOperationsAsString("|") + "}"
                  << std::endl;
     stringStream << " aggregation = column which will be used for aggreagation "
                     "(numerical only)"

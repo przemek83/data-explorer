@@ -34,6 +34,8 @@ set(${PROJECT_NAME}_SOURCES
     src/StringColumn.h
     src/UserInterface.cpp
     src/UserInterface.h
+    src/OperationType.h
+    src/OperationType.cpp
 )
 
 add_library (${PROJECT_NAME}-lib STATIC ${${PROJECT_NAME}_SOURCES})
