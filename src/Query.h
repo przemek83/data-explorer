@@ -5,7 +5,7 @@
 struct Query
 {
 public:
-    OperationType::Type operation{OperationType::Type::UNKNOWN};
-    std::size_t aggregateColumnId{0};
-    std::size_t groupingColumnId{0};
+    OperationType::Type operation_{OperationType::Type::UNKNOWN};
+    std::size_t aggregateId_{0};
+    std::size_t groupingId_{0};
 };

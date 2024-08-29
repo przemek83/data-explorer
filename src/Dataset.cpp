@@ -36,7 +36,7 @@ std::unordered_map<std::string, int> Dataset::executeQuery(
     const Query query) const
 {
     const std::vector<int>& aggregateData{
-        columns_[query.aggregateColumnId]->getData()};
-    return columns_[query.groupingColumnId]->performOperation(query.operation,
-                                                              aggregateData);
+        columns_[query.aggregateId_]->getData()};
+    return columns_[query.groupingId_]->performOperation(query.operation_,
+                                                         aggregateData);
 }

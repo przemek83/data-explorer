@@ -24,15 +24,15 @@ UserInterface::UserInterface()
 bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
                                                     Query& query) const
 {
-    query.operation =
+    query.operation_ =
         OperationType::getOperationTypeForString(operationInputString_);
-    if (query.operation == OperationType::Type::UNKNOWN)
+    if (query.operation_ == OperationType::Type::UNKNOWN)
     {
         Logger().logErr("Operation " + operationInputString_ + " is unknown.");
         return false;
     }
 
-    if (query.operation == OperationType::Type::QUIT)
+    if (query.operation_ == OperationType::Type::QUIT)
     {
         return true;
     }
@@ -43,8 +43,8 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
         return false;
     }
 
-    query.aggregateColumnId = dataset.getColumnId(aggregateColumnInputString_);
-    query.groupingColumnId = dataset.getColumnId(groupingColumnInputString_);
+    query.aggregateId_ = dataset.getColumnId(aggregateColumnInputString_);
+    query.groupingId_ = dataset.getColumnId(groupingColumnInputString_);
 
     Logger().logMsg("Execute: " + operationInputString_ + " " +
                     aggregateColumnInputString_ + " GROUPED BY " +
