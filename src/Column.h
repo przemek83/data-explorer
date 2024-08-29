@@ -25,9 +25,10 @@ public:
     Column& operator=(Column&& other) = default;
     Column(Column&& other) = default;
 
-    static std::string getColumnNameForType(Column::ColumnType type);
+    static std::string getColumnName(Column::ColumnType type);
 
-    static ColumnType getColumnTypeForName(const std::string& name);
+    static std::pair<bool, Column::ColumnType> getColumnType(
+        const std::string& name);
 
     virtual ColumnType getColumnType() const = 0;
 

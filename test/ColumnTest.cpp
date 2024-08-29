@@ -2,21 +2,29 @@
 
 #include <src/Column.h>
 
-TEST(ColumnTest, GetColumnNameForType)
+TEST(ColumnTest, GetColumnName)
 {
     using ColumnType = Column::ColumnType;
-    EXPECT_EQ(Column::getColumnNameForType(ColumnType::STRING), "string");
-    EXPECT_EQ(Column::getColumnNameForType(ColumnType::INTEGER), "integer");
+    EXPECT_EQ(Column::getColumnName(ColumnType::STRING), "string");
+    EXPECT_EQ(Column::getColumnName(ColumnType::INTEGER), "integer");
 }
 
 TEST(ColumnTest, GetColumnTypeForName)
 {
     using ColumnType = Column::ColumnType;
-    EXPECT_EQ(Column::getColumnTypeForName("string"), ColumnType::STRING);
-    EXPECT_EQ(Column::getColumnTypeForName("integer"), ColumnType::INTEGER);
+    bool success{false};
+    ColumnType type;
+    std::tie(success, type) = Column::getColumnType("string");
+    EXPECT_TRUE(success);
+    EXPECT_EQ(type, ColumnType::STRING);
+
+    std::tie(success, type) = Column::getColumnType("integer");
+    EXPECT_TRUE(success);
+    EXPECT_EQ(type, ColumnType::INTEGER);
 }
 
 TEST(ColumnTest, GetColumnTypeForNameInvalid)
 {
-    EXPECT_THROW(Column::getColumnTypeForName("unknown"), std::logic_error);
+    const auto [success, tape]{Column::getColumnType("invalid")};
+    EXPECT_FALSE(success);
 }

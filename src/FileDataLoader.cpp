@@ -96,11 +96,15 @@ std::vector<Column::ColumnType> FileDataLoader::getColumnTypes(
     size_t currentPosition = 0;
     while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
     {
-        columnTypes.emplace_back(
-            Column::getColumnTypeForName(inputLine.substr(0, currentPosition)));
+        const auto [success, type]{
+            Column::getColumnType(inputLine.substr(0, currentPosition))};
+        if (success)
+            columnTypes.push_back(type);
         inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
     }
-    columnTypes.emplace_back(Column::getColumnTypeForName(inputLine));
+    const auto [success, type]{Column::getColumnType(inputLine)};
+    if (success)
+        columnTypes.push_back(type);
 
     return columnTypes;
 }
