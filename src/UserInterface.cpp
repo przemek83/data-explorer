@@ -42,10 +42,8 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
         return false;
     }
 
-    query.aggregateColumnId =
-        dataset.getColumnIdForName(aggregateColumnInputString_);
-    query.groupingColumnId =
-        dataset.getColumnIdForName(groupingColumnInputString_);
+    query.aggregateColumnId = dataset.getColumnId(aggregateColumnInputString_);
+    query.groupingColumnId = dataset.getColumnId(groupingColumnInputString_);
 
     std::cout << "Execute: " << operationInputString_ << " "
               << aggregateColumnInputString_ << " GROUPED BY "

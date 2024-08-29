@@ -83,9 +83,9 @@ TEST(DatasetTest, GetColumnIdForName)
     Dataset dataset(std::make_unique<FakeLoader>());
     dataset.init();
 
-    EXPECT_EQ(dataset.getColumnIdForName("h1"), 0);
-    EXPECT_EQ(dataset.getColumnIdForName("h2"), 1);
-    EXPECT_EQ(dataset.getColumnIdForName("h3"), 2);
+    EXPECT_EQ(dataset.getColumnId("h1"), 0);
+    EXPECT_EQ(dataset.getColumnId("h2"), 1);
+    EXPECT_EQ(dataset.getColumnId("h3"), 2);
 }
 
 TEST(DatasetTest, IsColumnNameValid)

@@ -14,24 +14,23 @@ bool Dataset::init()
     return dataLoader_->loadData(headers_, columnTypes_, columns_);
 }
 
-unsigned int Dataset::getColumnIdForName(const std::string& columnName) const
+unsigned int Dataset::getColumnId(const std::string& name) const
 {
-    const auto position{
-        std::find(headers_.begin(), headers_.end(), columnName)};
-    return static_cast<unsigned int>(std::distance(headers_.begin(), position));
+    const auto pos{std::find(headers_.cbegin(), headers_.cend(), name)};
+    return static_cast<unsigned int>(std::distance(headers_.cbegin(), pos));
 }
 
 bool Dataset::isColumnNameValid(const std::string& columnName) const
 {
-    auto iterator = find(headers_.begin(), headers_.end(), columnName);
-    return iterator != headers_.end();
+    const auto it{find(headers_.cbegin(), headers_.cend(), columnName)};
+    return it != headers_.end();
 }
 
 bool Dataset::isColumnNameCanBeUsedForAggregation(
     const std::string& columnName) const
 {
-    return columnTypes_[getColumnIdForName(columnName)] ==
-           Column::ColumnType::INTEGER;
+    const std::size_t id{getColumnId(columnName)};
+    return columnTypes_[id] == Column::ColumnType::INTEGER;
 }
 
 std::unordered_map<std::string, int> Dataset::executeQuery(

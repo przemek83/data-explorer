@@ -12,7 +12,7 @@ public:
 
     bool init();
 
-    unsigned int getColumnIdForName(const std::string& columnName) const;
+    unsigned int getColumnId(const std::string& columnName) const;
 
     bool isColumnNameValid(const std::string& columnName) const;
 
