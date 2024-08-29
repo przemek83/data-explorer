@@ -13,24 +13,7 @@ public:
 
     ColumnType getColumnType() const override;
 
-    inline bool addDataItem(const std::string& item) override
-    {
-        int value{0};
-        const auto [_, errorCode] =
-            std::from_chars(item.data(), item.data() + item.size(), value);
-        if (errorCode == std::errc())
-        {
-            data_.push_back(value);
-            return true;
-        }
-
-        if (errorCode == std::errc::invalid_argument)
-            std::cerr << "Cannot convert to int: " << item << std::endl;
-        if (errorCode == std::errc::result_out_of_range)
-            std::cerr << "Value out of range: " << item << std::endl;
-
-        return false;
-    }
+    bool addDataItem(const std::string& item) override;
 
     std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
