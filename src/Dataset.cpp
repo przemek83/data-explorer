@@ -1,8 +1,7 @@
 #include "Dataset.h"
 
 #include <algorithm>
-
-#include "IntegerColumn.h"
+#include <cstddef>
 
 Dataset::Dataset(std::unique_ptr<DataLoader> dataLoader)
     : dataLoader_(std::move(dataLoader))
@@ -14,10 +13,10 @@ bool Dataset::init()
     return dataLoader_->loadData(headers_, columnTypes_, columns_);
 }
 
-unsigned int Dataset::getColumnId(const std::string& name) const
+std::size_t Dataset::getColumnId(const std::string& name) const
 {
     const auto pos{std::find(headers_.cbegin(), headers_.cend(), name)};
-    return static_cast<unsigned int>(std::distance(headers_.cbegin(), pos));
+    return static_cast<std::size_t>(std::distance(headers_.cbegin(), pos));
 }
 
 bool Dataset::isColumnNameValid(const std::string& columnName) const
@@ -36,9 +35,8 @@ bool Dataset::isColumnNameCanBeUsedForAggregation(
 std::unordered_map<std::string, int> Dataset::executeQuery(
     const Query query) const
 {
-    const std::vector<int>& aggregateData =
-        dynamic_cast<IntegerColumn*>(columns_[query.aggregateColumnId].get())
-            ->getData();
+    const std::vector<int>& aggregateData{
+        columns_[query.aggregateColumnId]->getData()};
     return columns_[query.groupingColumnId]->performOperation(query.operation,
                                                               aggregateData);
 }

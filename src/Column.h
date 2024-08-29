@@ -38,6 +38,8 @@ public:
         Operation::OperationType operationType,
         const std::vector<int>& data) const = 0;
 
+    virtual const std::vector<int>& getData() const = 0;
+
 private:
     static std::map<ColumnType, std::string> types_;
 };

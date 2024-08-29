@@ -6,6 +6,6 @@ struct Query
 {
 public:
     Operation::OperationType operation{Operation::OperationType::UNKNOWN};
-    unsigned int aggregateColumnId{0};
-    unsigned int groupingColumnId{0};
+    std::size_t aggregateColumnId{0};
+    std::size_t groupingColumnId{0};
 };

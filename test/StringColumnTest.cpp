@@ -16,7 +16,7 @@ TEST(StringColumn, AddDataItem)
     stringColumn.addDataItem("banana");
     stringColumn.addDataItem("apple");  // Duplicate
 
-    const std::vector<unsigned int>& data{stringColumn.getData()};
+    const std::vector<int>& data{stringColumn.getData()};
     ASSERT_EQ(data.size(), 3);
     EXPECT_EQ(data[0], 1);
     EXPECT_EQ(data[1], 2);
@@ -29,7 +29,7 @@ TEST(StringColumn, GetData)
     stringColumn.addDataItem("apple");
     stringColumn.addDataItem("banana");
 
-    const std::vector<unsigned int>& data{stringColumn.getData()};
+    const std::vector<int>& data{stringColumn.getData()};
     ASSERT_EQ(data.size(), 2);
     EXPECT_EQ(data[0], 1);
     EXPECT_EQ(data[1], 2);
