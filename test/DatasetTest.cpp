@@ -31,12 +31,12 @@ public:
             std::vector<int>{4, 5, 6, 14, 15, 16}));
 
         auto stringColumn{std::make_unique<StringColumn>()};
-        stringColumn->addDataItem("Entry1");
-        stringColumn->addDataItem("Entry2");
-        stringColumn->addDataItem("Entry3");
-        stringColumn->addDataItem("Entry1");
-        stringColumn->addDataItem("Entry2");
-        stringColumn->addDataItem("Entry3");
+        stringColumn->addItem("Entry1");
+        stringColumn->addItem("Entry2");
+        stringColumn->addItem("Entry3");
+        stringColumn->addItem("Entry1");
+        stringColumn->addItem("Entry2");
+        stringColumn->addItem("Entry3");
         dataColumns.push_back(std::move(stringColumn));
 
         return true;

@@ -12,9 +12,9 @@ TEST(StringColumnTest, GetColumnType)
 TEST(StringColumn, AddDataItem)
 {
     StringColumn stringColumn;
-    stringColumn.addDataItem("apple");
-    stringColumn.addDataItem("banana");
-    stringColumn.addDataItem("apple");  // Duplicate
+    stringColumn.addItem("apple");
+    stringColumn.addItem("banana");
+    stringColumn.addItem("apple");  // Duplicate
 
     const std::vector<int>& data{stringColumn.getData()};
     ASSERT_EQ(data.size(), 3);
@@ -26,8 +26,8 @@ TEST(StringColumn, AddDataItem)
 TEST(StringColumn, GetData)
 {
     StringColumn stringColumn;
-    stringColumn.addDataItem("apple");
-    stringColumn.addDataItem("banana");
+    stringColumn.addItem("apple");
+    stringColumn.addItem("banana");
 
     const std::vector<int>& data{stringColumn.getData()};
     ASSERT_EQ(data.size(), 2);
@@ -40,10 +40,10 @@ namespace
 StringColumn getStringColumn()
 {
     StringColumn stringColumn;
-    stringColumn.addDataItem("apple");
-    stringColumn.addDataItem("banana");
-    stringColumn.addDataItem("apple");
-    stringColumn.addDataItem("banana");
+    stringColumn.addItem("apple");
+    stringColumn.addItem("banana");
+    stringColumn.addItem("apple");
+    stringColumn.addItem("banana");
     return stringColumn;
 }
 const std::vector<int> inputData = {3, 4, 6, 2};

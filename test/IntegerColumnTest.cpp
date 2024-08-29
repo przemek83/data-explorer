@@ -24,7 +24,7 @@ TEST(IntegerColumn, AddDataItemTest)
 {
     std::vector<int> data{{1, 2, 3}};
     IntegerColumn column(data);
-    column.addDataItem("4");
+    column.addItem("4");
     std::vector<int> expectedData{{1, 2, 3, 4}};
     EXPECT_EQ(column.getData(), expectedData);
 }
@@ -33,9 +33,9 @@ TEST(IntegerColumn, AddDataItemInvalidTest)
 {
     std::vector<int> data{{1, 2, 3}};
     IntegerColumn column(data);
-    column.addDataItem("4");
+    column.addItem("4");
     testing::internal::CaptureStderr();
-    column.addDataItem("invalid");
+    column.addItem("invalid");
     std::string output{testing::internal::GetCapturedStderr()};
     EXPECT_TRUE(output.find("Cannot convert to int:") != std::string::npos);
 }
@@ -44,9 +44,9 @@ TEST(IntegerColumn, AddDataItemOutOfRangeTest)
 {
     std::vector<int> data{{1, 2, 3}};
     IntegerColumn column(data);
-    column.addDataItem("4");
+    column.addItem("4");
     testing::internal::CaptureStderr();
-    column.addDataItem(std::to_string(std::numeric_limits<int>::max()) + "1");
+    column.addItem(std::to_string(std::numeric_limits<int>::max()) + "1");
     std::string output{testing::internal::GetCapturedStderr()};
     EXPECT_TRUE(output.find("Value out of range:") != std::string::npos);
 }

@@ -15,7 +15,7 @@ public:
         INTEGER
     };
 
-    Column() = default;
+    explicit Column(std::vector<int> data);
 
     virtual ~Column() = default;
 
@@ -32,14 +32,19 @@ public:
 
     virtual ColumnType getColumnType() const = 0;
 
-    virtual bool addDataItem(const std::string& item) = 0;
+    virtual bool addItem(const std::string& item) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
         const std::vector<int>& data) const = 0;
 
-    virtual const std::vector<int>& getData() const = 0;
+    const std::vector<int>& getData() const;
+
+protected:
+    void addData(int data);
 
 private:
     static std::map<ColumnType, std::string> types_;
+
+    std::vector<int> data_;
 };

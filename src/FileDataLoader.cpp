@@ -114,7 +114,7 @@ bool FileDataLoader::processLine(
     {
         std::string item;
         std::getline(input, item, DELIMITER);
-        if (input.fail() || !dataColumns[i]->addDataItem(item))
+        if (input.fail() || !dataColumns[i]->addItem(item))
         {
             std::cerr << "No data, line " << index << ", column " << i << "\n";
             return false;

@@ -1,20 +1,18 @@
 #include "IntegerColumn.h"
 
-IntegerColumn::IntegerColumn(std::vector<int> data) : data_(std::move(data)) {}
-
 Column::ColumnType IntegerColumn::getColumnType() const
 {
     return Column::ColumnType::INTEGER;
 }
 
-bool IntegerColumn::addDataItem(const std::string& item)
+bool IntegerColumn::addItem(const std::string& item)
 {
     int value{0};
     const auto [_, errorCode]{
         std::from_chars(item.data(), item.data() + item.size(), value)};
     if (errorCode == std::errc())
     {
-        data_.push_back(value);
+        addData(value);
         return true;
     }
 
@@ -26,13 +24,11 @@ bool IntegerColumn::addDataItem(const std::string& item)
     return false;
 }
 
-const std::vector<int>& IntegerColumn::getData() const { return data_; }
-
 std::unordered_map<std::string, int> IntegerColumn::performOperation(
     Operation::OperationType operationType, const std::vector<int>& data) const
 {
     const std::unordered_map<int, int> results{
-        Operation::executeOperation<int>(operationType, data_, data)};
+        Operation::executeOperation<int>(operationType, getData(), data)};
 
     std::unordered_map<std::string, int> resultsWithStrings;
     for (const auto& [columnId, value] : results)
