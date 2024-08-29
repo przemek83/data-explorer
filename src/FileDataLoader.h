@@ -17,7 +17,7 @@ public:
                   std::vector<std::unique_ptr<Column>>& dataColumns) override;
 
 private:
-    std::vector<std::string> getHeaders(std::string& inputLine) const;
+    std::vector<std::string> getHeaders(const std::string& inputLine) const;
 
     std::vector<Column::ColumnType> getColumnTypes(
         const std::string& inputLine) const;

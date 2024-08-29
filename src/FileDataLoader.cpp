@@ -74,17 +74,14 @@ bool FileDataLoader::loadData(std::vector<std::unique_ptr<Column>>& dataColumns,
 }
 
 std::vector<std::string> FileDataLoader::getHeaders(
-    std::string& inputLine) const
+    const std::string& inputLine) const
 {
     std::vector<std::string> headers;
 
-    size_t currentPosition = 0;
-    while ((currentPosition = inputLine.find(DELIMITER)) != std::string::npos)
-    {
-        headers.emplace_back(inputLine.substr(0, currentPosition));
-        inputLine.erase(0, currentPosition + DELIMITER_LENGTH);
-    }
-    headers.emplace_back(inputLine);
+    std::stringstream input(inputLine);
+    std::string header;
+    while (std::getline(input, header, DELIMITER))
+        headers.push_back(header);
 
     return headers;
 }
