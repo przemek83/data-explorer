@@ -3,9 +3,11 @@
 #include <iostream>
 #include <memory>
 #include <sstream>
+#include <string>
 
 #include "Column.h"
 #include "IntegerColumn.h"
+#include "Logger.h"
 #include "StringColumn.h"
 
 FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream)
@@ -116,14 +118,17 @@ bool FileDataLoader::processLine(
         std::getline(input, item, DELIMITER);
         if (input.fail() || !dataColumns[i]->addItem(item))
         {
-            std::cerr << "No data, line " << index << ", column " << i << "\n";
+            Logger().logErr("No data, line " + std::to_string(index) +
+                            ", column " + std::to_string(i));
+
             return false;
         }
     }
 
     if (!input.eof())
     {
-        std::cerr << "More data entries than expected, line " << index << "\n";
+        Logger().logErr("More data entries than expected, line " +
+                        std::to_string(index));
         return false;
     }
 

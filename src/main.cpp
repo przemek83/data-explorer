@@ -3,18 +3,20 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <unordered_map>
 
 #include "Dataset.h"
 #include "FileDataLoader.h"
+#include "Logger.h"
 #include "Query.h"
 #include "UserInterface.h"
 
 [[noreturn]] static void exitWithHelp()
 {
-    std::cerr << "Usage: <binary> file" << std::endl
-              << " file - name of data file." << std::endl;
+    Logger().logErr("Usage: <binary> file");
+    Logger().logErr(" file - name of data file.");
     exit(EXIT_FAILURE);
 }
 
@@ -53,8 +55,7 @@ int main(int argc, char* argv[])
         std::make_unique<std::ifstream>(fileName);
     if (!inFile->good())
     {
-        std::cerr << "Cannot open " << fileName << " file, exiting."
-                  << std::endl;
+        Logger().logErr("Cannot open " + fileName + " file, exiting.");
         return EXIT_FAILURE;
     }
 
@@ -63,14 +64,17 @@ int main(int argc, char* argv[])
 
     if (!dataset.init())
     {
-        std::cerr << "Cannot load data, exiting." << std::endl;
+        Logger().logErr("Cannot load data, exiting.");
         return EXIT_FAILURE;
     }
 
     std::chrono::steady_clock::time_point end =
         std::chrono::steady_clock::now();
-    std::cout << "Data loaded in " << std::fixed
-              << getTimeDiffAsString(begin, end) << std::endl;
+
+    std::stringstream stream;
+    stream << "Data loaded in " << std::fixed
+           << getTimeDiffAsString(begin, end);
+    Logger().logMsg(stream.str());
 
     UserInterface::printCommandHelp();
 
@@ -95,11 +99,15 @@ int main(int argc, char* argv[])
 
         for (const auto& [key, value] : results)
         {
-            std::cout << key << " " << value << std::endl;
+            stream.str("");
+            stream << key << " " << value;
+            Logger().logMsg(stream.str());
         }
 
-        std::cout << "Operation time = " << std::fixed
-                  << getTimeDiffAsString(begin, end) << std::endl;
+        stream.str("");
+        stream << "Operation time = " << std::fixed
+               << getTimeDiffAsString(begin, end);
+        Logger().logMsg(stream.str());
     }
 
     return EXIT_SUCCESS;

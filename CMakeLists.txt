@@ -27,7 +27,6 @@ set(${PROJECT_NAME}_SOURCES
     src/FileDataLoader.h
     src/IntegerColumn.cpp
     src/IntegerColumn.h
-    src/Operation.cpp
     src/Operation.h
     src/Query.h
     src/StringColumn.cpp
@@ -36,6 +35,7 @@ set(${PROJECT_NAME}_SOURCES
     src/UserInterface.h
     src/OperationType.h
     src/OperationType.cpp
+    src/Logger.h
 )
 
 add_library (${PROJECT_NAME}-lib STATIC ${${PROJECT_NAME}_SOURCES})

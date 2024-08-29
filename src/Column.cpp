@@ -1,7 +1,8 @@
 #include "Column.h"
 
 #include <algorithm>
-#include <iostream>
+
+#include "Logger.h"
 
 std::map<Column::ColumnType, std::string> Column::types_{
     {Column::ColumnType::INTEGER, "integer"},
@@ -24,7 +25,8 @@ std::pair<bool, Column::ColumnType> Column::getColumnType(
         it != types_.cend())
         return {true, it->first};
 
-    std::cerr << "Cannot find column " << name << std::endl;
+    Logger().logMsg("Cannot find column " + name);
+
     return {false, {}};
 };
 

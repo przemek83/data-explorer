@@ -5,7 +5,7 @@
 #include <sstream>
 
 #include "Dataset.h"
-#include "Operation.h"
+#include "Logger.h"
 #include "OperationType.h"
 
 UserInterface::UserInterface()
@@ -28,8 +28,7 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
         OperationType::getOperationTypeForString(operationInputString_);
     if (query.operation == OperationType::Type::UNKNOWN)
     {
-        std::cerr << "Operation " << operationInputString_ << " is unknown."
-                  << std::endl;
+        Logger().logErr("Operation " + operationInputString_ + " is unknown.");
         return false;
     }
 
@@ -47,9 +46,9 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
     query.aggregateColumnId = dataset.getColumnId(aggregateColumnInputString_);
     query.groupingColumnId = dataset.getColumnId(groupingColumnInputString_);
 
-    std::cout << "Execute: " << operationInputString_ << " "
-              << aggregateColumnInputString_ << " GROUPED BY "
-              << groupingColumnInputString_ << std::endl;
+    Logger().logMsg("Execute: " + operationInputString_ + " " +
+                    aggregateColumnInputString_ + " GROUPED BY " +
+                    groupingColumnInputString_);
 
     return true;
 }
@@ -62,28 +61,26 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
 
     if (aggregateColumn == groupingColumn)
     {
-        std::cerr << "Cannot use same column for aggregation and grouping."
-                  << std::endl;
+        Logger().logErr("Cannot use same column for aggregation and grouping.");
         columnsValid = false;
     }
 
     if (columnsValid && !dataset.isColumnNameValid(aggregateColumn))
     {
-        std::cerr << "Column " << aggregateColumn << " not valid" << std::endl;
+        Logger().logErr("Column " + aggregateColumn + " not valid");
         columnsValid = false;
     }
 
     if (columnsValid && !dataset.isColumnNameValid(groupingColumn))
     {
-        std::cerr << "Column " << groupingColumn << " not valid" << std::endl;
+        Logger().logErr("Column " + groupingColumn + " not valid");
         columnsValid = false;
     }
 
     if (columnsValid &&
         !dataset.isColumnNameCanBeUsedForAggregation(aggregateColumn))
     {
-        std::cerr << "Cannot aggregate using column " << aggregateColumn
-                  << std::endl;
+        Logger().logErr("Cannot aggregate using column " + aggregateColumn);
         columnsValid = false;
     }
 
@@ -103,5 +100,5 @@ void UserInterface::printCommandHelp()
                  << std::endl;
     stringStream << " grouping = column which will be used for grouping"
                  << std::endl;
-    std::cout << stringStream.str() << std::endl;
+    Logger().logMsg(stringStream.str());
 }

@@ -1,9 +1,9 @@
 #include "IntegerColumn.h"
 
 #include <charconv>
-#include <iostream>
-#include <ostream>
+#include <string>
 
+#include "Logger.h"
 #include "Operation.h"
 
 Column::ColumnType IntegerColumn::getColumnType() const
@@ -23,9 +23,9 @@ bool IntegerColumn::addItem(const std::string& item)
     }
 
     if (errorCode == std::errc::invalid_argument)
-        std::cerr << "Cannot convert to int: " << item << std::endl;
+        Logger().logErr("Cannot convert to int: " + item);
     if (errorCode == std::errc::result_out_of_range)
-        std::cerr << "Value out of range: " << item << std::endl;
+        Logger().logErr("Value out of range: " + item);
 
     return false;
 }

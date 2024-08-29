@@ -1,10 +1,11 @@
 #pragma once
 
 #include <cmath>
-#include <iostream>
+#include <string>
 #include <unordered_map>
 #include <vector>
 
+#include "Logger.h"
 #include "OperationType.h"
 
 template <typename T>
@@ -15,12 +16,12 @@ public:
     ~Operation() = delete;
 
     static std::pair<bool, std::unordered_map<T, int>> executeOperation(
-        OperationType::Type operationType, const std::vector<T>& groupingData,
+        OperationType::Type type, const std::vector<T>& groupingData,
         const std::vector<int>& aggregateData)
     {
         std::unordered_map<T, int> results;
 
-        switch (operationType)
+        switch (type)
         {
             case OperationType::Type::AVG:
             {
@@ -44,8 +45,8 @@ public:
 
             default:
             {
-                std::cerr << "Unknown Operation Type "
-                          << static_cast<int>(operationType) << "\n";
+                Logger().logErr("Unknown Operation Type " +
+                                std::to_string(static_cast<int>(type)));
                 return {false, {}};
             }
         }
