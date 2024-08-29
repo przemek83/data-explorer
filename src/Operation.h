@@ -104,7 +104,4 @@ private:
 
         return results;
     }
-
-    const static std::map<std::string, OperationType::Type>
-        stringToOperationTypeMapping_;
 };
