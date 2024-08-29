@@ -111,28 +111,28 @@ TEST(DatasetTest, IsColumnNameCanBeUsedForAggregation)
 
 TEST(DatasetTest, ExecuteQueryMax)
 {
-    Query query{Operation::OperationType::MAX, 0, 2};
+    Query query{OperationType::MAX, 0, 2};
     testResults(query, {11, 12, 13});
 
-    query = {Operation::OperationType::MAX, 1, 2};
+    query = {OperationType::MAX, 1, 2};
     testResults(query, {14, 15, 16});
 }
 
 TEST(DatasetTest, ExecuteQueryMin)
 {
-    Query query{Operation::OperationType::MIN, 0, 2};
+    Query query{OperationType::MIN, 0, 2};
     testResults(query, {1, 2, 3});
 
-    query = {Operation::OperationType::MIN, 1, 2};
+    query = {OperationType::MIN, 1, 2};
     testResults(query, {4, 5, 6});
 }
 
 TEST(DatasetTest, ExecuteQueryAvg)
 {
-    Query query{Operation::OperationType::AVG, 0, 2};
+    Query query{OperationType::AVG, 0, 2};
     testResults(query, {6, 7, 8});
 
-    query = {Operation::OperationType::AVG, 1, 2};
+    query = {OperationType::AVG, 1, 2};
     testResults(query, {9, 10, 11});
 }
 
@@ -141,6 +141,6 @@ TEST(DatasetTest, ExecuteQueryUnknownOperation)
     Dataset dataset(std::make_unique<FakeLoader>());
     dataset.init();
 
-    Query query{Operation::OperationType::UNKNOWN, 0, 2};
+    Query query{OperationType::UNKNOWN, 0, 2};
     EXPECT_THROW(dataset.executeQuery(query), std::logic_error);
 }

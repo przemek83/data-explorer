@@ -18,8 +18,7 @@ dave;0;ender's_game;8)";
 
 TEST(DataExplorer, executeQuery)
 {
-    auto stream{
-        std::make_unique<std::istringstream>(sampleData)};
+    auto stream{std::make_unique<std::istringstream>(sampleData)};
 
     auto loader{std::make_unique<FileDataLoader>(std::move(stream))};
     Dataset dataset(std::move(loader));
@@ -28,15 +27,12 @@ TEST(DataExplorer, executeQuery)
 
     std::unordered_map<std::string, int> expected{
         {"tim", 26}, {"tamas", 44}, {"dave", 0}};
-    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::MIN, 1, 0}),
-              expected);
+    EXPECT_EQ(dataset.executeQuery({OperationType::MIN, 1, 0}), expected);
 
     expected = {{"inception", 8}, {"pulp_fiction", 8}, {"ender's_game", 8}};
-    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::MAX, 3, 2}),
-              expected);
+    EXPECT_EQ(dataset.executeQuery({OperationType::MAX, 3, 2}), expected);
 
     expected = std::unordered_map<std::string, int>{
         {"tim", 8}, {"tamas", 6}, {"dave", 8}};
-    EXPECT_EQ(dataset.executeQuery({Operation::OperationType::AVG, 3, 0}),
-              expected);
+    EXPECT_EQ(dataset.executeQuery({OperationType::AVG, 3, 0}), expected);
 }

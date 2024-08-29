@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Column.h"
+#include "OperationType.h"
 
 class StringColumn : public Column
 {
@@ -14,7 +15,7 @@ public:
     bool addItem(const std::string& item) override;
 
     std::unordered_map<std::string, int> performOperation(
-        Operation::OperationType operationType,
+        OperationType operationType,
         const std::vector<int>& data) const override;
 
 private:

@@ -5,6 +5,8 @@
 #include <sstream>
 
 #include "Dataset.h"
+#include "Operation.h"
+#include "OperationType.h"
 
 UserInterface::UserInterface()
 {
@@ -24,14 +26,14 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
 {
     query.operation =
         Operation::getOperationTypeForString(operationInputString_);
-    if (query.operation == Operation::OperationType::UNKNOWN)
+    if (query.operation == OperationType::UNKNOWN)
     {
         std::cerr << "Operation " << operationInputString_ << " is unknown."
                   << std::endl;
         return false;
     }
 
-    if (query.operation == Operation::OperationType::QUIT)
+    if (query.operation == OperationType::QUIT)
     {
         return true;
     }

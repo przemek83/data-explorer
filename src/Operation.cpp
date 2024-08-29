@@ -1,13 +1,12 @@
 #include "Operation.h"
 
-const std::map<std::string, Operation::OperationType>
-    Operation::stringToOperationTypeMapping_{
-        {"avg", Operation::OperationType::AVG},
-        {"min", Operation::OperationType::MIN},
-        {"max", Operation::OperationType::MAX},
-        {"quit", Operation::OperationType::QUIT}};
+const std::map<std::string, OperationType>
+    Operation::stringToOperationTypeMapping_{{"avg", OperationType::AVG},
+                                             {"min", OperationType::MIN},
+                                             {"max", OperationType::MAX},
+                                             {"quit", OperationType::QUIT}};
 
-Operation::OperationType Operation::getOperationTypeForString(
+OperationType Operation::getOperationTypeForString(
     const std::string& operationTypeString)
 {
     const auto& findResult =

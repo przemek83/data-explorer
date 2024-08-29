@@ -1,5 +1,11 @@
 #include "IntegerColumn.h"
 
+#include <charconv>
+#include <iostream>
+#include <ostream>
+
+#include "Operation.h"
+
 Column::ColumnType IntegerColumn::getColumnType() const
 {
     return Column::ColumnType::INTEGER;
@@ -25,7 +31,7 @@ bool IntegerColumn::addItem(const std::string& item)
 }
 
 std::unordered_map<std::string, int> IntegerColumn::performOperation(
-    Operation::OperationType operationType, const std::vector<int>& data) const
+    OperationType operationType, const std::vector<int>& data) const
 {
     const std::unordered_map<int, int> results{
         Operation::executeOperation<int>(operationType, getData(), data)};

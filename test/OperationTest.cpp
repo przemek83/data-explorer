@@ -4,16 +4,13 @@
 
 TEST(OperationTest, GetOperationTypeForString)
 {
-    EXPECT_EQ(Operation::getOperationTypeForString("avg"),
-              Operation::OperationType::AVG);
-    EXPECT_EQ(Operation::getOperationTypeForString("min"),
-              Operation::OperationType::MIN);
-    EXPECT_EQ(Operation::getOperationTypeForString("max"),
-              Operation::OperationType::MAX);
+    EXPECT_EQ(Operation::getOperationTypeForString("avg"), OperationType::AVG);
+    EXPECT_EQ(Operation::getOperationTypeForString("min"), OperationType::MIN);
+    EXPECT_EQ(Operation::getOperationTypeForString("max"), OperationType::MAX);
     EXPECT_EQ(Operation::getOperationTypeForString("quit"),
-              Operation::OperationType::QUIT);
+              OperationType::QUIT);
     EXPECT_EQ(Operation::getOperationTypeForString("unknown"),
-              Operation::OperationType::UNKNOWN);
+              OperationType::UNKNOWN);
 }
 
 TEST(OperationTest, GetAvailableOperationsAsString)
@@ -28,8 +25,8 @@ TEST(OperationTest, ExecuteOperationAverage)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 3, 5, 7}};
 
-    auto result{Operation::executeOperation(Operation::OperationType::AVG,
-                                            groupingData, aggregateData)};
+    auto result{Operation::executeOperation(OperationType::AVG, groupingData,
+                                            aggregateData)};
 
     EXPECT_EQ(result["group1"], 2);
     EXPECT_EQ(result["group2"], 6);
@@ -41,8 +38,8 @@ TEST(OperationTest, ExecuteOperationMin)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
-    auto result{Operation::executeOperation(Operation::OperationType::MIN,
-                                            groupingData, aggregateData)};
+    auto result{Operation::executeOperation(OperationType::MIN, groupingData,
+                                            aggregateData)};
 
     EXPECT_EQ(result["group1"], 1);
     EXPECT_EQ(result["group2"], 3);
@@ -54,8 +51,8 @@ TEST(OperationTest, ExecuteOperationMax)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
-    auto result{Operation::executeOperation(Operation::OperationType::MAX,
-                                            groupingData, aggregateData)};
+    auto result{Operation::executeOperation(OperationType::MAX, groupingData,
+                                            aggregateData)};
 
     EXPECT_EQ(result["group1"], 2);
     EXPECT_EQ(result["group2"], 4);
@@ -67,7 +64,7 @@ TEST(OperationTest, ExecuteOperationUnknown)
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};
 
-    EXPECT_THROW(Operation::executeOperation(Operation::OperationType::UNKNOWN,
+    EXPECT_THROW(Operation::executeOperation(OperationType::UNKNOWN,
                                              groupingData, aggregateData),
                  std::logic_error);
 }

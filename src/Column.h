@@ -2,9 +2,10 @@
 
 #include <map>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
-#include "Operation.h"
+#include "OperationType.h"
 
 class Column
 {
@@ -35,8 +36,7 @@ public:
     virtual bool addItem(const std::string& item) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(
-        Operation::OperationType operationType,
-        const std::vector<int>& data) const = 0;
+        OperationType operationType, const std::vector<int>& data) const = 0;
 
     const std::vector<int>& getData() const;
 

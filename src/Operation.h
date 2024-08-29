@@ -1,25 +1,17 @@
 #pragma once
 
 #include <cmath>
-#include <cstdint>
 #include <map>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
+#include "OperationType.h"
+
 class Operation
 {
 public:
-    enum class OperationType : uint8_t
-    {
-        AVG = 0,
-        MIN,
-        MAX,
-        QUIT,
-        UNKNOWN
-    };
-
     Operation() = delete;
     ~Operation() = delete;
 

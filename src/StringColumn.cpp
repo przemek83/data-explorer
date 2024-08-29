@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "Operation.h"
+
 StringColumn::StringColumn() : Column({}) {}
 
 Column::ColumnType StringColumn::getColumnType() const
@@ -25,7 +27,7 @@ bool StringColumn::addItem(const std::string& item)
 }
 
 std::unordered_map<std::string, int> StringColumn::performOperation(
-    Operation::OperationType operationType, const std::vector<int>& data) const
+    OperationType operationType, const std::vector<int>& data) const
 {
     std::unordered_map<int, int> indirectResults{
         Operation::executeOperation<int>(operationType, getData(), data)};
