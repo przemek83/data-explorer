@@ -112,9 +112,9 @@ bool FileDataLoader::processLine(
     std::stringstream input(line);
     for (int i{0}; i < columnsCount; ++i)
     {
-        std::string entry;
-        std::getline(input, entry, DELIMITER);
-        if (input.fail() || !dataColumns[i]->addDataItem(entry))
+        std::string item;
+        std::getline(input, item, DELIMITER);
+        if (input.fail() || !dataColumns[i]->addDataItem(item))
         {
             std::cerr << "No data, line " << index << ", column " << i << "\n";
             return false;
