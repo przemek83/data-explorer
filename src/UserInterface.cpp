@@ -90,15 +90,13 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
 void UserInterface::printCommandHelp()
 {
     std::stringstream stringStream(std::ios_base::out);
-    stringStream << "Usage:" << std::endl;
-    stringStream << "<operation> <aggregation> <grouping>" << std::endl;
+    stringStream << "Usage:\n";
+    stringStream << "<operation> <aggregation> <grouping>\n";
     stringStream << " operation = {" +
-                        OperationType::getAvailableOperationsAsString("|") + "}"
-                 << std::endl;
+                        OperationType::getAvailableOperationsAsString("|") +
+                        "}\n";
     stringStream << " aggregation = column which will be used for aggreagation "
-                    "(numerical only)"
-                 << std::endl;
-    stringStream << " grouping = column which will be used for grouping"
-                 << std::endl;
+                    "(numerical only)\n";
+    stringStream << " grouping = column which will be used for grouping\n";
     Logger().logMsg(stringStream.str());
 }
