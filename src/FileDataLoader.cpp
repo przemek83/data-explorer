@@ -25,14 +25,10 @@ bool FileDataLoader::loadData(std::vector<std::string>& headers,
     columnTypes = getColumnTypes(line);
 
     if (!initColumns(columnTypes, dataColumns))
-    {
         return false;
-    }
 
     if (!loadData(dataColumns, *stream_))
-    {
         return false;
-    }
 
     return true;
 }

@@ -25,18 +25,18 @@ public:
     Column& operator=(Column&& other) = default;
     Column(Column&& other) = default;
 
-    static std::string getColumnNameForType(Column::ColumnType columnType);
+    static std::string getColumnNameForType(Column::ColumnType type);
 
-    static ColumnType getColumnTypeForName(const std::string& columnName);
+    static ColumnType getColumnTypeForName(const std::string& name);
 
     virtual ColumnType getColumnType() const = 0;
 
-    virtual bool addDataItem(const std::string& dataItem) = 0;
+    virtual bool addDataItem(const std::string& item) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(
         Operation::OperationType operationType,
         const std::vector<int>& data) const = 0;
 
 private:
-    static std::map<ColumnType, std::string> columnTypes_;
+    static std::map<ColumnType, std::string> types_;
 };

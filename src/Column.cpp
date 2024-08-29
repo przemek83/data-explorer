@@ -3,24 +3,23 @@
 #include <algorithm>
 #include <stdexcept>
 
-std::map<Column::ColumnType, std::string> Column::columnTypes_{
+std::map<Column::ColumnType, std::string> Column::types_{
     {Column::ColumnType::INTEGER, "integer"},
     {Column::ColumnType::STRING, "string"}};
 
-std::string Column::getColumnNameForType(Column::ColumnType columnType)
+std::string Column::getColumnNameForType(Column::ColumnType type)
 {
-    return columnTypes_[columnType];
+    return types_[type];
 }
 
-Column::ColumnType Column::getColumnTypeForName(const std::string& columnName)
+Column::ColumnType Column::getColumnTypeForName(const std::string& name)
 {
-    const auto condition{[&name = columnName](const auto& pair)
-                         { return pair.second == name; }};
-    const auto result{
-        std::find_if(columnTypes_.cbegin(), columnTypes_.cend(), condition)};
+    const auto condition{[&columnName = name](const auto& pair)
+                         { return pair.second == columnName; }};
+    const auto result{std::find_if(types_.cbegin(), types_.cend(), condition)};
 
-    if (result == columnTypes_.cend())
-        throw std::logic_error("Unknown column name " + columnName);
+    if (result == types_.cend())
+        throw std::logic_error("Unknown column name " + name);
 
     return result->first;
 };

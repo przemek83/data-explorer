@@ -9,7 +9,7 @@ class StringColumn : public Column
 public:
     ColumnType getColumnType() const override;
 
-    bool addDataItem(const std::string& dataItem) override;
+    bool addDataItem(const std::string& item) override;
 
     const std::vector<unsigned int>& getData() const;
 

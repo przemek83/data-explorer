@@ -7,16 +7,16 @@ Column::ColumnType StringColumn::getColumnType() const
     return Column::ColumnType::STRING;
 }
 
-bool StringColumn::addDataItem(const std::string& dataItem)
+bool StringColumn::addDataItem(const std::string& item)
 {
-    if (auto element{stringToIdMapping_.find(dataItem)};
+    if (auto element{stringToIdMapping_.find(item)};
         element != stringToIdMapping_.end())
     {
         data_.push_back(element->second);
     }
     else
     {
-        stringToIdMapping_[dataItem] = ++currentIndex_;
+        stringToIdMapping_[item] = ++currentIndex_;
         data_.push_back(currentIndex_);
     }
     return true;

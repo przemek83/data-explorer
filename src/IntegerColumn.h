@@ -13,11 +13,11 @@ public:
 
     ColumnType getColumnType() const override;
 
-    inline bool addDataItem(const std::string& dataItem) override
+    inline bool addDataItem(const std::string& item) override
     {
         int value{0};
-        const auto [_, errorCode] = std::from_chars(
-            dataItem.data(), dataItem.data() + dataItem.size(), value);
+        const auto [_, errorCode] =
+            std::from_chars(item.data(), item.data() + item.size(), value);
         if (errorCode == std::errc())
         {
             data_.push_back(value);
@@ -25,9 +25,9 @@ public:
         }
 
         if (errorCode == std::errc::invalid_argument)
-            std::cerr << "Cannot convert to int: " << dataItem << std::endl;
+            std::cerr << "Cannot convert to int: " << item << std::endl;
         if (errorCode == std::errc::result_out_of_range)
-            std::cerr << "Value out of range: " << dataItem << std::endl;
+            std::cerr << "Value out of range: " << item << std::endl;
 
         return false;
     }
