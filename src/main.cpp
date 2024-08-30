@@ -87,7 +87,7 @@ int main(int argc, char* argv[])
             continue;
         }
 
-        if (userQuery.operation_ == operationType::Type::QUIT)
+        if (userQuery.operation_ == operation::Type::QUIT)
         {
             break;
         }

@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "OperationType.h"
+#include "Operation.h"
 
 class Column
 {
@@ -32,7 +32,7 @@ public:
     virtual bool addItem(const std::string& item) = 0;
 
     virtual std::unordered_map<std::string, int> performOperation(
-        operationType::Type type, const std::vector<int>& data) const = 0;
+        operation::Type type, const std::vector<int>& data) const = 0;
 
     const std::vector<int>& getData() const;
 

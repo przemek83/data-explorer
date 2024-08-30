@@ -26,10 +26,10 @@ bool IntegerColumn::addItem(const std::string& item)
 }
 
 std::unordered_map<std::string, int> IntegerColumn::performOperation(
-    operationType::Type type, const std::vector<int>& data) const
+    operation::Type type, const std::vector<int>& data) const
 {
-    const auto [success, results]{
-        Operation<int>::executeOperation(type, getData(), data)};
+    const auto [success,
+                results]{operation::executeOperation(type, getData(), data)};
 
     std::unordered_map<std::string, int> resultsWithStrings;
     for (const auto& [columnId, value] : results)

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "OperationType.h"
+#include "Operation.h"
 
 struct Query
 {
 public:
-    operationType::Type operation_{operationType::Type::UNKNOWN};
+    operation::Type operation_{operation::Type::UNKNOWN};
     std::size_t aggregateId_{0};
     std::size_t groupingId_{0};
 };

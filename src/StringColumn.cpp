@@ -22,10 +22,10 @@ bool StringColumn::addItem(const std::string& item)
 }
 
 std::unordered_map<std::string, int> StringColumn::performOperation(
-    operationType::Type type, const std::vector<int>& data) const
+    operation::Type type, const std::vector<int>& data) const
 {
     const auto [success, indirectResults]{
-        Operation<int>::executeOperation(type, getData(), data)};
+        operation::executeOperation(type, getData(), data)};
 
     std::unordered_map<std::string, int> resultsToReturn;
     for (const auto& [columnId, value] : indirectResults)

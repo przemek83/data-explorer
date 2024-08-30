@@ -6,7 +6,7 @@
 
 #include "Dataset.h"
 #include "Logger.h"
-#include "OperationType.h"
+#include "Operation.h"
 
 UserInterface::UserInterface()
 {
@@ -25,14 +25,14 @@ bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
                                                     Query& query) const
 {
     query.operation_ =
-        operationType::getOperationTypeForString(operationInputString_);
-    if (query.operation_ == operationType::Type::UNKNOWN)
+        operation::getOperationTypeForString(operationInputString_);
+    if (query.operation_ == operation::Type::UNKNOWN)
     {
         Logger().logErr("Operation " + operationInputString_ + " is unknown.");
         return false;
     }
 
-    if (query.operation_ == operationType::Type::QUIT)
+    if (query.operation_ == operation::Type::QUIT)
     {
         return true;
     }
@@ -93,8 +93,7 @@ void UserInterface::printCommandHelp()
     stringStream << "Usage:\n";
     stringStream << "<operation> <aggregation> <grouping>\n";
     stringStream << " operation = {" +
-                        operationType::getAvailableOperationsAsString("|") +
-                        "}\n";
+                        operation::getAvailableOperationsAsString("|") + "}\n";
     stringStream << " aggregation = column which will be used for aggreagation "
                     "(numerical only)\n";
     stringStream << " grouping = column which will be used for grouping\n";

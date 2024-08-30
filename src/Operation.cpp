@@ -1,21 +1,21 @@
-#include "OperationType.h"
+#include "Operation.h"
 
 #include <map>
 
 namespace
 {
-std::map<std::string, operationType::Type> getMapping()
+std::map<std::string, operation::Type> getMapping()
 {
-    return {{"avg", operationType::Type::AVG},
-            {"min", operationType::Type::MIN},
-            {"max", operationType::Type::MAX},
-            {"quit", operationType::Type::QUIT}};
+    return {{"avg", operation::Type::AVG},
+            {"min", operation::Type::MIN},
+            {"max", operation::Type::MAX},
+            {"quit", operation::Type::QUIT}};
 }
 }  // namespace
 
-namespace operationType
+namespace operation
 {
-operationType::Type getOperationTypeForString(
+operation::Type getOperationTypeForString(
     const std::string& operationTypeString)
 {
     const auto mapping{getMapping()};
@@ -24,7 +24,7 @@ operationType::Type getOperationTypeForString(
     if (findResult != mapping.end())
         return findResult->second;
     else
-        return operationType::Type::UNKNOWN;
+        return Type::UNKNOWN;
 }
 
 std::string getAvailableOperationsAsString(const std::string& delimiter)
@@ -39,4 +39,4 @@ std::string getAvailableOperationsAsString(const std::string& delimiter)
 
     return resultString;
 }
-};  // namespace operationType
+};  // namespace operation

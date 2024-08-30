@@ -27,14 +27,13 @@ set(${PROJECT_NAME}_SOURCES
     src/FileDataLoader.h
     src/IntegerColumn.cpp
     src/IntegerColumn.h
+    src/Operation.cpp
     src/Operation.h
     src/Query.h
     src/StringColumn.cpp
     src/StringColumn.h
     src/UserInterface.cpp
     src/UserInterface.h
-    src/OperationType.h
-    src/OperationType.cpp
     src/Logger.h
 )
 
