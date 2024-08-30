@@ -22,18 +22,6 @@ void showHelp()
     Logger().logErr(" file - name of data file.");
 }
 
-std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin,
-                                std::chrono::steady_clock::time_point end)
-{
-    constexpr unsigned int MICROSECONDS_IN_SECOND = 1'000'000;
-    auto diff =
-        std::chrono::duration_cast<std::chrono::microseconds>(end - begin)
-            .count();
-    std::string timeDiffAsString =
-        std::to_string(static_cast<double>(diff) / MICROSECONDS_IN_SECOND);
-    timeDiffAsString += "s";
-    return timeDiffAsString;
-}
 std::pair<bool, Dataset> createDataset(const std::string& fileName)
 {
     Timer<std::chrono::microseconds> timer;
