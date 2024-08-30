@@ -40,7 +40,7 @@ std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin,
         std::chrono::duration_cast<std::chrono::microseconds>(end - begin)
             .count();
     std::string timeDiffAsString =
-        std::to_string(diff * 1.0 / MICROSECONDS_IN_SECOND);
+        std::to_string(static_cast<double>(diff) / MICROSECONDS_IN_SECOND);
     timeDiffAsString += "s";
     return timeDiffAsString;
 }
