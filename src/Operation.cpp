@@ -4,7 +4,7 @@
 
 namespace
 {
-std::map<std::string, operation::Type> getMapping()
+std::map<std::string, operation::Type, std::less<>> getMapping()
 {
     return {{"avg", operation::Type::AVG},
             {"min", operation::Type::MIN},
