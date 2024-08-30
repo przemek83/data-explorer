@@ -37,7 +37,8 @@ private:
             return "ms";
         else if (std::is_same_v<T, std::chrono::microseconds>)
             return "us";
-        return "ns";
+        else
+            return "ns";
     }
 
     const std::string suffix_{getSuffix()};
