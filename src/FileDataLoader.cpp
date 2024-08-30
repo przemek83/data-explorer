@@ -113,13 +113,13 @@ bool FileDataLoader::processLine(
     std::vector<std::unique_ptr<Column>>& dataColumns, const std::string& line,
     int index) const
 {
-    const size_t columnsCount{dataColumns.size()};
+    const std::size_t columnsCount{dataColumns.size()};
     std::stringstream input(line);
-    for (int i{0}; i < columnsCount; ++i)
+    for (std::size_t i{0}; i < columnsCount; ++i)
     {
         std::string item;
         std::getline(input, item, DELIMITER);
-        if (input.fail() || !dataColumns[i]->addItem(item))
+        if (input.fail() || (!dataColumns[i]->addItem(item)))
         {
             Logger().logErr("No data, line " + std::to_string(index) +
                             ", column " + std::to_string(i));
