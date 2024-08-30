@@ -38,7 +38,7 @@ std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin,
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2)
+    if (const int expectedArgsc{2}; argc != expectedArgsc)
     {
         showHelp();
         return EXIT_FAILURE;
