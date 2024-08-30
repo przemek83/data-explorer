@@ -40,7 +40,7 @@ protected:
     void addData(int data);
 
 private:
-    static std::map<ColumnType, std::string> types_;
+    static std::map<ColumnType, std::string> getTypes();
 
     std::vector<int> data_;
 };
