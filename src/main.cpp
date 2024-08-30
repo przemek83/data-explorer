@@ -13,14 +13,16 @@
 #include "Query.h"
 #include "UserInterface.h"
 
-[[noreturn]] static void exitWithHelp()
+namespace
+{
+[[noreturn]] void exitWithHelp()
 {
     Logger().logErr("Usage: <binary> file");
     Logger().logErr(" file - name of data file.");
     exit(EXIT_FAILURE);
 }
 
-static std::string parseArgs(int argc, char* argv[])
+std::string parseArgs(int argc, char* argv[])
 {
     if (argc != 2)
     {
@@ -30,9 +32,8 @@ static std::string parseArgs(int argc, char* argv[])
     return argv[1];
 }
 
-static std::string getTimeDiffAsString(
-    std::chrono::steady_clock::time_point begin,
-    std::chrono::steady_clock::time_point end)
+std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin,
+                                std::chrono::steady_clock::time_point end)
 {
     constexpr unsigned int MICROSECONDS_IN_SECOND = 1'000'000;
     auto diff =
@@ -43,6 +44,7 @@ static std::string getTimeDiffAsString(
     timeDiffAsString += "s";
     return timeDiffAsString;
 }
+};  // namespace
 
 int main(int argc, char* argv[])
 {
