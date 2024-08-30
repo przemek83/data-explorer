@@ -35,6 +35,7 @@ set(${PROJECT_NAME}_SOURCES
     src/UserInterface.cpp
     src/UserInterface.h
     src/Logger.h
+    src/Timer.h
 )
 
 add_library (${PROJECT_NAME}-lib STATIC ${${PROJECT_NAME}_SOURCES})

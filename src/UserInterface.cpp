@@ -96,6 +96,6 @@ void UserInterface::printCommandHelp()
                  << operation::getAvailableOperationsAsString("|") << "}\n";
     stringStream << " aggregation = column which will be used for aggreagation "
                     "(numerical only)\n";
-    stringStream << " grouping = column which will be used for grouping\n";
+    stringStream << " grouping = column which will be used for grouping";
     Logger().logMsg(stringStream.str());
 }
