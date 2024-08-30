@@ -1,5 +1,6 @@
 #include <cassert>
 #include <chrono>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -15,21 +16,10 @@
 
 namespace
 {
-[[noreturn]] void exitWithHelp()
+void showHelp()
 {
     Logger().logErr("Usage: <binary> file");
     Logger().logErr(" file - name of data file.");
-    exit(EXIT_FAILURE);
-}
-
-std::string parseArgs(int argc, char* argv[])
-{
-    if (argc != 2)
-    {
-        exitWithHelp();
-    }
-
-    return argv[1];
 }
 
 std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin,
@@ -48,7 +38,13 @@ std::string getTimeDiffAsString(std::chrono::steady_clock::time_point begin,
 
 int main(int argc, char* argv[])
 {
-    std::string fileName = parseArgs(argc, argv);
+    if (argc != 2)
+    {
+        showHelp();
+        return EXIT_FAILURE;
+    }
+
+    const std::string fileName{argv[1]};
 
     std::chrono::steady_clock::time_point begin =
         std::chrono::steady_clock::now();
