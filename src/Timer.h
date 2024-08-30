@@ -13,7 +13,7 @@ public:
     {
         const std::chrono::time_point end{std::chrono::steady_clock::now()};
         const std::chrono::duration<double> duration{end - start_};
-        const long int executionTime{
+        const auto executionTime{
             std::chrono::duration_cast<T>(duration).count()};
         Logger().logMsg("Execution time: " + std::to_string(executionTime) +
                         suffix_);
