@@ -10,6 +10,9 @@ set(${PROJECT_TEST}_SOURCES
     FileDataLoaderTest.cpp
     DatasetTest.cpp
     OperationTest.cpp
+    UserInterfaceTest.cpp
+    FakeLoader.cpp
+    FakeLoader.h
 )
 
 add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})

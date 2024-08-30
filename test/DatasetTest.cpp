@@ -1,5 +1,4 @@
 #include <memory>
-#include <stdexcept>
 
 #include <gtest/gtest.h>
 
@@ -9,45 +8,10 @@
 #include <src/IntegerColumn.h>
 #include <src/StringColumn.h>
 
+#include "FakeLoader.h"
+
 namespace
 {
-class FakeLoader : public DataLoader
-{
-public:
-    bool loadData(std::vector<std::string>& headers,
-                  std::vector<Column::ColumnType>& columnTypes,
-                  std::vector<std::unique_ptr<Column>>& dataColumns) override
-    {
-        if (!loadDataResult_)
-            return false;
-
-        headers = {"h1", "h2", "h3"};
-        columnTypes = {Column::ColumnType::INTEGER, Column::ColumnType::INTEGER,
-                       Column::ColumnType::STRING};
-
-        dataColumns.push_back(std::make_unique<IntegerColumn>(
-            std::vector<int>{1, 2, 3, 11, 12, 13}));
-        dataColumns.push_back(std::make_unique<IntegerColumn>(
-            std::vector<int>{4, 5, 6, 14, 15, 16}));
-
-        auto stringColumn{std::make_unique<StringColumn>()};
-        stringColumn->addItem("Entry1");
-        stringColumn->addItem("Entry2");
-        stringColumn->addItem("Entry3");
-        stringColumn->addItem("Entry1");
-        stringColumn->addItem("Entry2");
-        stringColumn->addItem("Entry3");
-        dataColumns.push_back(std::move(stringColumn));
-
-        return true;
-    }
-
-    void setLoadDataResult(bool result) { loadDataResult_ = result; }
-
-private:
-    bool loadDataResult_{true};
-};
-
 void testResults(Query query, std::vector<int> expected)
 {
     Dataset dataset(std::make_unique<FakeLoader>());
