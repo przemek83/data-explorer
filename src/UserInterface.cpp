@@ -65,20 +65,20 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
         columnsValid = false;
     }
 
-    if (columnsValid && !dataset.isColumnNameValid(aggregateColumn))
+    if (columnsValid && (!dataset.isColumnNameValid(aggregateColumn)))
     {
         Logger().logErr("Column " + aggregateColumn + " not valid");
         columnsValid = false;
     }
 
-    if (columnsValid && !dataset.isColumnNameValid(groupingColumn))
+    if (columnsValid && (!dataset.isColumnNameValid(groupingColumn)))
     {
         Logger().logErr("Column " + groupingColumn + " not valid");
         columnsValid = false;
     }
 
     if (columnsValid &&
-        !dataset.isColumnCanBeUsedForAggregation(aggregateColumn))
+        (!dataset.isColumnCanBeUsedForAggregation(aggregateColumn)))
     {
         Logger().logErr("Cannot aggregate using column " + aggregateColumn);
         columnsValid = false;
