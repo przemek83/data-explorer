@@ -8,12 +8,9 @@
 #include "Logger.h"
 #include "Operation.h"
 
-UserInterface::UserInterface()
+UserInterface::UserInterface(const std::string& input)
 {
-    std::string inputLine;
-    getline(std::cin, inputLine);
-
-    std::istringstream iss(inputLine);
+    std::istringstream iss(input);
 
     iss >> operationInputString_ >> aggregateColumnInputString_ >>
         groupingColumnInputString_;

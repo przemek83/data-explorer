@@ -9,7 +9,7 @@ class Dataset;
 class UserInterface
 {
 public:
-    UserInterface();
+    explicit UserInterface(const std::string& input);
     virtual ~UserInterface() = default;
 
     UserInterface& operator=(const UserInterface& other) = delete;

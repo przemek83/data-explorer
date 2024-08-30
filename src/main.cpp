@@ -66,7 +66,9 @@ int main(int argc, char* argv[])
     while (true)
     {
         Logger().logMsg({});
-        UserInterface userInterface;
+        std::string inputLine;
+        getline(std::cin, inputLine);
+        UserInterface userInterface(inputLine);
         Query userQuery;
         if (!userInterface.getValidatedUserQueryForDataset(dataset, userQuery))
             continue;
