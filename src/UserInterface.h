@@ -18,8 +18,7 @@ public:
     UserInterface& operator=(UserInterface&& other) = default;
     UserInterface(UserInterface&& other) = default;
 
-    bool getValidatedUserQueryForDataset(const Dataset& dataset,
-                                         Query& query) const;
+    bool validateQuery(const Dataset& dataset, Query& query) const;
 
     static void printCommandHelp();
 

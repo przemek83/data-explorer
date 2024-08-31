@@ -68,9 +68,9 @@ int main(int argc, char* argv[])
         Logger().logMsg({});
         std::string inputLine;
         getline(std::cin, inputLine);
-        UserInterface userInterface(inputLine);
+        UserInterface ui{inputLine};
         Query userQuery;
-        if (!userInterface.getValidatedUserQueryForDataset(dataset, userQuery))
+        if (!ui.validateQuery(dataset, userQuery))
             continue;
 
         if (userQuery.operation_ == operation::Type::QUIT)

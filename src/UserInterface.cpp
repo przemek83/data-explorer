@@ -18,8 +18,7 @@ UserInterface::UserInterface(const std::string& input)
                    operationInputString_.begin(), ::tolower);
 }
 
-bool UserInterface::getValidatedUserQueryForDataset(const Dataset& dataset,
-                                                    Query& query) const
+bool UserInterface::validateQuery(const Dataset& dataset, Query& query) const
 {
     query.operation_ =
         operation::getOperationTypeForString(operationInputString_);
