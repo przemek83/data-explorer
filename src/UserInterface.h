@@ -21,11 +21,11 @@ public:
     bool validateQuery(const Dataset& dataset, Query& query) const;
 
 private:
-    bool areColumnsValid(const std::string& aggregateColumn,
-                         const std::string& groupingColumn,
-                         const Dataset& dataset) const;
+    bool areColumnsValid(const Dataset& dataset) const;
 
-    std::string operationInputString_{};
-    std::string aggregateColumnInputString_{};
-    std::string groupingColumnInputString_{};
+    bool isOperationValid(operation::Type type) const;
+
+    std::string operationInputString_;
+    std::string aggregateColumnInputString_;
+    std::string groupingColumnInputString_;
 };

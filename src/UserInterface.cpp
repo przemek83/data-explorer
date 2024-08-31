@@ -21,22 +21,12 @@ bool UserInterface::validateQuery(const Dataset& dataset, Query& query) const
 {
     query.operation_ =
         operation::getOperationTypeForString(operationInputString_);
-    if (query.operation_ == operation::Type::UNKNOWN)
-    {
-        Logger().logErr("Operation " + operationInputString_ + " is unknown.");
-        return false;
-    }
 
     if (query.operation_ == operation::Type::QUIT)
-    {
         return true;
-    }
 
-    if (!areColumnsValid(aggregateColumnInputString_,
-                         groupingColumnInputString_, dataset))
-    {
+    if ((!isOperationValid(query.operation_)) || (!areColumnsValid(dataset)))
         return false;
-    }
 
     query.aggregateId_ = dataset.getColumnId(aggregateColumnInputString_);
     query.groupingId_ = dataset.getColumnId(groupingColumnInputString_);
@@ -48,36 +38,47 @@ bool UserInterface::validateQuery(const Dataset& dataset, Query& query) const
     return true;
 }
 
-bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
-                                    const std::string& groupingColumn,
-                                    const Dataset& dataset) const
+bool UserInterface::areColumnsValid(const Dataset& dataset) const
 {
+    const std::string& aggregate{aggregateColumnInputString_};
+    const std::string& grouping{groupingColumnInputString_};
+
     bool columnsValid = true;
 
-    if (aggregateColumn == groupingColumn)
+    if (aggregate == grouping)
     {
         Logger().logErr("Cannot use same column for aggregation and grouping.");
         columnsValid = false;
     }
 
-    if (columnsValid && (!dataset.isColumnNameValid(aggregateColumn)))
+    if (columnsValid && (!dataset.isColumnNameValid(aggregate)))
     {
-        Logger().logErr("Column " + aggregateColumn + " not valid");
+        Logger().logErr("Column " + aggregate + " not valid");
         columnsValid = false;
     }
 
-    if (columnsValid && (!dataset.isColumnNameValid(groupingColumn)))
+    if (columnsValid && (!dataset.isColumnNameValid(grouping)))
     {
-        Logger().logErr("Column " + groupingColumn + " not valid");
+        Logger().logErr("Column " + grouping + " not valid");
         columnsValid = false;
     }
 
-    if (columnsValid &&
-        (!dataset.isColumnCanBeUsedForAggregation(aggregateColumn)))
+    if (columnsValid && (!dataset.isColumnCanBeUsedForAggregation(aggregate)))
     {
-        Logger().logErr("Cannot aggregate using column " + aggregateColumn);
+        Logger().logErr("Cannot aggregate using column " + aggregate);
         columnsValid = false;
     }
 
     return columnsValid;
+}
+
+bool UserInterface::isOperationValid(operation::Type type) const
+{
+    if (type == operation::Type::UNKNOWN)
+    {
+        Logger().logErr("Operation " + operationInputString_ + " is unknown.");
+        return false;
+    }
+
+    return true;
 }
