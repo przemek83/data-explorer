@@ -2,6 +2,8 @@
 
 #include <src/Operation.h>
 
+#include "StdStreamEater.h"
+
 TEST(OperationTest, GetoperationTypeForString)
 {
     EXPECT_EQ(operation::getOperationTypeForString("avg"),
@@ -66,6 +68,7 @@ TEST(OperationTest, ExecuteOperationMax)
 
 TEST(OperationTest, ExecuteOperationUnknown)
 {
+    StdStreamEater eater(std::cerr);
     std::vector<std::string> groupingData{
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};

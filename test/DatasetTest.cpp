@@ -9,6 +9,7 @@
 #include <src/StringColumn.h>
 
 #include "FakeLoader.h"
+#include "StdStreamEater.h"
 
 namespace
 {
@@ -102,6 +103,7 @@ TEST(DatasetTest, ExecuteQueryAvg)
 
 TEST(DatasetTest, ExecuteQueryUnknownOperation)
 {
+    StdStreamEater eater(std::cerr);
     Dataset dataset(std::make_unique<FakeLoader>());
     dataset.init();
 

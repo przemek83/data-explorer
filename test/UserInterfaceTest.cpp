@@ -1,77 +1,69 @@
+#include <memory>
+
 #include <gtest/gtest.h>
 
 #include <src/Dataset.h>
 #include <src/UserInterface.h>
-#include <memory>
 
 #include "FakeLoader.h"
+#include "StdStreamEater.h"
 
-TEST(UserInterface, GetQueryOperationUnknown)
+namespace
 {
-    UserInterface userInterface("wrong h1 h2");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
+class UserInterfaceTest : public ::testing::Test
+{
+protected:
+    void SetUp() override
+    {
+        dataset_ = std::make_unique<Dataset>(std::make_unique<FakeLoader>());
+        dataset_->init();
+    }
 
-    Query query;
-    EXPECT_FALSE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    std::unique_ptr<Dataset> dataset_;
+    Query query_;
+    StdStreamEater eaterCerr_{std::cerr};
+    StdStreamEater eaterCout_{std::cout};
+};
+};  // namespace
+
+TEST_F(UserInterfaceTest, GetQueryOperationUnknown)
+{
+    UserInterface ui("wrong h1 h2");
+    EXPECT_FALSE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }
 
-TEST(UserInterface, GetQueryOperationQuit)
+TEST_F(UserInterfaceTest, GetQueryOperationQuit)
 {
-    UserInterface userInterface("quit");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
-
-    Query query;
-    EXPECT_TRUE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    UserInterface ui("quit");
+    EXPECT_TRUE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }
 
-TEST(UserInterface, GetQueryOperationCorrectInput)
+TEST_F(UserInterfaceTest, GetQueryOperationCorrectInput)
 {
-    UserInterface userInterface("max h1 h2");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
-
-    Query query;
-    EXPECT_TRUE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    UserInterface ui("max h1 h2");
+    EXPECT_TRUE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }
 
-TEST(UserInterface, GetQueryOperationSameColumn)
+TEST_F(UserInterfaceTest, GetQueryOperationSameColumn)
 {
-    UserInterface userInterface("max h1 h1");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
-
-    Query query;
-    EXPECT_FALSE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    UserInterface ui("max h1 h1");
+    EXPECT_FALSE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }
 
-TEST(UserInterface, GetQueryOperationWrongAggregating)
+TEST_F(UserInterfaceTest, GetQueryOperationWrongAggregating)
 {
-    UserInterface userInterface("max wrong h1");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
-
-    Query query;
-    EXPECT_FALSE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    UserInterface ui("max wrong h1");
+    EXPECT_FALSE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }
 
-TEST(UserInterface, GetQueryOperationWrongGrouping)
+TEST_F(UserInterfaceTest, GetQueryOperationWrongGrouping)
 {
-    UserInterface userInterface("max h1 wrong");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
-
-    Query query;
-    EXPECT_FALSE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    UserInterface ui("max h1 wrong");
+    EXPECT_FALSE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }
 
-TEST(UserInterface, GetQueryOperationWrongAggregatingColumn)
+TEST_F(UserInterfaceTest, GetQueryOperationWrongAggregatingColumn)
 {
-    UserInterface userInterface("max h3 h2");
-    Dataset dataset{std::make_unique<FakeLoader>()};
-    dataset.init();
-
-    Query query;
-    EXPECT_FALSE(userInterface.getValidatedUserQueryForDataset(dataset, query));
+    UserInterface ui("max h3 h2");
+    EXPECT_FALSE(ui.getValidatedUserQueryForDataset(*dataset_, query_));
 }

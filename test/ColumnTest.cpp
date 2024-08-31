@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 
 #include <src/Column.h>
+#include <iostream>
+
+#include "StdStreamEater.h"
 
 TEST(ColumnTest, GetColumnTypeForName)
 {
@@ -18,6 +21,7 @@ TEST(ColumnTest, GetColumnTypeForName)
 
 TEST(ColumnTest, GetColumnTypeForNameInvalid)
 {
+    StdStreamEater eater(std::cout);
     const auto [success, tape]{Column::getColumnType("invalid")};
     EXPECT_FALSE(success);
 }
