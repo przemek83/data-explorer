@@ -1,6 +1,7 @@
 #include "UserInterface.h"
 
 #include <algorithm>
+#include <cctype>
 #include <sstream>
 
 #include "Dataset.h"
@@ -13,7 +14,7 @@ UserInterface::UserInterface(const std::string& input)
 
     iss >> operation_ >> aggregate_ >> grouping_;
     std::transform(operation_.begin(), operation_.end(), operation_.begin(),
-                   ::tolower);
+                   ::toupper);
 }
 
 bool UserInterface::validateQuery(const Dataset& dataset, Query& query) const

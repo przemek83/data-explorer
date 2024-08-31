@@ -1,15 +1,17 @@
 #include "Operation.h"
 
+#include <algorithm>
+#include <cctype>
 #include <map>
 
 namespace
 {
 std::map<std::string, operation::Type, std::less<>> getMapping()
 {
-    return {{"avg", operation::Type::AVG},
-            {"min", operation::Type::MIN},
-            {"max", operation::Type::MAX},
-            {"quit", operation::Type::QUIT}};
+    return {{"AVG", operation::Type::AVG},
+            {"MIN", operation::Type::MIN},
+            {"MAX", operation::Type::MAX},
+            {"QUIT", operation::Type::QUIT}};
 }
 }  // namespace
 
@@ -29,14 +31,16 @@ operation::Type getOperationTypeForString(
 
 std::string getAvailableOperationsAsString(const std::string& delimiter)
 {
-    std::string resultString;
+    std::string result;
     for (const auto& [stringPart, _] : getMapping())
     {
-        resultString += stringPart;
-        resultString += delimiter;
+        result += stringPart;
+        result += delimiter;
     }
-    resultString.pop_back();
+    result.pop_back();
 
-    return resultString;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+
+    return result;
 }
 };  // namespace operation

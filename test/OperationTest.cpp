@@ -6,15 +6,15 @@
 
 TEST(OperationTest, GetoperationTypeForString)
 {
-    EXPECT_EQ(operation::getOperationTypeForString("avg"),
+    EXPECT_EQ(operation::getOperationTypeForString("AVG"),
               operation::Type::AVG);
-    EXPECT_EQ(operation::getOperationTypeForString("min"),
+    EXPECT_EQ(operation::getOperationTypeForString("MIN"),
               operation::Type::MIN);
-    EXPECT_EQ(operation::getOperationTypeForString("max"),
+    EXPECT_EQ(operation::getOperationTypeForString("MAX"),
               operation::Type::MAX);
-    EXPECT_EQ(operation::getOperationTypeForString("quit"),
+    EXPECT_EQ(operation::getOperationTypeForString("QUIT"),
               operation::Type::QUIT);
-    EXPECT_EQ(operation::getOperationTypeForString("unknown"),
+    EXPECT_EQ(operation::getOperationTypeForString("UNKNOWN"),
               operation::Type::UNKNOWN);
 }
 
