@@ -25,7 +25,7 @@ private:
 
     bool isOperationValid(operation::Type type) const;
 
-    std::string operationInputString_;
-    std::string aggregateColumnInputString_;
-    std::string groupingColumnInputString_;
+    std::string operation_;
+    std::string aggregate_;
+    std::string grouping_;
 };
