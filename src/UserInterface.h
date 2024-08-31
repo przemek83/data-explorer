@@ -20,8 +20,6 @@ public:
 
     bool validateQuery(const Dataset& dataset, Query& query) const;
 
-    static void printCommandHelp();
-
 private:
     bool areColumnsValid(const std::string& aggregateColumn,
                          const std::string& groupingColumn,

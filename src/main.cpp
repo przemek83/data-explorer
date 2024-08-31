@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <unordered_map>
 
@@ -46,6 +47,19 @@ std::pair<bool, Dataset> createDataset(const std::string& fileName)
 
     return {true, std::move(dataset)};
 }
+
+void printCommandHelp()
+{
+    std::stringstream stringStream(std::ios_base::out);
+    stringStream << "Usage:\n";
+    stringStream << "<operation> <aggregation> <grouping>\n";
+    stringStream << " operation = {"
+                 << operation::getAvailableOperationsAsString("|") << "}\n";
+    stringStream << " aggregation = column which will be used for aggreagation "
+                    "(numerical only)\n";
+    stringStream << " grouping = column which will be used for grouping";
+    Logger().logMsg(stringStream.str());
+}
 };  // namespace
 
 int main(int argc, char* argv[])
@@ -61,7 +75,7 @@ int main(int argc, char* argv[])
     if (!success)
         return EXIT_FAILURE;
 
-    UserInterface::printCommandHelp();
+    printCommandHelp();
 
     while (true)
     {

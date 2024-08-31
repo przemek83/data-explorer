@@ -1,7 +1,6 @@
 #include "UserInterface.h"
 
 #include <algorithm>
-#include <iostream>
 #include <sstream>
 
 #include "Dataset.h"
@@ -81,17 +80,4 @@ bool UserInterface::areColumnsValid(const std::string& aggregateColumn,
     }
 
     return columnsValid;
-}
-
-void UserInterface::printCommandHelp()
-{
-    std::stringstream stringStream(std::ios_base::out);
-    stringStream << "Usage:\n";
-    stringStream << "<operation> <aggregation> <grouping>\n";
-    stringStream << " operation = {"
-                 << operation::getAvailableOperationsAsString("|") << "}\n";
-    stringStream << " aggregation = column which will be used for aggreagation "
-                    "(numerical only)\n";
-    stringStream << " grouping = column which will be used for grouping";
-    Logger().logMsg(stringStream.str());
 }
