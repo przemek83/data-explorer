@@ -16,7 +16,7 @@ set(${PROJECT_TEST}_SOURCES
 )
 
 add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})
-target_link_libraries(${PROJECT_TEST} PRIVATE GTest::gtest_main ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_TEST} PRIVATE GTest::gtest_main cpputils ${PROJECT_NAME}-lib)
 
 include(CTest)
 include(GoogleTest)
