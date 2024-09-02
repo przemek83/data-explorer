@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
             dataset.executeQuery(userQuery)};
 
         for (const auto& [key, value] : results)
-            Logger().logMsg(key + std::to_string(value));
+            Logger().logMsg(key + " " + std::to_string(value));
     }
 
     return EXIT_SUCCESS;
