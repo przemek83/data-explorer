@@ -4,8 +4,9 @@
 #include <cctype>
 #include <sstream>
 
+#include <cpputils/Logger.h>
+
 #include "Dataset.h"
-#include "Logger.h"
 #include "Operation.h"
 
 UserInterface::UserInterface(const std::string& input)

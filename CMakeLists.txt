@@ -17,6 +17,8 @@ if(CODE_COVERAGE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 --coverage")
 endif()
 
+include(CMakeLists.txt.cpputils)
+
 set(${PROJECT_NAME}_SOURCES
     src/Column.cpp
     src/Column.h
@@ -34,12 +36,10 @@ set(${PROJECT_NAME}_SOURCES
     src/StringColumn.h
     src/UserInterface.cpp
     src/UserInterface.h
-    src/Logger.h
-    src/Timer.h
 )
 
 add_library (${PROJECT_NAME}-lib STATIC ${${PROJECT_NAME}_SOURCES})
-target_link_libraries(${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-lib cpputils)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)

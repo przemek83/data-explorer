@@ -1,12 +1,12 @@
 #include <memory>
 
+#include <cpputils/StreamEater.h>
 #include <gtest/gtest.h>
 
 #include <src/Dataset.h>
 #include <src/UserInterface.h>
 
 #include "FakeLoader.h"
-#include "StdStreamEater.h"
 
 namespace
 {
@@ -21,8 +21,8 @@ protected:
 
     std::unique_ptr<Dataset> dataset_;
     Query query_;
-    StdStreamEater eaterCerr_{std::cerr};
-    StdStreamEater eaterCout_{std::cout};
+    StreamEater eaterCerr_{std::cerr};
+    StreamEater eaterCout_{std::cout};
 };
 };  // namespace
 

@@ -1,0 +1,9 @@
+include(FetchContent)
+
+FetchContent_Declare(
+    cpputils
+    GIT_REPOSITORY https://github.com/przemek83/cpputils.git
+    GIT_TAG origin/main
+)
+
+FetchContent_MakeAvailable(cpputils)

@@ -3,13 +3,12 @@
 #include <sstream>
 #include <tuple>
 
+#include <cpputils/StreamEater.h>
 #include <gtest/gtest.h>
 
 #include <src/FileDataLoader.h>
 #include <src/IntegerColumn.h>
 #include <src/StringColumn.h>
-
-#include "StdStreamEater.h"
 
 namespace
 {
@@ -53,7 +52,7 @@ TEST(FileDataLoader, LoadDataSuccess)
 
 TEST(FileDataLoader, LoadDataCorruptedTooMuchEntries)
 {
-    StdStreamEater eater(std::cerr);
+    StreamEater eater(std::cerr);
     std::string data{"header1;header2\ninteger;string\n1;hello;f"};
     FileDataLoader loader{std::make_unique<std::istringstream>(data)};
 
@@ -68,7 +67,7 @@ TEST(FileDataLoader, LoadDataCorruptedTooMuchEntries)
 
 TEST(FileDataLoader, LoadDataCorruptedTooLittleEntries)
 {
-    StdStreamEater eater(std::cerr);
+    StreamEater eater(std::cerr);
     std::string data{"header1;header2\ninteger;string\n1"};
     FileDataLoader loader{std::make_unique<std::istringstream>(data)};
 

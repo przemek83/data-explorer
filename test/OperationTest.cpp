@@ -1,8 +1,7 @@
+#include <cpputils/StreamEater.h>
 #include <gtest/gtest.h>
 
 #include <src/Operation.h>
-
-#include "StdStreamEater.h"
 
 TEST(OperationTest, GetoperationTypeForString)
 {
@@ -68,7 +67,7 @@ TEST(OperationTest, ExecuteOperationMax)
 
 TEST(OperationTest, ExecuteOperationUnknown)
 {
-    StdStreamEater eater(std::cerr);
+    StreamEater eater(std::cerr);
     std::vector<std::string> groupingData{
         {"group1", "group1", "group2", "group2"}};
     std::vector<int> aggregateData{{1, 2, 3, 4}};

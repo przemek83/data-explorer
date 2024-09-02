@@ -13,8 +13,6 @@ set(${PROJECT_TEST}_SOURCES
     UserInterfaceTest.cpp
     FakeLoader.cpp
     FakeLoader.h
-    StdStreamEater.h
-    StdStreamEater.cpp
 )
 
 add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})

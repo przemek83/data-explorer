@@ -8,11 +8,12 @@
 #include <string>
 #include <unordered_map>
 
+#include <cpputils/Logger.h>
+#include <cpputils/Timer.h>
+
 #include "Dataset.h"
 #include "FileDataLoader.h"
-#include "Logger.h"
 #include "Query.h"
-#include "Timer.h"
 #include "UserInterface.h"
 
 namespace

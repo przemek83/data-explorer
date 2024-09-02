@@ -5,9 +5,10 @@
 #include <sstream>
 #include <string>
 
+#include <cpputils/Logger.h>
+
 #include "Column.h"
 #include "IntegerColumn.h"
-#include "Logger.h"
 #include "StringColumn.h"
 
 FileDataLoader::FileDataLoader(std::unique_ptr<std::istream> stream)

@@ -3,7 +3,8 @@
 #include <charconv>
 #include <string>
 
-#include "Logger.h"
+#include <cpputils/Logger.h>
+
 #include "Operation.h"
 
 bool IntegerColumn::addItem(const std::string& item)

@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "Logger.h"
+#include <cpputils/Logger.h>
 
 Column::Column(std::vector<int> data) : data_{std::move(data)} {}
 
