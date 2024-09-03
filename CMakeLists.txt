@@ -42,7 +42,7 @@ add_library (${PROJECT_NAME}-lib STATIC ${${PROJECT_NAME}_SOURCES})
 target_link_libraries(${PROJECT_NAME}-lib cpputils)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib cpputils)
 
 enable_testing()
 Include(Tests.cmake)
