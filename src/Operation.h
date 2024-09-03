@@ -106,8 +106,8 @@ std::pair<bool, std::unordered_map<T, int>> executeOperation(
 
         default:
         {
-            Logger().logErr("Unknown Operation Type " +
-                            std::to_string(static_cast<int>(type)));
+            Log().error("Unknown Operation Type " +
+                        std::to_string(static_cast<int>(type)));
             return {false, {}};
         }
     }

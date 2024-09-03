@@ -17,7 +17,7 @@ std::pair<bool, Column::ColumnType> Column::getColumnType(
         it != types.cend())
         return {true, it->first};
 
-    Logger().logMsg("Cannot find column " + name);
+    Log().info("Cannot find column " + name);
 
     return {false, {}};
 };

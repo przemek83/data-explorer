@@ -122,8 +122,8 @@ bool FileDataLoader::processLine(
         std::getline(input, item, DELIMITER);
         if (input.fail() || (!dataColumns[i]->addItem(item)))
         {
-            Logger().logErr("No data, line " + std::to_string(index) +
-                            ", column " + std::to_string(i));
+            Log().error("No data, line " + std::to_string(index) + ", column " +
+                        std::to_string(i));
 
             return false;
         }
@@ -131,8 +131,8 @@ bool FileDataLoader::processLine(
 
     if (!input.eof())
     {
-        Logger().logErr("More data entries than expected, line " +
-                        std::to_string(index));
+        Log().error("More data entries than expected, line " +
+                    std::to_string(index));
         return false;
     }
 

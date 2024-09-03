@@ -20,20 +20,20 @@ namespace
 {
 void showHelp()
 {
-    Logger().logErr("Usage: <binary> file");
-    Logger().logErr(" file - name of data file.");
+    Log().error("Usage: <binary> file");
+    Log().error(" file - name of data file.");
 }
 
 std::pair<bool, Dataset> createDataset(const std::string& fileName)
 {
     Timer timer{Timer::Duration::MICROSECONDS};
-    Logger().logMsg("Loading data");
+    Log().info("Loading data");
 
     std::unique_ptr<std::istream> inFile =
         std::make_unique<std::ifstream>(fileName);
     if (!inFile->good())
     {
-        Logger().logErr("Cannot open " + fileName + " file, exiting.");
+        Log().error("Cannot open " + fileName + " file, exiting.");
         return {false, Dataset{nullptr}};
     }
 
@@ -42,7 +42,7 @@ std::pair<bool, Dataset> createDataset(const std::string& fileName)
 
     if (!dataset.init())
     {
-        Logger().logErr("Cannot load data, exiting.");
+        Log().error("Cannot load data, exiting.");
         return {false, Dataset{nullptr}};
     }
 
@@ -59,7 +59,7 @@ void printCommandHelp()
     stringStream << " aggregation = column which will be used for aggreagation "
                     "(numerical only)\n";
     stringStream << " grouping = column which will be used for grouping";
-    Logger().logMsg(stringStream.str());
+    Log().info(stringStream.str());
 }
 };  // namespace
 
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
 
     while (true)
     {
-        Logger().logMsg({});
+        Log().info({});
         std::string inputLine;
         getline(std::cin, inputLine);
         UserInterface ui{inputLine};
@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
             dataset.executeQuery(userQuery)};
 
         for (const auto& [key, value] : results)
-            Logger().logMsg(key + " " + std::to_string(value));
+            Log().info(key + " " + std::to_string(value));
     }
 
     return EXIT_SUCCESS;

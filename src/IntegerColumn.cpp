@@ -19,9 +19,9 @@ bool IntegerColumn::addItem(const std::string& item)
     }
 
     if (errorCode == std::errc::invalid_argument)
-        Logger().logErr("Cannot convert to int: " + item);
+        Log().error("Cannot convert to int: " + item);
     if (errorCode == std::errc::result_out_of_range)
-        Logger().logErr("Value out of range: " + item);
+        Log().error("Value out of range: " + item);
 
     return false;
 }

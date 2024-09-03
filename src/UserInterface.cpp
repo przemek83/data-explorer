@@ -31,8 +31,8 @@ bool UserInterface::validateQuery(const Dataset& dataset, Query& query) const
     query.aggregateId_ = dataset.getColumnId(aggregate_);
     query.groupingId_ = dataset.getColumnId(grouping_);
 
-    Logger().logMsg("Execute: " + operation_ + " " + aggregate_ +
-                    " GROUPED BY " + grouping_);
+    Log().info("Execute: " + operation_ + " " + aggregate_ + " GROUPED BY " +
+               grouping_);
 
     return true;
 }
@@ -43,25 +43,25 @@ bool UserInterface::areColumnsValid(const Dataset& dataset) const
 
     if (aggregate_ == grouping_)
     {
-        Logger().logErr("Cannot use same column for aggregation and grouping.");
+        Log().error("Cannot use same column for aggregation and grouping.");
         columnsValid = false;
     }
 
     if (columnsValid && (!dataset.isColumnNameValid(aggregate_)))
     {
-        Logger().logErr("Column " + aggregate_ + " not valid");
+        Log().error("Column " + aggregate_ + " not valid");
         columnsValid = false;
     }
 
     if (columnsValid && (!dataset.isColumnNameValid(grouping_)))
     {
-        Logger().logErr("Column " + grouping_ + " not valid");
+        Log().error("Column " + grouping_ + " not valid");
         columnsValid = false;
     }
 
     if (columnsValid && (!dataset.isColumnCanBeUsedForAggregation(aggregate_)))
     {
-        Logger().logErr("Cannot aggregate using column " + aggregate_);
+        Log().error("Cannot aggregate using column " + aggregate_);
         columnsValid = false;
     }
 
@@ -72,7 +72,7 @@ bool UserInterface::isOperationValid(operation::Type type) const
 {
     if (type == operation::Type::UNKNOWN)
     {
-        Logger().logErr("Operation " + operation_ + " is unknown.");
+        Log().error("Operation " + operation_ + " is unknown.");
         return false;
     }
 
