@@ -26,7 +26,7 @@ void showHelp()
 
 std::pair<bool, Dataset> createDataset(const std::string& fileName)
 {
-    Timer<std::chrono::microseconds> timer;
+    Timer timer{Timer::Duration::MICROSECONDS};
     Logger().logMsg("Loading data");
 
     std::unique_ptr<std::istream> inFile =
@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
         if (userQuery.operation_ == operation::Type::QUIT)
             return EXIT_SUCCESS;
 
-        Timer<std::chrono::microseconds> timer;
+        Timer timer{Timer::Duration::MICROSECONDS};
         std::unordered_map<std::string, int> results{
             dataset.executeQuery(userQuery)};
 
