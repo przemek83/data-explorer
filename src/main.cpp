@@ -58,6 +58,7 @@ void printCommandHelp()
                     "(numerical only)\n";
     stringStream << " grouping = column which will be used for grouping";
     Log().info(stringStream.str());
+    Log().info({});
 }
 
 std::unordered_map<std::string, int> execute(const Dataset& dataset,
@@ -69,6 +70,7 @@ std::unordered_map<std::string, int> execute(const Dataset& dataset,
 
 void printResults(const std::unordered_map<std::string, int>& results)
 {
+    Log().info("Results:");
     for (const auto& [key, value] : results)
         Log().info(key + " " + std::to_string(value));
     Log().info({});
