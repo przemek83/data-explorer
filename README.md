@@ -25,7 +25,7 @@ Clone and use CMake with GCC/Clang/MSVC to compile the project and tests from an
 | GCC | 13.1.0 | 13.2.0 |
 | CMake | 3.30.2 | 3.28.3 |
 | Git | 2.46.0 | 2.43.0 |
-| cpputils | ? | ? |
+| cpputils | 1.0.0 | 1.0.0 |
 
 # Usage:  
 ## Launching:  
