@@ -9,7 +9,7 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=przemek83_data-explorer&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=przemek83_data-explorer)
 
 # About
-Data Explorer is a tool for performing various operations on datasets. It supports operations like aggregation (average, minumum, maximum) and grouping, providing a simple interface for querying data.
+Data Explorer is a tool for performing various operations on datasets. It supports operations like aggregation (average, minimum, and maximum) and grouping, providing a simple interface for querying data.
 
 
 # Building:  
@@ -29,22 +29,22 @@ Clone and use CMake with GCC/Clang/MSVC to compile the project and tests from an
 
 # Usage:  
 ## Launching:  
-Launch binary and pass single param being file name containing data: 
+Launch the binary and pass a single parameter, which is the file name containing data: 
 ```shell
 $ data-explorer sample.txt
 ```
 ## Interface
-Application expects series of commands as text lines. Each line should have following structure:
+Application expects a series of commands as text lines. Each line should have the following structure:
 ```
 <operation> <aggregation column> <grouping column>  
 ```
 where:
-- `operation` is an aggregation functions of one of types:
+- `operation` is an aggregation function of one of the following types:
     - `avg`: calculates the average of a set of values.
     - `min`: finds the minimum value in a set of values.
     - `max`: finds the maximum value in a set of values.
-- `aggregation column` is numerical data column using which aggregation will be done.
-- `grouping column` is column used for grouping results.
+- `aggregation column` is a numerical data column using which aggregation will be done.
+- `grouping column` is a column used for grouping results.
 
 
 Usage Example:  
@@ -71,7 +71,7 @@ The project uses the following open-source software:
 | cpputils | MIT | https://github.com/przemek83/cpputils| collection of C++ utility classes |
 
 # Testing
-For testing purposes `gtest` framework is used. Build the project first. Make sure that the `data-explorer-test` target is built. Modern IDEs supporting CMake also support running tests with monitoring of failures. But in case you would like to run it manually, go to the `build/tests` directory, where the⁣ binary `data-explorer-test` should be available. Launching it should produce the following output on Linux:
+For testing purposes, `gtest` framework is used. Build the project first. Make sure that the `data-explorer-test` target is built. Modern IDEs supporting CMake also support running tests with monitoring of failures. But in case you would like to run it manually, go to the `build/tests` directory, where the⁣ binary `data-explorer-test` should be available. Launching it should produce the following output on Linux:
     
     $ ./data-explorer-test 
     Running main() from <path>/data-explorer/build/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -110,14 +110,14 @@ As an alternative, CTest can be used to run tests from `build` directory:
 
 
 # Additional info
-As speed is most important expectations from task there was some optimization performed. Ones with biggest impact:  
+As speed is the most important expectation from the task, there was some optimization was performed. Ones with the biggest impact:  
 * Used std::unordered_map instead of std::map.  
 * Used std::vectors to store data and passed by const reference.  
-* Storing strings as mapped values (std::string <-> unsigned int) and usage of indexes for operations (performance and significant memory optimisation).  
+* Storing strings as mapped values (std::string <-> unsigned int) and usage of indexes for operations (performance and significant memory optimization).  
 * Minimized copying.
 
 # Potential further improvements
-For bigger datasets and more sophisticated operations following enhancements might be viable:
+For bigger datasets and more sophisticated operations, the following enhancements might be viable:
 * Usage for multithreading in calculations using std::async + std::future.  
 * Usage of MPI (make sense with more sophisticated calculations).  
 * GPU calculations (in case of more complex calculations).
