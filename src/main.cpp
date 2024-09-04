@@ -71,6 +71,7 @@ void printResults(const std::unordered_map<std::string, int>& results)
 {
     for (const auto& [key, value] : results)
         Log().info(key + " " + std::to_string(value));
+    Log().info({});
 }
 
 void processQuery(const Dataset& dataset, Query query)
@@ -98,7 +99,6 @@ int main(int argc, char* argv[])
     Query query;
     while (query.operation_ != operation::Type::QUIT)
     {
-        Log().info({});
         std::string inputLine;
         getline(std::cin, inputLine);
 
