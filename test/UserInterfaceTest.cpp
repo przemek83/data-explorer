@@ -35,7 +35,7 @@ TEST_F(UserInterfaceTest, GetQueryOperationUnknown)
 TEST_F(UserInterfaceTest, GetQueryOperationQuit)
 {
     UserInterface ui("quit");
-    EXPECT_TRUE(ui.validateQuery(*dataset_, query_));
+    EXPECT_FALSE(ui.validateQuery(*dataset_, query_));
 }
 
 TEST_F(UserInterfaceTest, GetQueryOperationCorrectInput)

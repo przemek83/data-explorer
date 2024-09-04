@@ -28,8 +28,7 @@ std::pair<bool, Dataset> createDataset(const std::string& fileName)
     Timer timer{Timer::Duration::MICROSECONDS};
     Log().info("Loading data");
 
-    std::unique_ptr<std::istream> inFile =
-        std::make_unique<std::ifstream>(fileName);
+    auto inFile{std::make_unique<std::ifstream>(fileName)};
     if (!inFile->good())
     {
         Log().error("Cannot open " + fileName + " file, exiting.");
@@ -60,6 +59,25 @@ void printCommandHelp()
     stringStream << " grouping = column which will be used for grouping";
     Log().info(stringStream.str());
 }
+
+std::unordered_map<std::string, int> execute(const Dataset& dataset,
+                                             Query userQuery)
+{
+    Timer timer{Timer::Duration::MICROSECONDS};
+    return dataset.executeQuery(userQuery);
+}
+
+void printResults(const std::unordered_map<std::string, int>& results)
+{
+    for (const auto& [key, value] : results)
+        Log().info(key + " " + std::to_string(value));
+}
+
+void processQuery(const Dataset& dataset, Query query)
+{
+    const std::unordered_map<std::string, int> results{execute(dataset, query)};
+    printResults(results);
+}
 };  // namespace
 
 int main(int argc, char* argv[])
@@ -77,25 +95,15 @@ int main(int argc, char* argv[])
 
     printCommandHelp();
 
-    while (true)
+    Query query;
+    while (query.operation_ != operation::Type::QUIT)
     {
         Log().info({});
         std::string inputLine;
         getline(std::cin, inputLine);
-        UserInterface ui{inputLine};
-        Query userQuery;
-        if (!ui.validateQuery(dataset, userQuery))
-            continue;
 
-        if (userQuery.operation_ == operation::Type::QUIT)
-            return EXIT_SUCCESS;
-
-        Timer timer{Timer::Duration::MICROSECONDS};
-        std::unordered_map<std::string, int> results{
-            dataset.executeQuery(userQuery)};
-
-        for (const auto& [key, value] : results)
-            Log().info(key + " " + std::to_string(value));
+        if (UserInterface ui{inputLine}; ui.validateQuery(dataset, query))
+            processQuery(dataset, query);
     }
 
     return EXIT_SUCCESS;

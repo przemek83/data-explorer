@@ -23,7 +23,7 @@ bool UserInterface::validateQuery(const Dataset& dataset, Query& query) const
     query.operation_ = operation::getOperationTypeForString(operation_);
 
     if (query.operation_ == operation::Type::QUIT)
-        return true;
+        return false;
 
     if ((!isOperationValid(query.operation_)) || (!areColumnsValid(dataset)))
         return false;
