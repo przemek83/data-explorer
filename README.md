@@ -26,6 +26,7 @@ Clone and use CMake with GCC/Clang/MSVC to compile the project and tests from an
 | CMake | 3.30.2 | 3.28.3 |
 | Git | 2.46.0 | 2.43.0 |
 | cpputils | 1.0.0 | 1.0.0 |
+| GoogleTest | 1.15.2 | 1.15.2 |
 
 # Usage:  
 ## Launching:  
@@ -69,6 +70,7 @@ The project uses the following open-source software:
 | Name | License | Home | Description |
 | --- | --- | --- | --- |
 | cpputils | MIT | https://github.com/przemek83/cpputils| collection of C++ utility classes |
+| GoogleTest | BSD-3-Clause | https://github.com/google/googletest | testing framework |
 
 # Testing
 For testing purposes, `gtest` framework is used. Build the project first. Make sure that the `data-explorer-test` target is built. Modern IDEs supporting CMake also support running tests with monitoring of failures. But in case you would like to run it manually, go to the `build/tests` directory, where the⁣ binary `data-explorer-test` should be available. Launching it should produce the following output on Linux:
