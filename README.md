@@ -11,7 +11,6 @@
 # About
 Data Explorer is a tool for performing various operations on datasets. It supports operations like aggregation (average, minimum, and maximum) and grouping, providing a simple interface for querying data.
 
-
 # Building:  
 Clone and use CMake with GCC/Clang/MSVC to compile the project and tests from an IDE or command line. CMake **should**:
 - configure everything automatically,
@@ -109,7 +108,6 @@ As an alternative, `CTest` can be used to run tests from `build` directory:
     100% tests passed, 0 tests failed out of 44
 
     Total Test time (real) =   0.10 sec
-
 
 # Additional info
 As speed is the most important expectation from the task, there was some optimization was performed. Ones with the biggest impact:  
