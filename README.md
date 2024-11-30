@@ -73,9 +73,9 @@ The project uses the following open-source software:
 | GoogleTest | BSD-3-Clause | https://github.com/google/googletest | testing framework |
 
 # Testing
-For testing purposes, `gtest` framework is used. Build the project first. Make sure that the `data-explorer-test` target is built. Modern IDEs supporting CMake also support running tests with monitoring of failures. But in case you would like to run it manually, go to the `build/test` directory, where the⁣ binary `data-explorer-test` should be available. Launching it should produce the following output on Linux:
+For testing purposes, `gtest` framework is used. Build the project first. Make sure that the `data-explorer-tests` target is built. Modern IDEs supporting CMake also support running tests with monitoring of failures. But in case you would like to run it manually, go to the `build/tests` directory, where the⁣ binary `data-explorer-tests` should be available. Launching it should produce the following output on Linux:
     
-    $ ./data-explorer-test 
+    $ ./data-explorer-tests
     Running main() from <path>/data-explorer/build/_deps/googletest-src/googletest/src/gtest_main.cc
     [==========] Running 44 tests from 8 test suites.
     [----------] Global test environment set-up.

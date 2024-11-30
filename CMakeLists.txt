@@ -46,4 +46,4 @@ target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib cpputils)
 
 enable_testing()
 Include(Tests.cmake)
-add_subdirectory(test)
+add_subdirectory(tests)
