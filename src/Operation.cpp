@@ -17,14 +17,11 @@ std::map<std::string, operation::Type, std::less<>> getMapping()
 
 namespace operation
 {
-operation::Type getOperationTypeForString(
-    const std::string& operationTypeString)
+operation::Type getOperationTypeForString(const std::string& operation)
 {
     const auto mapping{getMapping()};
-    const auto& findResult{mapping.find(operationTypeString)};
-
-    if (findResult != mapping.end())
-        return findResult->second;
+    if (const auto& result{mapping.find(operation)}; result != mapping.end())
+        return result->second;
 
     return Type::UNKNOWN;
 }

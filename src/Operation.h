@@ -19,8 +19,7 @@ enum class Type : uint8_t
     UNKNOWN
 };
 
-operation::Type getOperationTypeForString(
-    const std::string& operationTypeString);
+operation::Type getOperationTypeForString(const std::string& operation);
 
 std::string getAvailableOperationsAsString(std::string_view delimiter);
 
