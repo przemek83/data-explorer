@@ -22,7 +22,7 @@ enum class Type : uint8_t
 operation::Type getOperationTypeForString(
     const std::string& operationTypeString);
 
-std::string getAvailableOperationsAsString(const std::string& delimiter);
+std::string getAvailableOperationsAsString(std::string_view delimiter);
 
 template <typename T, class Func>
 std::unordered_map<T, int> computeExtremum(

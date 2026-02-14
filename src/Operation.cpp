@@ -25,11 +25,11 @@ operation::Type getOperationTypeForString(
 
     if (findResult != mapping.end())
         return findResult->second;
-    else
-        return Type::UNKNOWN;
+
+    return Type::UNKNOWN;
 }
 
-std::string getAvailableOperationsAsString(const std::string& delimiter)
+std::string getAvailableOperationsAsString(std::string_view delimiter)
 {
     std::string result;
     for (const auto& [stringPart, _] : getMapping())
