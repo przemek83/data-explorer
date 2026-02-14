@@ -17,14 +17,13 @@ public:
     };
 
     explicit Column(std::vector<int> data);
+    Column(const Column& other) = default;
+    Column(Column&& other) = default;
 
     virtual ~Column() = default;
 
     Column& operator=(const Column& other) = default;
-    Column(const Column& other) = default;
-
     Column& operator=(Column&& other) = default;
-    Column(Column&& other) = default;
 
     static std::pair<bool, Column::ColumnType> getColumnType(
         const std::string& name);

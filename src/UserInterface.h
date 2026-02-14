@@ -10,13 +10,13 @@ class UserInterface
 {
 public:
     explicit UserInterface(const std::string& input);
+    UserInterface(const UserInterface& other) = delete;
+    UserInterface(UserInterface&& other) = default;
+
     virtual ~UserInterface() = default;
 
     UserInterface& operator=(const UserInterface& other) = delete;
-    UserInterface(const UserInterface& other) = delete;
-
     UserInterface& operator=(UserInterface&& other) = default;
-    UserInterface(UserInterface&& other) = default;
 
     bool validateQuery(const Dataset& dataset, Query& query) const;
 

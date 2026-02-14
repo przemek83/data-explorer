@@ -13,14 +13,13 @@ class DataLoader
 {
 public:
     DataLoader() = default;
+    DataLoader(const DataLoader& other) = default;
+    DataLoader(DataLoader&& other) = default;
 
     virtual ~DataLoader() = default;
 
     DataLoader& operator=(const DataLoader& other) = default;
-    DataLoader(const DataLoader& other) = default;
-
     DataLoader& operator=(DataLoader&& other) = default;
-    DataLoader(DataLoader&& other) = default;
 
     virtual bool loadData(
         std::vector<std::string>& headers,
